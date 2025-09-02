@@ -22,7 +22,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_BASE_URL || "https://faizms.dev"
+    process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:3000"
   ),
   title: {
     default: "Muh. Fayiz Syamsuddin - Software Developer & Full-Stack Engineer",
@@ -46,7 +46,12 @@ export const metadata: Metadata = {
     "Freelance Developer",
     "Indonesia",
   ],
-  authors: [{ name: "Muh. Fayiz Syamsuddin", url: "https://faizms.dev" }],
+  authors: [
+    {
+      name: "Muh. Fayiz Syamsuddin",
+      url: process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:3000",
+    },
+  ],
   creator: "Muh. Fayiz Syamsuddin",
   icons: {
     icon: [
@@ -78,7 +83,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://faizms.dev",
+    url: process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:3000",
     title: "Muh. Fayiz Syamsuddin - Software Developer",
     description:
       "Experienced Software Developer creating innovative web applications and digital solutions.",
