@@ -9,7 +9,7 @@ export default function CVPage() {
   return (
     <div className="min-h-screen bg-white">
       <iframe
-        src="/CV-Muh. Fayiz Syamsuddin.pdf"
+        src="/CV - Muh. Fayiz Syamsuddin.pdf"
         width="100%"
         height="100%"
         style={{ height: "100vh", border: "none" }}

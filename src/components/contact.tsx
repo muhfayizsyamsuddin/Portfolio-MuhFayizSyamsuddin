@@ -2,7 +2,7 @@
 
 import type React from "react";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {
   Card,
   CardContent,
@@ -27,14 +27,18 @@ import { Label } from "./ui/label";
 import { contactFormSchema } from "@/lib/validation";
 import { ZodError } from "zod";
 import { motion } from "motion/react";
+import emailjs from "@emailjs/browser";
 
 export function Contact() {
+  const form = useRef<HTMLFormElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!form.current) return;
+
     setIsSubmitting(true);
     setErrors({});
 
@@ -50,27 +54,29 @@ export function Contact() {
       // Validate form data
       const validatedData = contactFormSchema.parse(data);
 
-      // Submit to API
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(validatedData),
-      });
+      // Send email using EmailJS
+      await emailjs.sendForm(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_CONTACT!,
+        form.current,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      );
 
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.error || "Failed to send message");
-      }
+      // Send auto reply to user
+      await emailjs.sendForm(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_REPLY!,
+        form.current,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      );
 
       toast({
-        title: "Message sent successfully!",
+        title: "✅ Message sent successfully!",
         description: "Thank you for your message. I'll get back to you soon.",
       });
 
       // Reset form
+      form.current.reset();
     } catch (error) {
       if (error instanceof ZodError) {
         // Handle validation errors
@@ -83,7 +89,7 @@ export function Contact() {
         setErrors(fieldErrors);
       } else {
         toast({
-          title: "Failed to send message",
+          title: "❌ Failed to send message",
           description:
             error instanceof Error ? error.message : "Please try again later.",
           variant: "destructive",
@@ -167,7 +173,11 @@ export function Contact() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="flex-1">
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form
+                    ref={form}
+                    onSubmit={handleSubmit}
+                    className="space-y-6"
+                  >
                     <input
                       type="text"
                       name="honeypot"
