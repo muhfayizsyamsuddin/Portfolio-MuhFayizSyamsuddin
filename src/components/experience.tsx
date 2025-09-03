@@ -10,7 +10,7 @@ import {
 import {
   Calendar,
   MapPin,
-  Award,
+  // Award,
   Code,
   GraduationCap,
   TrendingUp,
@@ -22,91 +22,150 @@ import { motion } from "framer-motion";
 export function Experience() {
   const experiences = [
     {
-      type: "internship",
-      title: "Frontend Developer Intern",
-      company: "TechStart Solutions",
-      location: "Remote",
-      duration: "Jun 2025 - Aug 2025",
-      description:
-        "Developed responsive web components using React and TypeScript. Collaborated with senior developers to implement new features and optimize existing codebase.",
-      impact: [
-        "Improved page load times by 35% through code optimization",
-        "Built 12+ reusable components adopted across 3 product teams",
-        "Reduced bug reports by 40% with comprehensive testing practices",
-      ],
-      technologies: ["React", "TypeScript", "Tailwind CSS", "Git"],
-      icon: <Code className="h-5 w-5" />,
-    },
-    {
       type: "education",
-      title: "Full-Stack Web Development Bootcamp",
-      company: "CodePath Academy",
-      location: "Online",
-      duration: "Jan 2025 - May 2025",
+      title: "Bachelor of Agricultural Technology",
+      company: "Universitas Hasanuddin",
+      location: "Makassar, Sulawesi Selatan",
+      duration: "2020 - 2024",
       description:
-        "Intensive 20-week program covering full-stack development. Built multiple projects including e-commerce platforms, social media apps, and RESTful APIs.",
+        "Experienced in applying problem-solving, teamwork, and analytical skills to real-world projects such as monitoring systems, automation, and decision-support systems.",
       impact: [
-        "Completed 8 full-stack projects with 95% average grade",
-        "Led team of 4 developers in capstone project deployment",
-        "Mastered 15+ technologies in modern web development stack",
+        "Maintaining excellent academic performance with GPA: 3.72/4.0",
+        "Participated in programming competitions, enhancing problem-solving and critical thinking",
+        "Collaborated in research and projects involving IoT, AI, and automation systems, improving teamwork and adaptability",
+        "Applied analytical and communication skills in preparing technical reports and presentations",
       ],
-      technologies: ["JavaScript", "React", "Node.js", "MongoDB", "Express.js"],
+      technologies: [
+        "C++",
+        "Artificial Intelligence",
+        "Instrumentation",
+        "Internet of Things (IoT)",
+        "Monitoring System",
+        "Automatic Control System",
+        "Fuzzy Logic Systems",
+        "Expert Systems",
+      ],
       icon: <GraduationCap className="h-5 w-5" />,
     },
     {
-      type: "project",
-      title: "Freelance Web Developer",
-      company: "Self-Employed",
-      location: "Remote",
-      duration: "Mar 2025 - Present",
+      type: "education",
+      title: "Fullstack JavaScript Immersive",
+      company: "Hacktiv8 Indonesia",
+      location: "Jakarta Selatan, DKI Jakarta, Indonesia",
+      duration: "Apr 2025 - Aug 2025",
       description:
-        "Developing custom websites and web applications for small businesses. Managing client relationships, project timelines, and delivering solutions.",
+        "Completed Fullstack JavaScript Immersive program with a focus on modern web and mobile development. Gained strong foundation in programming fundamentals and database management.",
       impact: [
-        "Delivered 6 client projects with 100% satisfaction rate",
-        "Increased client website traffic by average of 60%",
-        "Generated $15K+ revenue while maintaining full-time studies",
+        "Successfully built and deployed multiple fullstack applications within project deadlines",
+        "Collaborated in agile team projects simulating real-world software development environments",
+        "Strengthened problem-solving skills through daily coding challenges and pair programming",
+        "Graduated from one of Indonesia’s top coding bootcamps with industry-ready skills",
+        "Applied critical thinking and analytical skills to solve real-world technical challenges",
+        "Cultivated a growth mindset and proactive learning attitude for continuous improvement",
       ],
-      technologies: ["Next.js", "React", "Tailwind CSS", "Vercel"],
-      icon: <Code className="h-5 w-5" />,
+      technologies: [
+        "JavaScript",
+        "TypeScript",
+        "Node.js",
+        "Express.js",
+        "Next.js",
+        "React",
+        "React Native",
+        "MongoDB",
+        "GraphQL",
+        "PostgreSQL",
+        "RESTful APIs",
+        "Tailwind CSS",
+        "HTML5/CSS3",
+      ],
+      icon: <GraduationCap className="h-5 w-5" />,
     },
+    // {
+    //   type: "internship",
+    //   title: "Frontend Developer Intern",
+    //   company: "TechStart Solutions",
+    //   location: "Remote",
+    //   duration: "Jun 2025 - Aug 2025",
+    //   description:
+    //     "Developed responsive web components using React and TypeScript. Collaborated with senior developers to implement new features and optimize existing codebase.",
+    //   impact: [
+    //     "Improved page load times by 35% through code optimization",
+    //     "Built 12+ reusable components adopted across 3 product teams",
+    //     "Reduced bug reports by 40% with comprehensive testing practices",
+    //   ],
+    //   technologies: ["React", "TypeScript", "Tailwind CSS", "Git"],
+    //   icon: <Code className="h-5 w-5" />,
+    // },
+    // {
+    //   type: "education",
+    //   title: "Full-Stack Web Development Bootcamp",
+    //   company: "CodePath Academy",
+    //   location: "Online",
+    //   duration: "Jan 2025 - May 2025",
+    //   description:
+    //     "Intensive 20-week program covering full-stack development. Built multiple projects including e-commerce platforms, social media apps, and RESTful APIs.",
+    //   impact: [
+    //     "Completed 8 full-stack projects with 95% average grade",
+    //     "Led team of 4 developers in capstone project deployment",
+    //     "Mastered 15+ technologies in modern web development stack",
+    //   ],
+    //   technologies: ["JavaScript", "React", "Node.js", "MongoDB", "Express.js"],
+    //   icon: <GraduationCap className="h-5 w-5" />,
+    // },
+    // {
+    //   type: "project",
+    //   title: "Freelance Web Developer",
+    //   company: "Self-Employed",
+    //   location: "Remote",
+    //   duration: "Mar 2025 - Present",
+    //   description:
+    //     "Developing custom websites and web applications for small businesses. Managing client relationships, project timelines, and delivering solutions.",
+    //   impact: [
+    //     "Delivered 6 client projects with 100% satisfaction rate",
+    //     "Increased client website traffic by average of 60%",
+    //     "Generated $15K+ revenue while maintaining full-time studies",
+    //   ],
+    //   technologies: ["Next.js", "React", "Tailwind CSS", "Vercel"],
+    //   icon: <Code className="h-5 w-5" />,
+    // },
     {
       type: "internship",
       title: "Assistant Supervisor",
       company: "Agricultural Extension Center",
-      location: "Sidenreng Rappang, Sulawesi Selatan",
-      duration: "January 2023 - February 2023",
+      location: "Sidenreng Rappang, Sulawesi Selatan, Indonesia",
+      duration: "Jan 2023 - Feb 2023",
       description:
-        "Assisted in the development and implementation of agricultural programs. Coordinated with local farmers to improve crop yields and promote sustainable practices.",
+        "Supported the development and execution of agricultural programs by collaborating with supervisors and local farmers. Focused on knowledge transfer, problem-solving, and data-driven approaches to improve crop yields and promote sustainable practices.",
       impact: [
-        "Improved crop yields by an average of 30% through targeted training sessions",
-        "Developed educational materials on sustainable farming practices",
-        "Facilitated workshops for over 100 local farmers",
+        "Increased crop yields by an average of 30% through structured training and data-driven recommendations",
+        "Designed and distributed educational materials to promote sustainable farming practices",
+        "Facilitated interactive workshops for over 100 local farmers, enhancing communication and leadership skills",
       ],
-      technologies: ["Next.js", "React", "Tailwind CSS", "Vercel"],
+      technologies: ["Agricultural Practices", "Community Outreach"],
       icon: <Code className="h-5 w-5" />,
     },
   ];
 
-  const certifications = [
-    {
-      name: "AWS Cloud Practitioner",
-      issuer: "Amazon Web Services",
-      date: "Sep 2025",
-      credentialId: "AWS-CCP-2024-001",
-    },
-    {
-      name: "React Developer Certification",
-      issuer: "Meta",
-      date: "Aug 2025",
-      credentialId: "META-REACT-2024",
-    },
-    {
-      name: "JavaScript Algorithms & Data Structures",
-      issuer: "freeCodeCamp",
-      date: "Jul 2025",
-      credentialId: "FCC-JS-2024-789",
-    },
-  ];
+  // const certifications = [
+  //   {
+  //     name: "AWS Cloud Practitioner",
+  //     issuer: "HackerRank",
+  //     date: "Aug 2025",
+  //     credentialId: "AWS-CCP-2024-001",
+  //   },
+  //   {
+  //     name: "React Developer Certification",
+  //     issuer: "HackerRank",
+  //     date: "Aug 2025",
+  //     credentialId: "META-REACT-2024",
+  //   },
+  //   {
+  //     name: "JavaScript Algorithms & Data Structures",
+  //     issuer: "Udemy",
+  //     date: "Aug 2025",
+  //     credentialId: "FCC-JS-2024-789",
+  //   },
+  // ];
 
   const getTypeColor = () => {
     // Simplified color scheme - all using primary color for consistency
@@ -250,11 +309,11 @@ export function Experience() {
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
           viewport={{ once: true, margin: "-100px" }}
         >
-          <h3 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
+          {/* <h3 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
             <Award className="h-6 w-6 text-primary" />
             Certifications
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          </h3> */}
+          {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {certifications.map((cert, index) => (
               <motion.div
                 key={index}
@@ -297,7 +356,7 @@ export function Experience() {
                 </Card>
               </motion.div>
             ))}
-          </div>
+          </div> */}
         </motion.div>
       </div>
     </section>
