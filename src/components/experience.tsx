@@ -26,7 +26,7 @@ export function Experience() {
       title: "Frontend Developer Intern",
       company: "TechStart Solutions",
       location: "Remote",
-      duration: "Jun 2024 - Aug 2024",
+      duration: "Jun 2025 - Aug 2025",
       description:
         "Developed responsive web components using React and TypeScript. Collaborated with senior developers to implement new features and optimize existing codebase.",
       impact: [
@@ -42,7 +42,7 @@ export function Experience() {
       title: "Full-Stack Web Development Bootcamp",
       company: "CodePath Academy",
       location: "Online",
-      duration: "Jan 2024 - May 2024",
+      duration: "Jan 2025 - May 2025",
       description:
         "Intensive 20-week program covering full-stack development. Built multiple projects including e-commerce platforms, social media apps, and RESTful APIs.",
       impact: [
@@ -58,7 +58,7 @@ export function Experience() {
       title: "Freelance Web Developer",
       company: "Self-Employed",
       location: "Remote",
-      duration: "Mar 2024 - Present",
+      duration: "Mar 2025 - Present",
       description:
         "Developing custom websites and web applications for small businesses. Managing client relationships, project timelines, and delivering solutions.",
       impact: [
@@ -91,19 +91,19 @@ export function Experience() {
     {
       name: "AWS Cloud Practitioner",
       issuer: "Amazon Web Services",
-      date: "Sep 2024",
+      date: "Sep 2025",
       credentialId: "AWS-CCP-2024-001",
     },
     {
       name: "React Developer Certification",
       issuer: "Meta",
-      date: "Aug 2024",
+      date: "Aug 2025",
       credentialId: "META-REACT-2024",
     },
     {
       name: "JavaScript Algorithms & Data Structures",
       issuer: "freeCodeCamp",
-      date: "Jul 2024",
+      date: "Jul 2025",
       credentialId: "FCC-JS-2024-789",
     },
   ];

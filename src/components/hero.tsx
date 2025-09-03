@@ -17,10 +17,16 @@ export function Hero() {
   const [typedText, setTypedText] = useState("");
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   // Use custom hooks for client-side safety
   const isClient = useIsClient();
   const dimensions = useWindowDimensions();
+
+  // Ensure component is mounted before running client-side effects
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const roles = useMemo(
     () => [
@@ -34,7 +40,7 @@ export function Hero() {
 
   // Generate stable random positions for dots using deterministic approach
   const dotPositions = useMemo(() => {
-    if (!isClient) return [];
+    if (!isClient || !mounted) return [];
 
     // Use deterministic seed-based generation instead of Math.random()
     const generateSeededValue = (seed: number, min: number, max: number) => {
@@ -58,10 +64,12 @@ export function Hero() {
       });
     }
     return positions;
-  }, [isClient, dimensions.width, dimensions.height]);
+  }, [isClient, mounted, dimensions.width, dimensions.height]);
 
-  // Typing effect
+  // Typing effect - only start after component is mounted
   useEffect(() => {
+    if (!mounted) return;
+
     const currentRole = roles[currentRoleIndex];
     const timeout = setTimeout(
       () => {
@@ -84,7 +92,7 @@ export function Hero() {
     );
 
     return () => clearTimeout(timeout);
-  }, [typedText, currentRoleIndex, isDeleting, roles]);
+  }, [typedText, currentRoleIndex, isDeleting, roles, mounted]);
 
   const scrollToProjects = () => {
     document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
@@ -95,7 +103,7 @@ export function Hero() {
   };
 
   const handleViewCV = () => {
-    window.open("/CV - Muh. Fayiz Syamsuddin.pdf", "_blank");
+    window.open("/CV-Muh. Fayiz Syamsuddin.pdf", "_blank");
   };
 
   return (
@@ -110,8 +118,30 @@ export function Hero() {
       {/* Subtle grid pattern */}
       <div className="absolute inset-0 bg-primary/[0.005] opacity-[0.03]" />
 
+      {/* Loading state for SSR */}
+      {!mounted && (
+        <div className="container mx-auto max-w-6xl text-center z-10 relative">
+          <div className="space-y-6">
+            <h1 className="text-4xl md:text-6xl lg:text-8xl font-extralight text-foreground tracking-tight leading-[0.9] mb-2">
+              <span className="block font-light whitespace-nowrap">
+                Muh. Fayiz Syamsuddin.
+              </span>
+            </h1>
+            <div className="flex items-center justify-center gap-3 mt-8">
+              <div className="h-px w-8 bg-primary/30" />
+              <div className="min-h-[1.5rem] flex items-center">
+                <h2 className="text-sm md:text-base font-medium text-muted-foreground tracking-[0.2em] uppercase">
+                  Software Developer
+                </h2>
+              </div>
+              <div className="h-px w-8 bg-primary/30" />
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Floating dots animation - Only render on client */}
-      {isClient && (
+      {isClient && mounted && (
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {dotPositions.map((dot, i) => (
             <motion.div
@@ -146,256 +176,266 @@ export function Hero() {
         </div>
       )}
 
-      <div className="text-center max-w-4xl mx-auto space-y-8 relative z-10">
-        <motion.div
-          className="space-y-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-        >
-          <h1
-            id="hero-heading"
-            className="text-4xl md:text-6xl lg:text-8xl font-extralight text-foreground tracking-tight leading-[0.9] mb-2"
+      {/* Animated content - only render after mounted */}
+      {mounted && (
+        <div className="text-center max-w-4xl mx-auto space-y-8 relative z-10">
+          <motion.div
+            className="space-y-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <motion.span
-              className="block font-light whitespace-nowrap"
-              initial={{
-                opacity: 0,
-                y: 30,
-                scale: 0.9,
-                filter: "blur(10px)",
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                filter: "blur(0px)",
-              }}
+            <h1
+              id="hero-heading"
+              className="text-4xl md:text-6xl lg:text-8xl font-extralight text-foreground tracking-tight leading-[0.9] mb-2"
+            >
+              <motion.span
+                className="block font-light whitespace-nowrap"
+                initial={{
+                  opacity: 0,
+                  y: 30,
+                  scale: 0.9,
+                  filter: "blur(10px)",
+                }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                  filter: "blur(0px)",
+                }}
+                transition={{
+                  duration: 1.2,
+                  delay: 0.3,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+              >
+                Muh. Fayiz Syamsuddin.
+              </motion.span>
+            </h1>
+
+            <motion.div
+              className="flex items-center justify-center gap-3 mt-8"
+              initial={{ opacity: 0, y: 20, scale: 0.8 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{
-                duration: 1.2,
-                delay: 0.3,
+                duration: 0.8,
+                delay: 0.8,
                 ease: [0.16, 1, 0.3, 1],
               }}
             >
-              Muh. Fayiz Syamsuddin.
+              <motion.div
+                className="h-px w-8 bg-primary/30"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.6, delay: 1.0 }}
+              />
+              <div className="min-h-[1.5rem] flex items-center">
+                <h2
+                  className="text-sm md:text-base font-medium text-muted-foreground tracking-[0.2em] uppercase"
+                  suppressHydrationWarning={true}
+                >
+                  {mounted
+                    ? typedText || "Software Developer"
+                    : "Software Developer"}
+                  {mounted && (
+                    <motion.span
+                      className="inline-block w-0.5 h-4 bg-primary ml-1"
+                      animate={{ opacity: [1, 0] }}
+                      transition={{ duration: 0.8, repeat: Infinity }}
+                    />
+                  )}
+                </h2>
+              </div>
+              <motion.div
+                className="h-px w-8 bg-primary/30"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.6, delay: 1.0 }}
+              />
+            </motion.div>
+          </motion.div>
+
+          <motion.p
+            className="text-lg md:text-xl text-muted-foreground/90 max-w-3xl mx-auto leading-relaxed font-light"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1 }}
+          >
+            Passionate about creating{" "}
+            <motion.span
+              className="font-medium text-foreground"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 1.2 }}
+            >
+              innovative web solutions
+            </motion.span>{" "}
+            and transforming ideas into{" "}
+            <motion.span
+              className="font-medium text-foreground"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 1.4 }}
+            >
+              seamless, user-friendly applications.
             </motion.span>
-          </h1>
+          </motion.p>
 
           <motion.div
-            className="flex items-center justify-center gap-3 mt-8"
-            initial={{ opacity: 0, y: 20, scale: 0.8 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{
-              duration: 0.8,
-              delay: 0.8,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-          >
-            <motion.div
-              className="h-px w-8 bg-primary/30"
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 0.6, delay: 1.0 }}
-            />
-            <div className="min-h-[1.5rem] flex items-center">
-              <h2 className="text-sm md:text-base font-medium text-muted-foreground tracking-[0.2em] uppercase">
-                {typedText}
-                <motion.span
-                  className="inline-block w-0.5 h-4 bg-primary ml-1"
-                  animate={{ opacity: [1, 0] }}
-                  transition={{ duration: 0.8, repeat: Infinity }}
-                />
-              </h2>
-            </div>
-            <motion.div
-              className="h-px w-8 bg-primary/30"
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 0.6, delay: 1.0 }}
-            />
-          </motion.div>
-        </motion.div>
-
-        <motion.p
-          className="text-lg md:text-xl text-muted-foreground/90 max-w-3xl mx-auto leading-relaxed font-light"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1 }}
-        >
-          Passionate about creating{" "}
-          <motion.span
-            className="font-medium text-foreground"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1.2 }}
           >
-            innovative web solutions
-          </motion.span>{" "}
-          and transforming ideas into{" "}
-          <motion.span
-            className="font-medium text-foreground"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 1.4 }}
-          >
-            seamless, user-friendly applications.
-          </motion.span>
-        </motion.p>
-
-        <motion.div
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.2 }}
-        >
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
-          >
-            <Button
-              onClick={handleViewCV}
-              size="lg"
-              className="group px-8 py-3 font-medium transition-all duration-300 hover:shadow-xl hover:shadow-primary/40 focus:ring-2 focus:ring-primary/30 focus:ring-offset-2 bg-primary hover:bg-primary/90 hover:-translate-y-0.5 hover:scale-105"
-              aria-describedby="cv-description"
-              suppressHydrationWarning
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              <FileText className="mr-2 h-4 w-4 transition-transform group-hover:scale-110 group-hover:-translate-y-0.5" />
-              View Resume
-            </Button>
-          </motion.div>
-
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
-          >
-            <Button
-              onClick={scrollToContact}
-              variant="outline"
-              size="lg"
-              className="group px-8 py-3 font-medium border-2 border-primary text-foreground bg-foreground/5 hover:bg-primary hover:text-foreground transition-colors duration-300 focus:ring-2 focus:ring-primary/30 focus:ring-offset-2"
-              aria-describedby="contact-description"
-              suppressHydrationWarning
-            >
-              <Mail className="mr-2 h-4 w-4 transition-transform group-hover:scale-110 group-hover:rotate-12" />
-              Get In Touch
-            </Button>
-          </motion.div>
-        </motion.div>
-
-        {/* Enhanced Social Links */}
-        <motion.div
-          className="flex justify-center items-center gap-6"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 1.4 }}
-        >
-          <motion.div
-            className="h-px bg-muted-foreground/20 flex-1 max-w-16"
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 1.5 }}
-          />
-
-          <div className="flex gap-3">
-            {[
-              {
-                href: "https://github.com/muhfayizsyamsuddin",
-                icon: Github,
-                label: "GitHub",
-              },
-              {
-                href: "https://linkedin.com/in/muh-fayiz-syamsuddin-b43ba2339",
-                icon: Linkedin,
-                label: "LinkedIn",
-              },
-              {
-                href: "https://instagram.com/faizms14_",
-                icon: Instagram,
-                label: "Instagram",
-              },
-              {
-                href: "mailto:muhfayiz14@gmail.com",
-                icon: Mail,
-                label: "Email",
-              },
-            ].map((social, index) => (
-              <motion.a
-                key={social.label}
-                href={social.href}
-                target={
-                  social.href.startsWith("mailto:") ? undefined : "_blank"
-                }
-                rel={
-                  social.href.startsWith("mailto:")
-                    ? undefined
-                    : "noopener noreferrer"
-                }
-                className="group p-2.5 rounded-xl hover:bg-primary/10 transition-all duration-300 focus:ring-2 focus:ring-primary/20 focus:outline-none border border-transparent hover:border-primary/20"
-                aria-label={`${social.label} Profile`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 1.6 + index * 0.1 }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <social.icon className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors duration-200" />
-              </motion.a>
-            ))}
-          </div>
-
-          <motion.div
-            className="h-px bg-muted-foreground/20 flex-1 max-w-16"
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 1.5 }}
-          />
-        </motion.div>
-
-        {/* Enhanced Scroll Indicator */}
-        <motion.div
-          className="pt-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1.8 }}
-          suppressHydrationWarning
-        >
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button
-              onClick={scrollToProjects}
-              variant="outline"
-              size="sm"
-              className="group text-sm font-light text-muted-foreground hover:text-foreground transition-all duration-300 focus:ring-2 focus:ring-primary/20 focus:ring-offset-2 hover:bg-muted/30 border border-muted-foreground/20 hover:border-primary/30"
-              aria-describedby="explore-nav-description"
-              suppressHydrationWarning
-            >
-              Explore Work
-              <motion.div
-                animate={{ y: [0, 4, 0] }}
-                transition={{
-                  duration: 2.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
+              <Button
+                onClick={handleViewCV}
+                size="lg"
+                className="group px-8 py-3 font-medium transition-all duration-300 hover:shadow-xl hover:shadow-primary/40 focus:ring-2 focus:ring-primary/30 focus:ring-offset-2 bg-primary hover:bg-primary/90 hover:-translate-y-0.5 hover:scale-105"
+                aria-describedby="cv-description"
                 suppressHydrationWarning
               >
-                <ArrowDown className="ml-2 h-4 w-4 group-hover:text-primary transition-colors" />
-              </motion.div>
-            </Button>
-          </motion.div>
-        </motion.div>
+                <FileText className="mr-2 h-4 w-4 transition-transform group-hover:scale-110 group-hover:-translate-y-0.5" />
+                View Resume
+              </Button>
+            </motion.div>
 
-        <span id="cv-description" className="sr-only">
-          View Muh. Fayiz Syamsuddin resume as a PDF file in new tab
-        </span>
-        <span id="contact-description" className="sr-only">
-          Navigate to contact section to get in touch
-        </span>
-        <span id="explore-nav-description" className="sr-only">
-          Scroll down to explore projects and portfolio
-        </span>
-      </div>
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            >
+              <Button
+                onClick={scrollToContact}
+                variant="outline"
+                size="lg"
+                className="group px-8 py-3 font-medium border-2 border-primary text-foreground bg-foreground/5 hover:bg-primary hover:text-foreground transition-colors duration-300 focus:ring-2 focus:ring-primary/30 focus:ring-offset-2"
+                aria-describedby="contact-description"
+                suppressHydrationWarning
+              >
+                <Mail className="mr-2 h-4 w-4 transition-transform group-hover:scale-110 group-hover:rotate-12" />
+                Get In Touch
+              </Button>
+            </motion.div>
+          </motion.div>
+
+          {/* Enhanced Social Links */}
+          <motion.div
+            className="flex justify-center items-center gap-6"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 1.4 }}
+          >
+            <motion.div
+              className="h-px bg-muted-foreground/20 flex-1 max-w-16"
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 0.8, delay: 1.5 }}
+            />
+
+            <div className="flex gap-3">
+              {[
+                {
+                  href: "https://github.com/muhfayizsyamsuddin",
+                  icon: Github,
+                  label: "GitHub",
+                },
+                {
+                  href: "https://linkedin.com/in/muh-fayiz-syamsuddin-b43ba2339",
+                  icon: Linkedin,
+                  label: "LinkedIn",
+                },
+                {
+                  href: "https://instagram.com/faizms14_",
+                  icon: Instagram,
+                  label: "Instagram",
+                },
+                {
+                  href: "mailto:muhfayiz14@gmail.com",
+                  icon: Mail,
+                  label: "Email",
+                },
+              ].map((social, index) => (
+                <motion.a
+                  key={social.label}
+                  href={social.href}
+                  target={
+                    social.href.startsWith("mailto:") ? undefined : "_blank"
+                  }
+                  rel={
+                    social.href.startsWith("mailto:")
+                      ? undefined
+                      : "noopener noreferrer"
+                  }
+                  className="group p-2.5 rounded-xl hover:bg-primary/10 transition-all duration-300 focus:ring-2 focus:ring-primary/20 focus:outline-none border border-transparent hover:border-primary/20"
+                  aria-label={`${social.label} Profile`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 1.6 + index * 0.1 }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <social.icon className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors duration-200" />
+                </motion.a>
+              ))}
+            </div>
+
+            <motion.div
+              className="h-px bg-muted-foreground/20 flex-1 max-w-16"
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 0.8, delay: 1.5 }}
+            />
+          </motion.div>
+
+          {/* Enhanced Scroll Indicator */}
+          <motion.div
+            className="pt-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 1.8 }}
+            suppressHydrationWarning
+          >
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button
+                onClick={scrollToProjects}
+                variant="outline"
+                size="sm"
+                className="group text-sm font-light text-muted-foreground hover:text-foreground transition-all duration-300 focus:ring-2 focus:ring-primary/20 focus:ring-offset-2 hover:bg-muted/30 border border-muted-foreground/20 hover:border-primary/30"
+                aria-describedby="explore-nav-description"
+                suppressHydrationWarning
+              >
+                Explore Work
+                <motion.div
+                  animate={{ y: [0, 4, 0] }}
+                  transition={{
+                    duration: 2.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  suppressHydrationWarning
+                >
+                  <ArrowDown className="ml-2 h-4 w-4 group-hover:text-primary transition-colors" />
+                </motion.div>
+              </Button>
+            </motion.div>
+          </motion.div>
+
+          <span id="cv-description" className="sr-only">
+            View Muh. Fayiz Syamsuddin resume as a PDF file in new tab
+          </span>
+          <span id="contact-description" className="sr-only">
+            Navigate to contact section to get in touch
+          </span>
+          <span id="explore-nav-description" className="sr-only">
+            Scroll down to explore projects and portfolio
+          </span>
+        </div>
+      )}
     </section>
   );
 }
