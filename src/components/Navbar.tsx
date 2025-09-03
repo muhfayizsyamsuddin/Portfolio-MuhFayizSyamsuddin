@@ -32,6 +32,8 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
+    if (!mounted) return;
+
     const handleScroll = () => {
       const sections = [
         "hero",
@@ -64,7 +66,7 @@ export function Navbar() {
       clearTimeout(timeoutId);
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [mounted]);
 
   const scrollToSection = (href: string) => {
     const sectionId = href.substring(1);
@@ -104,9 +106,29 @@ export function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex-shrink-0">
-              <button className="text-xl font-bold text-foreground rounded-md px-1">
+              <div className="text-xl font-bold text-foreground rounded-md px-1">
                 Faiz<span className="font-light">ms</span>
-              </button>
+              </div>
+            </div>
+            <div className="hidden md:flex flex-1 justify-end mr-8">
+              <div className="flex items-center space-x-8">
+                {navItems.map((item) => (
+                  <div
+                    key={item.name}
+                    className="flex items-center gap-2 text-base font-medium text-foreground/80 py-2"
+                  >
+                    <item.icon className="h-4 w-4" />
+                    {item.name}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="md:hidden">
+                <div className="p-2 rounded-md text-foreground/80">
+                  <Menu className="h-5 w-5" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -124,7 +146,6 @@ export function Navbar() {
               onClick={scrollToHero}
               className="text-xl font-bold transition-all duration-300 focus:outline-none cursor-pointer text-foreground hover:text-primary active:text-primary hover:scale-105 active:scale-95 rounded-md px-1"
               aria-label="Scroll to top / Home"
-              suppressHydrationWarning={true}
             >
               Faiz<span className="font-light">ms</span>
             </button>
@@ -145,7 +166,6 @@ export function Navbar() {
                         ? "text-primary font-semibold transform scale-105" // Aktif: hanya warna + font bold + scale
                         : "text-foreground/80 hover:text-primary hover:scale-105 active:text-primary active:scale-95"
                     )}
-                    suppressHydrationWarning={true}
                   >
                     <IconComponent className="h-4 w-4" />
                     {item.name}
@@ -192,7 +212,6 @@ export function Navbar() {
                         ? "text-primary font-semibold bg-primary/10 border border-primary/20" // Aktif: warna + font bold + background
                         : "text-foreground/80 hover:text-primary"
                     )}
-                    suppressHydrationWarning={true}
                   >
                     <IconComponent className="h-4 w-4 flex-shrink-0" />
                     {item.name}

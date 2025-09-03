@@ -53,32 +53,6 @@ export const metadata: Metadata = {
     },
   ],
   creator: "Muh. Fayiz Syamsuddin",
-  icons: {
-    icon: [
-      {
-        url: "/icon.svg?v=2",
-        type: "image/svg+xml",
-      },
-      {
-        url: "/favicon.ico?v=2",
-        sizes: "32x32",
-      },
-    ],
-    apple: [
-      {
-        url: "/apple-touch-icon.png?v=2",
-        sizes: "180x180",
-        type: "image/png",
-      },
-    ],
-    other: [
-      {
-        rel: "mask-icon",
-        url: "/safari-pinned-tab.svg?v=2",
-        color: "#3b82f6",
-      },
-    ],
-  },
   publisher: "Muh. Fayiz Syamsuddin",
   openGraph: {
     type: "website",
