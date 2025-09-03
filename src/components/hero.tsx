@@ -95,7 +95,7 @@ export function Hero() {
   };
 
   const handleViewCV = () => {
-    window.open("/CV-Muh. Fayiz Syamsuddin.pdf", "_blank");
+    window.open("/cv", "_blank");
   };
 
   return (
