@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:3000"
   ),
   title: {
-    default: "Muh. Fayiz Syamsuddin - Software Developer & Full-Stack Engineer",
+    default: "Muh. Fayiz Syamsuddin - Full Stack Developer",
     template: "%s | Muh. Fayiz Syamsuddin",
   },
   description:
