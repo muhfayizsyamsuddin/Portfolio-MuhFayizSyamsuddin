@@ -15,6 +15,7 @@ import {
   GraduationCap,
   TrendingUp,
   Zap,
+  Briefcase,
 } from "lucide-react";
 import { Badge } from "./ui/badge";
 import { motion } from "framer-motion";
@@ -142,6 +143,22 @@ export function Experience() {
         "Facilitated interactive workshops for over 100 local farmers, enhancing communication and leadership skills",
       ],
       technologies: ["Agricultural Practices", "Community Outreach"],
+      icon: <Briefcase className="h-5 w-5" />,
+    },
+    {
+      type: "internship",
+      title: "Frontend Developer",
+      company: "Promptive",
+      location: "Bekasi, Jawa Barat, Indonesia",
+      duration: "Oct 2025 - Dec 2025",
+      description:
+        "Developed and maintained responsive web applications using modern frontend technologies. Collaborated with design and backend teams to deliver high-quality user experiences.",
+      impact: [
+        "Improved application performance by 40% through code optimization and efficient resource management",
+        "Implemented new features that increased user engagement by 25%",
+        "Participated in code reviews and mentored junior developers, contributing to a more robust development process",
+      ],
+      technologies: ["HTML", "CSS", "JavaScript", "React", "Tailwind CSS", "Git"],
       icon: <Code className="h-5 w-5" />,
     },
   ];
@@ -149,7 +166,7 @@ export function Experience() {
   // const certifications = [
   //   {
   //     name: "AWS Cloud Practitioner",
-  //     issuer: "HackerRank",
+  //     issuer: "HackerRank", 
   //     date: "Aug 2025",
   //     credentialId: "AWS-CCP-2024-001",
   //   },
