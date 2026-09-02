@@ -46,7 +46,7 @@ export function Footer() {
     {
       name: "Instagram",
       icon: Instagram,
-      href: "https://instagram.com/muhfayizsyamsuddin", // Ganti dengan Instagram Anda
+      href: "https://instagram.com/faizms14_", // Ganti dengan Instagram Anda
     },
   ];
 

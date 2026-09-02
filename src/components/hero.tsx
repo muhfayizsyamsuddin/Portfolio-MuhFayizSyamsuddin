@@ -24,10 +24,7 @@ export function Hero() {
 
   const roles = useMemo(
     () => [
-      "Software Developer",
       "Full-Stack Developer",
-      "Frontend Developer",
-      "Backend Developer",
     ],
     []
   );

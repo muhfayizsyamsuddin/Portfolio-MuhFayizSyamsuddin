@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import {
   Card,
   CardContent,
@@ -14,7 +15,31 @@ import { Badge } from "./ui/badge";
 import { motion } from "motion/react";
 
 export function Projects() {
+  const [showAll, setShowAll] = useState(false);
+
   const projects = [
+    {
+      name: "Opsora",
+      description:
+        "Enterprise business operations management system covering inventory, purchasing, sales, HR, attendance, payroll, performance reviews, reporting, and role-based administration.",
+      techStack: [
+        "Next.js",
+        "TypeScript",
+        "Node.js",
+        "Express.js",
+        "PostgreSQL",
+        "Prisma ORM",
+        "Docker",
+        "Cloudinary",
+        "GitHub Actions (CI/CD)",
+        "Traefik",
+      ],
+      githubUrl:
+        "https://github.com/muhfayizsyamsuddin/opsora",
+      demoUrl: "https://opsora.faizms.com",
+      image: "/opsora-logo.png",
+      featured: true,
+    },
     {
       name: "Click Booth App",
       description:
@@ -48,15 +73,23 @@ export function Projects() {
       featured: true,
     },
     {
-      name: "My Social Media App",
+      name: "Sportify Court App",
       description:
-        "Cross-platform social media application with real-time messaging, user profiles, following/followers and GraphQL API.",
-      techStack: ["GraphQL", "MongoDB", "Apollo Server-client", "React Native", "Expo", "Tailwind CSS", "Docker", "GitHub Actions (CI/CD)"],
-      githubUrl: "https://github.com/muhfayizsyamsuddin/My-Social-Media-App",
-      demoUrl:
-        "https://expo.dev/preview/update?message=feat%3A+enhance+ProfileScreen%2C+SearchScreen%2C+and+UserProfile%3B+update+user+ID+handling%2C+improve+loading+states%2C+and+implement+follo&updateRuntimeVersion=1.0.0&createdAt=2025-08-09T18%3A38%3A09.228Z&slug=exp&projectId=76ae8898-b386-4e59-af07-a236eb53ac91&group=f998b3b5-7870-4e3c-96e7-d2af4ab1af4d",
-      image: "/mysocialmediaapp.png",
-      featured: true,
+        "Sports field booking platform with payment integration and real-time availability checking.",
+      techStack: [
+        "Node.js",
+        "Express.js",
+        "PostgreSQL",
+        "React.js",
+        "Midtrans",
+        "GeminiAI",
+        "Bootstrap",
+        "Docker",
+        "GitHub Actions (CI/CD)",
+      ],
+      githubUrl: "https://github.com/muhfayizsyamsuddin/Sportify-Court",
+      demoUrl: "https://sportifycourt.faizms.com",
+      image: "/Sportify-Court.png",
     },
     {
       name: "Smart Chat App",
@@ -78,23 +111,39 @@ export function Projects() {
       image: "/smart-chat.png",
     },
     {
-      name: "Sportify Court App",
+      name: "SIO App - Microservices",
       description:
-        "Sports field booking platform with payment integration and real-time availability checking.",
+        "Re-engineered a monolithic restaurant ordering application into a microservices architecture, replacing the EJS frontend with React and introducing modular services, asynchronous communication, and containerized deployment.",
       techStack: [
         "Node.js",
         "Express.js",
+        "Sequelize",
         "PostgreSQL",
         "React.js",
-        "Midtrans",
-        "GeminiAI",
-        "Bootstrap",
+        "Tailwind CSS",
+        "RabbitMQ",
+        "Traefik",
+        "PDFKit",
         "Docker",
         "GitHub Actions (CI/CD)",
       ],
-      githubUrl: "https://github.com/muhfayizsyamsuddin/Sportify-Court",
-      demoUrl: "https://sportifycourt.faizms.com",
-      image: "/Sportify-Court.png",
+      githubUrl:
+        "https://github.com/muhfayizsyamsuddin/SIO-deployment",
+      demoUrl: "https://sioms.faizms.com",
+      image: "/sio.png",
+      variant: "microservices",
+      featured: true,
+    },
+    {
+      name: "My Social Media App",
+      description:
+        "Cross-platform social media application with real-time messaging, user profiles, following/followers and GraphQL API.",
+      techStack: ["GraphQL", "MongoDB", "Apollo Server-client", "React Native", "Expo", "Tailwind CSS", "Docker", "GitHub Actions (CI/CD)"],
+      githubUrl: "https://github.com/muhfayizsyamsuddin/My-Social-Media-App",
+      demoUrl:
+        "https://expo.dev/preview/update?message=feat%3A+enhance+ProfileScreen%2C+SearchScreen%2C+and+UserProfile%3B+update+user+ID+handling%2C+improve+loading+states%2C+and+implement+follo&updateRuntimeVersion=1.0.0&createdAt=2025-08-09T18%3A38%3A09.228Z&slug=exp&projectId=76ae8898-b386-4e59-af07-a236eb53ac91&group=f998b3b5-7870-4e3c-96e7-d2af4ab1af4d",
+      image: "/mysocialmediaapp.png",
+      featured: true,
     },
     {
       name: "Furniqo",
@@ -117,7 +166,7 @@ export function Projects() {
       name: "SIO App",
       description:
         "A web based application for ordering food and drinks in restaurants.",
-      techStack: ["Node.js", "Express.js", "Sequelize", "PostgreSQL", "Docker", "GitHub Actions (CI/CD)"],
+      techStack: ["Node.js", "Express.js", "Sequelize", "PostgreSQL", "EJS", "Docker", "GitHub Actions (CI/CD)"],
       githubUrl: "https://github.com/muhfayizsyamsuddin/SIO-APP",
       demoUrl: "https://sioapp.faizms.com",
       image: "/sio.png",
@@ -142,6 +191,8 @@ export function Projects() {
     },
   ];
 
+  const visibleProjects = showAll ? projects : projects.slice(0, 6);
+
   return (
     <section
       id="projects"
@@ -163,13 +214,12 @@ export function Projects() {
             Recent Work
           </h2>
           <p className="text-lg text-muted-foreground text-pretty max-w-2xl mx-auto">
-            A showcase of my latest projects in full-stack development,
-            featuring modern web technologies and innovative solutions
+            Selected full-stack projects demonstrating production deployment, scalable backend architecture, modern frontend development, and real-world business workflows.
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
+          {visibleProjects.map((project, index) => (
             <motion.div
               key={project.name}
               initial={{ opacity: 0, y: 20 }}
@@ -185,7 +235,11 @@ export function Projects() {
                     }
                     alt={`Screenshot of ${project.name} project showing the main interface`}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className={`group-hover:scale-105 transition-transform duration-500 ${
+                      project.name === "Opsora"
+                        ? "object-contain bg-white scale-110"
+                        : "object-cover"
+                    }`}
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     loading={index === 0 ? "eager" : "lazy"}
                     priority={index === 0}
@@ -211,6 +265,16 @@ export function Projects() {
                         </svg>
                         Featured
                       </Badge> */}
+                    </div>
+                  )}
+                  {project.variant === "microservices" && (
+                    <div className="absolute top-3 right-3">
+                      <Badge
+                        variant="secondary"
+                        className="bg-primary text-white text-xs font-semibold shadow-lg border border-primary px-3 py-1"
+                      >
+                        Microservices
+                      </Badge>
                     </div>
                   )}
                 </div>
@@ -286,6 +350,15 @@ export function Projects() {
               </Card>
             </motion.div>
           ))}
+        </div>
+        <div className="flex justify-center mt-10">
+          <Button
+            variant="outline"
+            onClick={() => setShowAll((prev) => !prev)}
+            className="px-6 border-primary/30 hover:bg-primary/10 hover:text-primary hover:border-primary transition-colors"
+          >
+            {showAll ? "Show Less" : "Show All Projects"}
+          </Button>
         </div>
       </div>
     </section>

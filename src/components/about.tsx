@@ -10,9 +10,9 @@ export function About() {
   const highlights = [
     {
       icon: <Code2 className="h-4 w-4" />,
-      title: "Full-Stack Development",
+      title: "Full-Stack Developer",
       description:
-        "Experienced with React.js, Next.js, Node.js, Express.js, and MongoDB",
+        "Experienced with Next.js, Node.js, Express.js, PostgreSQL, and MongoDB",
     },
     {
       icon: <Lightbulb className="h-4 w-4" />,
@@ -24,7 +24,7 @@ export function About() {
       icon: <Rocket className="h-4 w-4" />,
       title: "Real-World Projects",
       description:
-        "From photo booth apps with payment integration to mobile apps",
+        "Built production-ready systems from enterprise operations platforms to payment and mobile apps",
     },
     {
       icon: <BookOpen className="h-4 w-4" />,
@@ -47,7 +47,7 @@ export function About() {
             About Me
           </h2>
           <p className="text-xl text-muted-foreground text-pretty max-w-2xl mx-auto">
-            Transforming ideas into elegant digital solutions
+            Building reliable web applications for real-world business needs
           </p>
         </motion.div>
 
@@ -85,7 +85,7 @@ export function About() {
                 variant="secondary"
                 className="text-sm bg-primary/10 text-primary border-primary/20"
               >
-                Software Developer
+                Full-Stack Developer
               </Badge>
             </div>
           </motion.div>
@@ -100,41 +100,28 @@ export function About() {
           >
             {/* Main Description */}
             <Card className="border-border/50 shadow-sm">
-              <CardContent className="p-8">
-                <div className="space-y-6">
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    <span className="text-foreground font-medium">
-                      Software Developer{" "}
-                    </span>
-                    with a unique journey from{" "}
-                    <span className="text-foreground font-medium">
-                      Agricultural Technology
-                    </span>{" "}
-                    to modern web development. My background in automation and
-                    instrumentation provides a systematic approach to
-                    problem-solving and attention to detail.
-                  </p>
+              <CardContent className="p-8 space-y-4">
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  I&apos;m a{" "}
+                  <span className="text-foreground font-medium">
+                    Full-Stack Developer
+                  </span>{" "}
+                  who transitioned into software development after completing a degree in{" "}
+                  <span className="text-foreground font-medium">
+                    Agricultural Technology
+                  </span>
+                  . My academic background in automation and instrumentation shaped a
+                  structured approach to problem-solving and technical systems.
+                </p>
 
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    Through intensive training and hands-on projects, I&apos;ve
-                    mastered
-                    <span className="text-foreground font-medium">
-                      {" "}
-                      React.js, Next.js, Express.js, Node.js, and MongoDB
-                    </span>
-                    , building everything from payment-integrated applications
-                    to mobile solutions with React Native.
-                  </p>
-
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    I bring{" "}
-                    <span className="text-foreground font-medium">
-                      adaptability, continuous learning mindset
-                    </span>
-                    , and passion for creating impactful digital solutions that
-                    solve real-world problems.
-                  </p>
-                </div>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  After completing the{" "}
+                  <span className="text-foreground font-medium">
+                    Full-Stack JavaScript Immersive program at Hacktiv8 Indonesia
+                  </span>
+                  , I continued developing my skills through real-world projects and
+                  technical training in Docker and microservices.
+                </p>
               </CardContent>
             </Card>
 

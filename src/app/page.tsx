@@ -37,7 +37,7 @@ export default function Home() {
         <section
           id="about"
           aria-labelledby="about-heading"
-          className="scroll-mt-16 bg-blue-50/30 dark:bg-blue-950/20"
+          className="scroll-mt-16 min-h-[calc(100vh-4rem)] bg-blue-50/30 dark:bg-blue-950/20"
         >
           <About />
         </section>
@@ -46,7 +46,7 @@ export default function Home() {
         <section
           id="skills"
           aria-labelledby="skills-heading"
-          className="scroll-mt-16 bg-background"
+          className="scroll-mt-16 min-h-[calc(100vh-4rem)] bg-background"
         >
           <Skills />
         </section>
@@ -55,7 +55,7 @@ export default function Home() {
         <section
           id="projects"
           aria-labelledby="projects-heading"
-          className="scroll-mt-16 bg-blue-50/40 dark:bg-blue-950/30"
+          className="scroll-mt-16 min-h-[calc(100vh-4rem)] bg-blue-50/40 dark:bg-blue-950/30"
         >
           <Projects />
         </section>
@@ -64,7 +64,7 @@ export default function Home() {
         <section
           id="experience"
           aria-labelledby="experience-heading"
-          className="scroll-mt-16 bg-background"
+          className="scroll-mt-16 min-h-[calc(100vh-4rem)] bg-background"
         >
           <Experience />
         </section>
@@ -73,7 +73,7 @@ export default function Home() {
         <section
           id="contact"
           aria-labelledby="contact-heading"
-          className="scroll-mt-16 bg-blue-50/50 dark:bg-blue-950/40"
+          className="scroll-mt-16 min-h-[calc(100vh-4rem)] bg-blue-50/50 dark:bg-blue-950/40"
         >
           <Contact />
         </section>

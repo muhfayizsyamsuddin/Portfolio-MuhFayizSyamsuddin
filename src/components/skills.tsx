@@ -17,6 +17,7 @@ export function Skills() {
         "Tailwind CSS",
         "HTML5",
         "CSS3",
+        "Apollo Client",
       ],
     },
     {
@@ -25,20 +26,23 @@ export function Skills() {
       skills: [
         "Node.js",
         "Express.js",
-        "Sequelize",
+        "Sequelize ORM",
+        "Prisma ORM",
         "RESTful APIs",
         "GraphQL",
         "Apollo Server",
+        "RabbitMQ",
       ],
     },
     {
-      category: "Cloud & Infrastructure",
+      category: "Database & Cloud",
       icon: Database,
       skills: [
         "PostgreSQL",
         "MongoDB",
         "Redis",
         "Supabase",
+        "Cloudinary",
         "AWS EC2",
         "Vercel",
       ],
@@ -46,7 +50,7 @@ export function Skills() {
     {
       category: "Programming Languages",
       icon: Code2,
-      skills: ["JavaScript", "TypeScript", "C++"],
+      skills: ["JavaScript", "TypeScript"],
     },
     {
       category: "Development Tools & Deployment",
@@ -55,15 +59,15 @@ export function Skills() {
         "Git & GitHub",
         "Docker",
         "GitHub Actions (CI/CD)",
+        "Traefik",
         "Nginx",
         "Postman",
-        "Visual Studio Code",
       ],
     },
   ];
 
   return (
-    <section className="py-16 px-4 scroll-mt-16" id="skills">
+    <div className="min-h-[calc(100vh-4rem)] flex items-center py-12 px-4">
       <div className="container mx-auto max-w-7xl">
         <motion.div
           className="text-center mb-12"
@@ -76,8 +80,7 @@ export function Skills() {
             Skills & Technologies
           </h2>
           <p className="text-lg text-muted-foreground text-pretty max-w-2xl mx-auto">
-            Technologies and tools I use to craft exceptional digital
-            experiences
+            Technologies and tools I use to build, deploy, and maintain modern web applications
           </p>
         </motion.div>
 
@@ -158,6 +161,6 @@ export function Skills() {
           </Card> */}
         </motion.div>
       </div>
-    </section>
+    </div>
   );
 }
