@@ -141,7 +141,7 @@ export function Projects() {
       techStack: ["GraphQL", "MongoDB", "Apollo Server-client", "React Native", "Expo", "Tailwind CSS", "Docker", "GitHub Actions (CI/CD)"],
       githubUrl: "https://github.com/muhfayizsyamsuddin/My-Social-Media-App",
       demoUrl:
-        "https://expo.dev/preview/update?message=feat%3A+enhance+ProfileScreen%2C+SearchScreen%2C+and+UserProfile%3B+update+user+ID+handling%2C+improve+loading+states%2C+and+implement+follo&updateRuntimeVersion=1.0.0&createdAt=2025-08-09T18%3A38%3A09.228Z&slug=exp&projectId=76ae8898-b386-4e59-af07-a236eb53ac91&group=f998b3b5-7870-4e3c-96e7-d2af4ab1af4d",
+        "#",
       image: "/mysocialmediaapp.png",
       featured: true,
     },
