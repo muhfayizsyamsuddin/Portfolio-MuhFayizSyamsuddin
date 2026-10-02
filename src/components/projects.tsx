@@ -13,6 +13,7 @@ import { Github, ExternalLink, Code } from "lucide-react";
 import Image from "next/image";
 import { Badge } from "./ui/badge";
 import { motion } from "motion/react";
+import DeveloperInsights from "@/components/DeveloperInsights";
 
 export function Projects() {
   const [showAll, setShowAll] = useState(false);
@@ -360,6 +361,7 @@ export function Projects() {
             {showAll ? "Show Less" : "Show All Projects"}
           </Button>
         </div>
+        <DeveloperInsights />
       </div>
     </section>
   );
