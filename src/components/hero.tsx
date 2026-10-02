@@ -303,7 +303,7 @@ export function Hero() {
                 label: "GitHub",
               },
               {
-                href: "https://linkedin.com/in/muh-fayiz-syamsuddin-b43ba2339",
+                href: "https://linkedin.com/in/muh-fayiz-syamsuddin",
                 icon: Linkedin,
                 label: "LinkedIn",
               },

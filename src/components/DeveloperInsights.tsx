@@ -11,7 +11,7 @@ import {
   type ChartOptions,
   type ScriptableContext,
 } from "chart.js";
-
+import { motion } from "motion/react";
 import { Bar, Doughnut } from "react-chartjs-2";
 
 ChartJS.register(
@@ -132,7 +132,8 @@ const technologyChartOptions: ChartOptions<"bar"> = {
   },
 
   animation: {
-    duration: 700,
+    duration: 900,
+    easing: "easeOutQuart",
   },
 };
 
@@ -201,7 +202,8 @@ const projectDistributionOptions: ChartOptions<"doughnut"> = {
   },
 
   animation: {
-    duration: 700,
+    duration: 900,
+    easing: "easeOutQuart",
   },
 };
 
@@ -214,7 +216,16 @@ export default function DeveloperInsights() {
     <div className="mt-20 border-t border-white/5 pt-16">
       <div className="w-full">
         {/* Heading */}
-        <div className="mx-auto mb-12 max-w-3xl text-center">
+        <motion.div
+          className="mx-auto mb-12 max-w-3xl text-center"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{
+            duration: 0.6,
+            ease: "easeOut",
+          }}
+        >
           <p className="mb-3 text-sm font-medium uppercase tracking-[0.2em] text-sky-500">
             Project Insights
           </p>
@@ -227,12 +238,23 @@ export default function DeveloperInsights() {
             A visual overview of the technologies and categories
             represented across my projects.
           </p>
-        </div>
+        </motion.div>
 
         {/* Charts */}
         <div className="grid gap-6 lg:grid-cols-2">
           {/* Bar Chart */}
-          <div className="rounded-xl border border-white/10 bg-[#11131d] p-6">
+          <motion.div
+            className="rounded-xl border border-white/10 bg-[#11131d] p-6 transition-colors duration-300 hover:border-sky-500/20"
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            whileHover={{ y: -4 }}
+            transition={{
+              duration: 0.6,
+              delay: 0.1,
+              ease: "easeOut",
+            }}
+          >
             <div className="mb-6">
               <h3 className="text-lg font-semibold text-white">
                 Technology Usage Across Projects
@@ -249,10 +271,21 @@ export default function DeveloperInsights() {
                 options={technologyChartOptions}
               />
             </div>
-          </div>
+          </motion.div>
 
           {/* Doughnut Chart */}
-          <div className="rounded-xl border border-white/10 bg-[#11131d] p-6">
+          <motion.div
+            className="rounded-xl border border-white/10 bg-[#11131d] p-6 transition-colors duration-300 hover:border-sky-500/20"
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            whileHover={{ y: -4 }}
+            transition={{
+              duration: 0.6,
+              delay: 0.2,
+              ease: "easeOut",
+            }}
+          >
             <div className="mb-6">
               <h3 className="text-lg font-semibold text-white">
                 Project Distribution
@@ -269,7 +302,7 @@ export default function DeveloperInsights() {
                 options={projectDistributionOptions}
               />
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

@@ -116,8 +116,8 @@ export function Contact() {
     {
       name: "LinkedIn",
       icon: Linkedin,
-      href: "https://linkedin.com/in/muh-fayiz-syamsuddin-b43ba2339",
-      label: "linkedin.com/in/muh-fayiz-syamsuddin-b43ba2339",
+      href: "https://linkedin.com/in/muh-fayiz-syamsuddin",
+      label: "linkedin.com/in/muh-fayiz-syamsuddin",
     },
     {
       name: "Instagram",
