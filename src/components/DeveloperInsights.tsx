@@ -265,7 +265,7 @@ export default function DeveloperInsights() {
               </p>
             </div>
 
-            <div className="h-[420px]">
+            <div className="h-[350px] sm:h-[380px] lg:h-[420px]">
               <Bar
                 data={technologyChartData}
                 options={technologyChartOptions}
@@ -296,7 +296,7 @@ export default function DeveloperInsights() {
               </p>
             </div>
 
-            <div className="h-[420px]">
+            <div className="h-[350px] sm:h-[380px] lg:h-[420px]">
               <Doughnut
                 data={projectDistributionData}
                 options={projectDistributionOptions}
