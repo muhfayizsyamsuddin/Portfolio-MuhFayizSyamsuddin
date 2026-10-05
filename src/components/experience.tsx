@@ -66,7 +66,7 @@ export function Experience() {
       icon: <Code className="h-5 w-5" />,
     },
     {
-      type: "training",
+      type: "education",
       title: "Fullstack JavaScript Immersive",
       company: "Hacktiv8 Indonesia",
       location: "Jakarta Selatan, DKI Jakarta, Indonesia",

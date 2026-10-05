@@ -14,6 +14,7 @@ import Image from "next/image";
 import { Badge } from "./ui/badge";
 import { motion } from "motion/react";
 import DeveloperInsights from "@/components/DeveloperInsights";
+import TechnicalDashboard from "@/components/TechnicalDashboard";
 
 export function Projects() {
   const [showAll, setShowAll] = useState(false);
@@ -362,6 +363,7 @@ export function Projects() {
           </Button>
         </div>
         <DeveloperInsights />
+        <TechnicalDashboard />
       </div>
     </section>
   );
