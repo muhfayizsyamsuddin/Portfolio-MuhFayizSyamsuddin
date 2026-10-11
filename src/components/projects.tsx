@@ -75,6 +75,46 @@ export function Projects() {
       featured: true,
     },
     {
+      name: "Denver Build",
+      description: "Responsive construction company website with a custom admin CMS for managing company information, services, projects, galleries, testimonials, inquiries, SEO metadata, and site settings.",
+      techStack: [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "PostgreSQL",
+        "Prisma ORM",
+        "Zod",
+        "Cloudinary",
+        "Docker",
+        "Traefik",
+        "GitHub Actions (CI/CD)"
+      ],
+      githubUrl: "https://github.com/muhfayizsyamsuddin/denver-build",
+      demoUrl: "https://denverbuild.faizms.com",
+      image: "/denverbuild.png",
+      featured: true,
+    },
+    {
+      name: "Photography Booking System",
+      description: "Photography service platform featuring a portfolio, service packages, online booking requests, and booking management workflows.",
+      techStack: [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "PostgreSQL",
+        "Prisma ORM",
+        "Zod",
+        "Cloudinary",
+        "Docker",
+        "Traefik",
+        "GitHub Actions (CI/CD)"
+      ],
+      githubUrl: "https://github.com/muhfayizsyamsuddin/photography-booking-system",
+      demoUrl: "https://photobooth.faizms.com",
+      image: "/photography-booking-system.png",
+      featured: true,
+    },
+    {
       name: "Sportify Court App",
       description:
         "Sports field booking platform with payment integration and real-time availability checking.",

@@ -39,6 +39,7 @@ export function Skills() {
       icon: Database,
       skills: [
         "PostgreSQL",
+        "MySQL",
         "MongoDB",
         "Redis",
         "Supabase",
@@ -50,7 +51,7 @@ export function Skills() {
     {
       category: "Programming Languages",
       icon: Code2,
-      skills: ["JavaScript", "TypeScript"],
+      skills: ["JavaScript", "TypeScript", "PHP"],
     },
     {
       category: "Development Tools & Deployment",
