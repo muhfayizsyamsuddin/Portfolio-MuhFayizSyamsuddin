@@ -1,410 +1,339 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Github, ExternalLink, Code } from "lucide-react";
+import {
+  Github,
+  ArrowUpRight,
+  Cpu,
+  FlaskConical,
+  ChevronDown,
+  ChevronUp,
+  Terminal,
+} from "lucide-react";
 import Image from "next/image";
-import { Badge } from "./ui/badge";
 import { motion } from "motion/react";
-import DeveloperInsights from "@/components/DeveloperInsights";
-import TechnicalDashboard from "@/components/TechnicalDashboard";
+import { PROJECTS_DATA, ENGINEERING_LABS } from "@/data/portfolio";
+import { ProjectArchitecture } from "./ProjectArchitecture";
 
 export function Projects() {
-  const [showAll, setShowAll] = useState(false);
+  const [showArchive, setShowArchive] = useState(false);
 
-  const projects = [
-    {
-      name: "Opsora",
-      description:
-        "Enterprise business operations management system covering inventory, purchasing, sales, HR, attendance, payroll, performance reviews, reporting, and role-based administration.",
-      techStack: [
-        "Next.js",
-        "TypeScript",
-        "Node.js",
-        "Express.js",
-        "PostgreSQL",
-        "Prisma ORM",
-        "Docker",
-        "Cloudinary",
-        "GitHub Actions (CI/CD)",
-        "Traefik",
-      ],
-      githubUrl:
-        "https://github.com/muhfayizsyamsuddin/opsora",
-      demoUrl: "https://opsora.faizms.com",
-      image: "/opsora-logo.png",
-      featured: true,
-    },
-    {
-      name: "Click Booth App",
-      description:
-        "A comprehensive web-based photobooth application with AI integration, payment processing, and cloud storage capabilities.",
-      techStack: [
-        "TypeScript",
-        "Next.js",
-        "MongoDB",
-        "Tailwind CSS",
-        "OpenAI",
-        "Midtrans",
-        "Fonnte",
-        "Cloudinary",
-        "Docker",
-        "GitHub Actions (CI/CD)",
-      ],
-      githubUrl:
-        "https://github.com/muhfayizsyamsuddin/Click-Booth",
-      demoUrl: "https://clickbooth.faizms.com",
-      image: "/logo.png",
-      featured: true,
-    },
-    {
-      name: "Next Balance App",
-      description:
-        "Modern e-commerce platform inspired by NewBalance, featuring product catalog, wishlist management, and responsive design.",
-      techStack: ["TypeScript", "Next.js", "MongoDB", "Tailwind CSS", "Docker", "GitHub Actions (CI/CD)",],
-      githubUrl: "https://github.com/muhfayizsyamsuddin/Next-Balance",
-      demoUrl: "https://nextbalance.faizms.com",
-      image: "/nb.png",
-      featured: true,
-    },
-    {
-      name: "Denver Build",
-      description: "Responsive construction company website with a custom admin CMS for managing company information, services, projects, galleries, testimonials, inquiries, SEO metadata, and site settings.",
-      techStack: [
-        "Next.js",
-        "TypeScript",
-        "Tailwind CSS",
-        "PostgreSQL",
-        "Prisma ORM",
-        "Zod",
-        "Cloudinary",
-        "Docker",
-        "Traefik",
-        "GitHub Actions (CI/CD)"
-      ],
-      githubUrl: "https://github.com/muhfayizsyamsuddin/denver-build",
-      demoUrl: "https://denverbuild.faizms.com",
-      image: "/denverbuild.png",
-      featured: true,
-    },
-    {
-      name: "Photography Booking System",
-      description: "Photography service platform featuring a portfolio, service packages, online booking requests, and booking management workflows.",
-      techStack: [
-        "Next.js",
-        "TypeScript",
-        "Tailwind CSS",
-        "PostgreSQL",
-        "Prisma ORM",
-        "Zod",
-        "Cloudinary",
-        "Docker",
-        "Traefik",
-        "GitHub Actions (CI/CD)"
-      ],
-      githubUrl: "https://github.com/muhfayizsyamsuddin/photography-booking-system",
-      demoUrl: "https://photobooth.faizms.com",
-      image: "/photography-booking-system.png",
-      featured: true,
-    },
-    {
-      name: "Sportify Court App",
-      description:
-        "Sports field booking platform with payment integration and real-time availability checking.",
-      techStack: [
-        "Node.js",
-        "Express.js",
-        "PostgreSQL",
-        "React.js",
-        "Midtrans",
-        "GeminiAI",
-        "Bootstrap",
-        "Docker",
-        "GitHub Actions (CI/CD)",
-      ],
-      githubUrl: "https://github.com/muhfayizsyamsuddin/Sportify-Court",
-      demoUrl: "https://sportifycourt.faizms.com",
-      image: "/Sportify-Court.png",
-    },
-    {
-      name: "Smart Chat App",
-      description:
-        "Real-time chat platform with AI integration, multiple room support, and Socket.IO for instant messaging.",
-      techStack: [
-        "Node.js",
-        "Express.js",
-        "PostgreSQL",
-        "React.js",
-        "Socket.io",
-        "Vite",
-        "GeminiAI",
-        "Docker",
-        "GitHub Actions (CI/CD)",
-      ],
-      githubUrl: "https://github.com/muhfayizsyamsuddin/Smart-Chat-Client",
-      demoUrl: "https://smartchat.faizms.com",
-      image: "/smart-chat.png",
-    },
-    {
-      name: "SIO App - Microservices",
-      description:
-        "Re-engineered a monolithic restaurant ordering application into a microservices architecture, replacing the EJS frontend with React and introducing modular services, asynchronous communication, and containerized deployment.",
-      techStack: [
-        "Node.js",
-        "Express.js",
-        "Sequelize",
-        "PostgreSQL",
-        "React.js",
-        "Tailwind CSS",
-        "RabbitMQ",
-        "Traefik",
-        "PDFKit",
-        "Docker",
-        "GitHub Actions (CI/CD)",
-      ],
-      githubUrl:
-        "https://github.com/muhfayizsyamsuddin/SIO-deployment",
-      demoUrl: "https://sioms.faizms.com",
-      image: "/sio.png",
-      variant: "microservices",
-      featured: true,
-    },
-    {
-      name: "My Social Media App",
-      description:
-        "Cross-platform social media application with real-time messaging, user profiles, following/followers and GraphQL API.",
-      techStack: ["GraphQL", "MongoDB", "Apollo Server-client", "React Native", "Expo", "Tailwind CSS", "Docker", "GitHub Actions (CI/CD)"],
-      githubUrl: "https://github.com/muhfayizsyamsuddin/My-Social-Media-App",
-      demoUrl:
-        "#",
-      image: "/mysocialmediaapp.png",
-      featured: true,
-    },
-    {
-      name: "Furniqo",
-      description:
-        "Furniture e-commerce platform with user profiles, product management, and modern UI/UX design.",
-      techStack: [
-        "Node.js",
-        "Express.js",
-        "PostgreSQL",
-        "React.js",
-        "Bootstrap",
-        "Docker",
-        "GitHub Actions (CI/CD)",
-      ],
-      githubUrl: "https://github.com/muhfayizsyamsuddin/Furniqo-App-Client",
-      demoUrl: "https://furniqo.faizms.com",
-      image: "/furniqo.png",
-    },
-    {
-      name: "SIO App",
-      description:
-        "A web based application for ordering food and drinks in restaurants.",
-      techStack: ["Node.js", "Express.js", "Sequelize", "PostgreSQL", "EJS", "Docker", "GitHub Actions (CI/CD)"],
-      githubUrl: "https://github.com/muhfayizsyamsuddin/SIO-APP",
-      demoUrl: "https://sioapp.faizms.com",
-      image: "/sio.png",
-    },
-    {
-      name: "Toride Store",
-      description:
-        "A web based e-commerce app for selling Japanese sports products.",
-      techStack: ["JavaScript", "HTML", "CSS", "Bootstrap", "Docker", "GitHub Actions (CI/CD)"],
-      githubUrl: "https://github.com/muhfayizsyamsuddin/Toride-Store-Web",
-      demoUrl: "https://toridestore.faizms.com",
-      image: "/toride.png",
-    },
-    {
-      name: "Prelo App",
-      description:
-        "Web-based e-commerce application for used goods with a shopping cart feature.",
-      techStack: ["JavaScript", "HTML", "CSS", "Bootstrap", "Docker", "GitHub Actions (CI/CD)"],
-      githubUrl: "https://github.com/muhfayizsyamsuddin/prelo-app",
-      demoUrl: "https://preloapp.faizms.com",
-      image: "/preloapp.png",
-    },
-  ];
-
-  const visibleProjects = showAll ? projects : projects.slice(0, 6);
+  const featuredProjects = PROJECTS_DATA.filter((p) => p.featured);
+  const archiveProjects = PROJECTS_DATA.filter((p) => !p.featured);
 
   return (
-    <section
-      id="projects"
-      className="py-16 px-4 scroll-mt-16"
-      aria-labelledby="projects-heading"
-    >
-      <div className="container mx-auto max-w-7xl">
+    <div className="py-24 px-4">
+      <div className="container mx-auto max-w-6xl">
+        {/* 1. HEADER: FEATURED SYSTEMS */}
         <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 30 }}
+          className="max-w-3xl mb-16"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
+          <p className="text-xs font-mono uppercase tracking-[0.2em] text-primary mb-3">
+            Selected Works & Infrastructure
+          </p>
           <h2
             id="projects-heading"
-            className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance"
+            className="text-3xl md:text-4xl font-semibold text-foreground tracking-tight mb-4"
           >
-            Recent Work
+            Featured Production Systems
           </h2>
-          <p className="text-lg text-muted-foreground text-pretty max-w-2xl mx-auto">
-            Selected full-stack projects demonstrating production deployment, scalable backend architecture, modern frontend development, and real-world business workflows.
+          <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+            Full-cycle applications engineered from database schema and backend APIs to containerized Docker deployments behind Traefik reverse proxies.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {visibleProjects.map((project, index) => (
-            <motion.div
-              key={project.name}
+        {/* 2. FEATURED BENTO / EDITORIAL GRID (2 Kolom Besar agar tidak sempit) */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {featuredProjects.map((project, index) => (
+            <motion.article
+              key={project.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
               viewport={{ once: true }}
+              className="group rounded-2xl border border-border/80 bg-card/40 backdrop-blur-sm hover:border-primary/40 transition-all duration-300 flex flex-col overflow-hidden"
             >
-              <Card className="group hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-1 border-border/50 hover:border-primary/40 focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 h-full bg-card/50 backdrop-blur-sm flex flex-col overflow-hidden">
-                <div className="aspect-video relative bg-primary/5 overflow-hidden rounded-t-lg">
-                  <Image
-                    src={
-                      project.image || "/placeholder.svg?height=300&width=400"
-                    }
-                    alt={`Screenshot of ${project.name} project showing the main interface`}
-                    fill
-                    className={`group-hover:scale-105 transition-transform duration-500 ${
-                      project.name === "Opsora"
-                        ? "object-contain bg-white scale-110"
-                        : "object-cover"
+              {/* Top Media Frame */}
+              <div className="aspect-[16/9] relative bg-muted/40 border-b border-border/60 overflow-hidden">
+                <Image
+                  src={project.image}
+                  alt={`${project.name} interface preview`}
+                  fill
+                  className={`transition-transform duration-500 group-hover:scale-[1.03] ${project.isLogoImage
+                    ? "object-contain p-10 bg-zinc-950/40"
+                    : "object-cover"
                     }`}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    loading={index === 0 ? "eager" : "lazy"}
-                    priority={index === 0}
-                  />
-                  {project.featured && (
-                    <div className="absolute top-3 right-3">
-                      {/* <Badge
-                        variant="secondary"
-                        className="bg-primary text-white text-xs font-semibold shadow-lg border border-primary px-3 py-1.5 flex items-center gap-1.5 hover:bg-primary/90 transition-all duration-300"
-                      >
-                        <svg
-                          width="12"
-                          height="12"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="flex-shrink-0"
-                        >
-                          <path
-                            d="M12 2L15.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L8.91 8.26L12 2Z"
-                            fill="currentColor"
-                          />
-                        </svg>
-                        Featured
-                      </Badge> */}
-                    </div>
-                  )}
-                  {project.variant === "microservices" && (
-                    <div className="absolute top-3 right-3">
-                      <Badge
-                        variant="secondary"
-                        className="bg-primary text-white text-xs font-semibold shadow-lg border border-primary px-3 py-1"
-                      >
-                        Microservices
-                      </Badge>
-                    </div>
-                  )}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority={index < 2}
+                />
+                <div className="absolute top-3 left-3">
+                  <span className="px-2.5 py-1 rounded-md text-xs font-mono bg-background/90 backdrop-blur-md text-foreground border border-border/80 shadow-sm">
+                    {project.category}
+                  </span>
                 </div>
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-foreground group-hover:text-primary transition-colors text-lg">
-                    {project.name}
-                  </CardTitle>
-                  <CardDescription className="text-pretty text-sm leading-relaxed">
+              </div>
+
+              {/* Card Body */}
+              <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between space-y-6">
+                <div className="space-y-3">
+                  <div>
+                    <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
+                      {project.name}
+                    </h3>
+                    <p className="text-xs font-mono text-muted-foreground mt-0.5">
+                      {project.tagline}
+                    </p>
+                  </div>
+
+                  <p className="text-sm text-muted-foreground leading-relaxed">
                     {project.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4 pt-0 flex-1 flex flex-col">
+                  </p>
+
+                  {/* Architecture Context Callout */}
+                  <div className="rounded-xl bg-muted/40 border border-border/60 p-3.5 flex items-start gap-2.5">
+                    <Cpu className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                    <p className="text-xs text-foreground/90 leading-relaxed">
+                      <span className="font-semibold">Architecture: </span>
+                      {project.architectureNote}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="space-y-5 pt-2">
+                  {/* Clean Monospace Stack Pills (Max 6, Tanpa Ikon <> Berulang) */}
                   <div
-                    className="flex flex-wrap gap-1.5 items-start content-start min-h-[80px]"
-                    role="list"
-                    aria-label={`Technologies used in ${project.name}`}
+                    className="flex flex-wrap gap-1.5"
+                    aria-label={`Core technologies for ${project.name}`}
                   >
-                    {project.techStack.map((tech) => (
-                      <Badge
+                    {project.coreStack.map((tech) => (
+                      <span
                         key={tech}
-                        variant="secondary"
-                        className="text-xs py-1.5 px-2.5 bg-background/60 backdrop-blur-sm border border-border/50 hover:border-primary/40 hover:bg-primary/5 transition-all duration-200 flex items-center gap-1 h-7 min-w-fit whitespace-nowrap text-primary"
-                        role="listitem"
+                        className="px-2.5 py-1 rounded-md text-xs font-mono bg-background/80 border border-border/80 text-muted-foreground"
                       >
-                        <Code
-                          className="h-3 w-3 flex-shrink-0 text-primary"
-                          aria-hidden="true"
-                        />
                         {tech}
-                      </Badge>
+                      </span>
                     ))}
+                    {project.extraStack && project.extraStack.length > 0 && (
+                      <span className="px-2 py-1 rounded-md text-xs font-mono text-muted-foreground/70">
+                        +{project.extraStack.length} more
+                      </span>
+                    )}
                   </div>
-                  <div className="mt-auto pt-4">
-                    <Button
-                      size="sm"
-                      asChild
-                      className="w-full focus:ring-2 focus:ring-primary focus:ring-offset-2 text-xs bg-primary hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 transition-all duration-300"
-                      disabled={project.demoUrl === "#"}
-                    >
-                      <a
-                        href={
-                          project.demoUrl !== "#"
-                            ? project.demoUrl
-                            : project.githubUrl
-                        }
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`View ${
-                          project.demoUrl !== "#" ? "live demo" : "source code"
-                        } of ${project.name}`}
+
+                  {/* Dual Action Bar */}
+                  <div className="flex items-center gap-3 pt-2 border-t border-border/50">
+                    {project.demoUrl && project.demoUrl !== "#" && (
+                      <Button
+                        size="sm"
+                        asChild
+                        className="rounded-lg font-medium px-4"
                       >
-                        {project.demoUrl !== "#" ? (
-                          <>
-                            <ExternalLink
-                              className="h-3.5 w-3.5 mr-1.5"
-                              aria-hidden="true"
-                            />
-                            View Project
-                          </>
-                        ) : (
-                          <>
-                            <Github
-                              className="h-3.5 w-3.5 mr-1.5"
-                              aria-hidden="true"
-                            />
-                            View Code
-                          </>
-                        )}
-                      </a>
-                    </Button>
+                        <a
+                          href={project.demoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Live System
+                          <ArrowUpRight className="ml-1.5 h-3.5 w-3.5" />
+                        </a>
+                      </Button>
+                    )}
+
+                    {project.githubUrl && (
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        asChild
+                        className="rounded-lg border-border/80 bg-card/40 hover:bg-card"
+                      >
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Github className="mr-1.5 h-3.5 w-3.5" />
+                          Source
+                        </a>
+                      </Button>
+                    )}
                   </div>
-                </CardContent>
-              </Card>
-            </motion.div>
+                </div>
+              </div>
+            </motion.article>
           ))}
         </div>
-        <div className="flex justify-center mt-10">
-          <Button
-            variant="outline"
-            onClick={() => setShowAll((prev) => !prev)}
-            className="px-6 border-primary/30 hover:bg-primary/10 hover:text-primary hover:border-primary transition-colors"
-          >
-            {showAll ? "Show Less" : "Show All Projects"}
-          </Button>
+
+        {/* 3. ARCHIVE TOGGLE (Untuk Proyek Tambahan seperti Sportify, Smart Chat, Furniqo) */}
+        <div className="mt-10">
+          <div className="flex justify-center">
+            <Button
+              variant="outline"
+              onClick={() => setShowArchive((prev) => !prev)}
+              className="rounded-xl border-border/80 font-mono text-xs px-5"
+            >
+              {showArchive ? (
+                <>
+                  Hide Additional Projects ({archiveProjects.length})
+                  <ChevronUp className="ml-2 h-4 w-4" />
+                </>
+              ) : (
+                <>
+                  View Additional Deployed Projects ({archiveProjects.length})
+                  <ChevronDown className="ml-2 h-4 w-4" />
+                </>
+              )}
+            </Button>
+          </div>
+
+          {showArchive && (
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-8"
+            >
+              {archiveProjects.map((project) => (
+                <div
+                  key={project.id}
+                  className="rounded-xl border border-border/70 bg-card/30 p-5 flex flex-col justify-between hover:border-primary/40 transition-colors"
+                >
+                  <div>
+                    <div className="flex items-start justify-between gap-2 mb-2">
+                      <h4 className="text-base font-semibold text-foreground">
+                        {project.name}
+                      </h4>
+                      <div className="flex items-center gap-1.5 shrink-0">
+                        {project.githubUrl && (
+                          <a
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted"
+                            aria-label={`${project.name} GitHub`}
+                          >
+                            <Github className="h-4 w-4" />
+                          </a>
+                        )}
+                        {project.demoUrl && project.demoUrl !== "#" && (
+                          <a
+                            href={project.demoUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-1.5 rounded-md text-muted-foreground hover:text-primary hover:bg-muted"
+                            aria-label={`${project.name} Live Demo`}
+                          >
+                            <ArrowUpRight className="h-4 w-4" />
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                    <p className="text-xs text-muted-foreground leading-relaxed mb-4">
+                      {project.description}
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap gap-1.5 pt-3 border-t border-border/40">
+                    {project.coreStack.map((tech) => (
+                      <span
+                        key={tech}
+                        className="text-[11px] font-mono text-muted-foreground bg-background/60 px-2 py-0.5 rounded border border-border/60"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </motion.div>
+          )}
         </div>
-        <DeveloperInsights />
-        <TechnicalDashboard />
+
+        {/* 4. ENGINEERING LABS & TECHNICAL EXPLORATIONS (MAXY ACADEMY TRACK) */}
+        <div className="mt-24 pt-16 border-t border-border/60">
+          <div className="max-w-3xl mb-10">
+            <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-primary mb-2">
+              <FlaskConical className="h-3.5 w-3.5" />
+              <span>Engineering Labs & R&D</span>
+            </div>
+            <h3 className="text-2xl md:text-3xl font-semibold text-foreground tracking-tight mb-3">
+              Backend, AI & Automation Explorations
+            </h3>
+            <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+              Focused technical implementations from the Maxy Academy Backend & AI Bootcamp—covering Laravel enterprise cycles, payment webhooks, LLM chatbots, and headless browser data mining.
+            </p>
+          </div>
+
+          <div className="divide-y divide-border/60 rounded-2xl border border-border/80 bg-card/30 overflow-hidden">
+            {ENGINEERING_LABS.map((lab) => (
+              <div
+                key={lab.id}
+                className="p-6 hover:bg-card/60 transition-colors grid grid-cols-1 lg:grid-cols-12 gap-6 items-start lg:items-center"
+              >
+                <div className="lg:col-span-5 space-y-1.5">
+                  <div className="flex items-center gap-2">
+                    <span className="px-2 py-0.5 rounded text-[11px] font-mono bg-primary/10 text-primary border border-primary/20">
+                      {lab.domain}
+                    </span>
+                    <span className="text-xs font-mono text-muted-foreground flex items-center gap-1">
+                      <Terminal className="h-3 w-3" />
+                      {lab.deliverableType}
+                    </span>
+                  </div>
+                  <h4 className="text-base font-semibold text-foreground">
+                    {lab.title}
+                  </h4>
+                  <p className="text-xs font-mono text-muted-foreground">
+                    {lab.track}
+                  </p>
+                </div>
+
+                <div className="lg:col-span-5 space-y-3">
+                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                    {lab.summary}
+                  </p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {lab.stack.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2 py-0.5 rounded text-[11px] font-mono bg-background border border-border/70 text-foreground/80"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="lg:col-span-2 flex lg:justify-end gap-2">
+                  {lab.liveUrl && (
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      asChild
+                      className="rounded-lg text-xs font-mono h-8 px-3"
+                    >
+                      <a
+                        href={lab.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Demo
+                        <ArrowUpRight className="ml-1 h-3 w-3" />
+                      </a>
+                    </Button>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 5. UNDER THE HOOD: SYSTEM ARCHITECTURE */}
+        <ProjectArchitecture />
       </div>
-    </section>
+    </div>
   );
 }

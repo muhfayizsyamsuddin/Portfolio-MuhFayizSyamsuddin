@@ -30,27 +30,27 @@ ChartJS.register(
 const technologyLabels = [
   "Docker",
   "GitHub Actions (CI/CD)",
+  "PostgreSQL",
   "Node.js",
   "Express.js",
-  "PostgreSQL",
   "Tailwind CSS",
-  "React.js",
-  "Bootstrap",
   "Next.js",
   "TypeScript",
+  "React.js",
+  "Bootstrap",
 ];
 
 const technologyValues = [
-  11,
-  11,
-  6,
-  6,
-  6,
-  4,
-  4,
-  4,
-  3,
-  3,
+  13, // Docker
+  13, // GitHub Actions (CI/CD)
+  8,  // PostgreSQL
+  6,  // Node.js
+  6,  // Express.js
+  6,  // Tailwind CSS
+  5,  // Next.js
+  5,  // TypeScript
+  4,  // React.js
+  4,  // Bootstrap
 ];
 
 const technologyChartData = {
@@ -151,7 +151,7 @@ const projectDistributionData = {
 
   datasets: [
     {
-      data: [5, 2, 2, 2],
+      data: [2, 4, 2, 5],
 
       backgroundColor: [
         "#0ea5e9",
@@ -186,11 +186,24 @@ const projectDistributionOptions: ChartOptions<"doughnut"> = {
     },
 
     tooltip: {
-      backgroundColor: "#111827",
-      titleColor: "#ffffff",
-      bodyColor: "#d1d5db",
-      borderColor: "rgba(255,255,255,0.1)",
+      enabled: true,
+      backgroundColor: "rgba(15, 23, 42, 0.98)",
+      titleColor: "#f8fafc",
+      bodyColor: "#e2e8f0",
+      borderColor: "#38bdf8",
       borderWidth: 1,
+      cornerRadius: 8,
+      padding: 12,
+      displayColors: true,
+
+      titleFont: {
+        size: 13,
+        weight: "bold",
+      },
+
+      bodyFont: {
+        size: 12,
+      },
 
       callbacks: {
         label: (context) => {
@@ -231,20 +244,19 @@ export default function DeveloperInsights() {
           </p>
 
           <h2 className="text-3xl font-semibold tracking-tight text-white md:text-4xl">
-            Project analytics & technology overview
+            Project & Technology Insights
           </h2>
 
           <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-400">
-            A visual overview of the technologies and categories
-            represented across my projects.
+            An overview of the technologies used across my projects and their distribution by application category.
           </p>
         </motion.div>
 
         {/* Charts */}
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className="grid gap-6 sm:grid-cols-2">
           {/* Bar Chart */}
           <motion.div
-            className="rounded-xl border border-white/10 bg-[#11131d] p-6 transition-colors duration-300 hover:border-sky-500/20"
+            className="h-full rounded-2xl border border-border/70 bg-card p-6 shadow-sm transition-colors duration-300 hover:border-sky-500/40"
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
@@ -256,11 +268,11 @@ export default function DeveloperInsights() {
             }}
           >
             <div className="mb-6">
-              <h3 className="text-lg font-semibold text-white">
+              <h3 className="text-lg font-semibold text-foreground">
                 Technology Usage Across Projects
               </h3>
 
-              <p className="mt-1 text-sm text-slate-400">
+              <p className="mt-1 text-sm leading-6 text-muted-foreground">
                 Number of projects using each technology.
               </p>
             </div>
@@ -275,7 +287,7 @@ export default function DeveloperInsights() {
 
           {/* Doughnut Chart */}
           <motion.div
-            className="rounded-xl border border-white/10 bg-[#11131d] p-6 transition-colors duration-300 hover:border-sky-500/20"
+            className="h-full rounded-2xl border border-border/70 bg-card p-6 shadow-sm transition-colors duration-300 hover:border-sky-500/40"
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
@@ -287,11 +299,11 @@ export default function DeveloperInsights() {
             }}
           >
             <div className="mb-6">
-              <h3 className="text-lg font-semibold text-white">
+              <h3 className="text-lg font-semibold text-foreground">
                 Project Distribution
               </h3>
 
-              <p className="mt-1 text-sm text-slate-400">
+              <p className="mt-1 text-sm leading-6 text-muted-foreground">
                 Distribution of projects by application category.
               </p>
             </div>

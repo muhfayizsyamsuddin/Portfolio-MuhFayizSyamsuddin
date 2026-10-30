@@ -1,166 +1,84 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
-// import { Badge } from "./ui/badge";
-import { Database, Globe, Settings, Layers, Code2 } from "lucide-react";
 import { motion } from "motion/react";
+import { SKILL_PILLARS } from "@/data/portfolio";
+import { Layers, Server, Cpu } from "lucide-react";
 
 export function Skills() {
-  const skillCategories = [
-    {
-      category: "Frontend",
-      icon: Globe,
-      skills: [
-        "React.js",
-        "Next.js",
-        "React Native",
-        "Tailwind CSS",
-        "HTML5",
-        "CSS3",
-        "Apollo Client",
-      ],
-    },
-    {
-      category: "Backend",
-      icon: Layers,
-      skills: [
-        "Node.js",
-        "Express.js",
-        "Sequelize ORM",
-        "Prisma ORM",
-        "RESTful APIs",
-        "GraphQL",
-        "Apollo Server",
-        "RabbitMQ",
-      ],
-    },
-    {
-      category: "Database & Cloud",
-      icon: Database,
-      skills: [
-        "PostgreSQL",
-        "MySQL",
-        "MongoDB",
-        "Redis",
-        "Supabase",
-        "Cloudinary",
-        "AWS EC2",
-        "Vercel",
-      ],
-    },
-    {
-      category: "Programming Languages",
-      icon: Code2,
-      skills: ["JavaScript", "TypeScript", "PHP"],
-    },
-    {
-      category: "Development Tools & Deployment",
-      icon: Settings,
-      skills: [
-        "Git & GitHub",
-        "Docker",
-        "GitHub Actions (CI/CD)",
-        "Traefik",
-        "Nginx",
-        "Postman",
-      ],
-    },
-  ];
+  const pillarIcons = [Layers, Server, Cpu];
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] flex items-center py-12 px-4">
-      <div className="container mx-auto max-w-7xl">
+    <div className="py-24 px-4">
+      <div className="container mx-auto max-w-6xl">
         <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 30 }}
+          className="max-w-3xl mb-16"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">
-            Skills & Technologies
+          <p className="text-xs font-mono uppercase tracking-[0.2em] text-primary mb-3">
+            Technical Stack
+          </p>
+          <h2
+            id="skills-heading"
+            className="text-3xl md:text-4xl font-semibold text-foreground tracking-tight mb-4"
+          >
+            Engineering Capabilities & Tools
           </h2>
-          <p className="text-lg text-muted-foreground text-pretty max-w-2xl mx-auto">
-            Technologies and tools I use to build, deploy, and maintain modern web applications
+          <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+            Grouped by architectural domain—from type-safe frontend interfaces and polyglot backend APIs to AI workflow automation and container orchestration.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 mb-12">
-          {skillCategories.map((category, index) => {
-            const IconComponent = category.icon;
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {SKILL_PILLARS.map((pillar, index) => {
+            const IconComponent = pillarIcons[index % pillarIcons.length];
             return (
               <motion.div
-                key={category.category}
+                key={pillar.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
+                className="rounded-2xl border border-border/70 bg-card/40 backdrop-blur-sm p-6 flex flex-col justify-between hover:border-primary/40 transition-colors"
               >
-                <Card className="bg-card/50 backdrop-blur-sm border-border/30 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 group h-full">
-                  <CardContent className="p-5">
-                    <div className="flex items-center gap-3 mb-5">
-                      <div className="p-2.5 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-all duration-300">
-                        <IconComponent className="w-4 h-4 text-primary group-hover:text-primary/80 transition-colors duration-300" />
-                      </div>
-                      <h3 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
-                        {category.category}
-                      </h3>
+                <div>
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="p-2.5 rounded-xl bg-primary/10 text-primary border border-primary/20">
+                      <IconComponent className="w-5 h-5" />
                     </div>
+                    <h3 className="text-lg font-semibold text-foreground">
+                      {pillar.category}
+                    </h3>
+                  </div>
 
-                    <div className="space-y-1.5">
-                      {category.skills.map((skill) => (
-                        <div
-                          key={skill}
-                          className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 py-0.5 leading-relaxed cursor-default"
-                        >
-                          <span className="text-primary">•</span> {skill}
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
+                  <p className="text-xs text-muted-foreground mb-6 leading-relaxed">
+                    {pillar.subtitle}
+                  </p>
+
+                  <div className="divide-y divide-border/50">
+                    {pillar.skills.map((skill) => (
+                      <div
+                        key={skill.name}
+                        className="py-2.5 flex items-center justify-between gap-2"
+                      >
+                        <span className="text-sm font-medium text-foreground">
+                          {skill.name}
+                        </span>
+                        {skill.context && (
+                          <span className="text-xs font-mono text-muted-foreground text-right">
+                            {skill.context}
+                          </span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </motion.div>
             );
           })}
         </div>
-
-        {/* Core Competencies Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-        >
-          {/* <Card className="bg-gradient-to-r from-primary/5 via-primary/3 to-primary/5 border-primary/20 hover:border-primary/30 transition-all duration-300 backdrop-blur-sm">
-            <CardContent className="p-8 text-center">
-              <h3 className="text-2xl font-bold text-foreground mb-4">
-                Core Competencies
-              </h3>
-              <p className="text-muted-foreground mb-6 max-w-3xl mx-auto text-lg">
-                Specializing in modern web development with a focus on
-                performance, scalability, and user experience
-              </p>
-              <div className="flex flex-wrap gap-3 justify-center">
-                {[
-                  "Full-Stack Development",
-                  "Modern JavaScript",
-                  "React Ecosystem",
-                  "API Design",
-                  "Database Architecture",
-                  "Cloud Deployment",
-                ].map((competency) => (
-                  <Badge
-                    key={competency}
-                    variant="outline"
-                    className="hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-200 text-sm py-2 px-4 font-medium border-primary/30 bg-background/50 backdrop-blur-sm text-foreground hover:shadow-md"
-                  >
-                    {competency}
-                  </Badge>
-                ))}
-              </div>
-            </CardContent>
-          </Card> */}
-        </motion.div>
       </div>
     </div>
   );

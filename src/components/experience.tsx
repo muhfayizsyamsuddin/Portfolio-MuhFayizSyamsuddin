@@ -1,363 +1,110 @@
 "use client";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  Calendar,
-  MapPin,
-  // Award,
-  Code,
-  GraduationCap,
-  TrendingUp,
-  Zap,
-  Briefcase,
-} from "lucide-react";
-import { Badge } from "./ui/badge";
-import { motion } from "framer-motion";
+import { Calendar, MapPin, CheckCircle2 } from "lucide-react";
+import { motion } from "motion/react";
+import { EXPERIENCE_DATA } from "@/data/portfolio";
 
 export function Experience() {
-  const experiences = [
-    {
-      type: "training",
-      title: "Docker and Microservices",
-      company: "Screenesia",
-      location: "Makassar, Sulawesi Selatan, Indonesia",
-      duration: "Jun 2026 - Aug 2026",
-      description:
-        "Completed a 28 JP technical training program focused on Docker, containerization, and microservices architecture through hands-on learning and a capstone project.",
-      impact: [
-        "Learned Docker fundamentals, Dockerfile, volumes, networks, and Docker Compose best practices",
-        "Built RESTful microservices with API Gateway, service discovery, and asynchronous communication using message brokers",
-        "Studied authentication and authorization, resilience patterns, observability, and Kubernetes fundamentals",
-        "Applied CI/CD concepts for microservices and completed a capstone project",
-      ],
-      technologies: [
-        "Docker",
-        "Docker Compose",
-        "Microservices",
-        "RESTful APIs",
-        "API Gateway",
-        "RabbitMQ",
-        "Kubernetes",
-        "CI/CD",
-        "Observability",  
-      ],
-      icon: <Code className="h-5 w-5" />,
-    },
-    {
-      type: "internship",
-      title: "Frontend Developer",
-      company: "Promptive",
-      location: "Bekasi, Jawa Barat, Indonesia",
-      duration: "Oct 2025 - Dec 2025",
-      description:
-        "Developed and maintained responsive web applications using modern frontend technologies. Collaborated with design and backend teams to deliver high-quality user experiences.",
-      impact: [
-        "Improved application performance by 40% through code optimization and efficient resource management",
-        "Implemented new features that increased user engagement by 25%",
-        "Participated in code reviews and mentored junior developers, contributing to a more robust development process",
-      ],
-      technologies: ["HTML", "CSS", "JavaScript", "React.js", "Tailwind CSS", "Figma", "Git"],
-      icon: <Code className="h-5 w-5" />,
-    },
-    {
-      type: "education",
-      title: "Fullstack JavaScript Immersive",
-      company: "Hacktiv8 Indonesia",
-      location: "Jakarta Selatan, DKI Jakarta, Indonesia",
-      duration: "Apr 2025 - Aug 2025",
-      description:
-        "Completed Fullstack JavaScript Immersive program with a focus on modern web and mobile development. Gained strong foundation in programming fundamentals and database management.",
-      impact: [
-        "Successfully built and deployed multiple fullstack applications within project deadlines",
-        "Collaborated in agile team projects simulating real-world software development environments",
-        "Strengthened problem-solving skills through daily coding challenges and pair programming",
-        "Graduated from one of Indonesia’s top coding bootcamps with industry-ready skills",
-        "Applied critical thinking and analytical skills to solve real-world technical challenges",
-        "Cultivated a growth mindset and proactive learning attitude for continuous improvement",
-      ],
-      technologies: [
-        "JavaScript",
-        "TypeScript",
-        "Node.js",
-        "Express.js",
-        "Next.js",
-        "React.js",
-        "React Native",
-        "MongoDB",
-        "GraphQL",
-        "PostgreSQL",
-        "Supabase",
-        "Sequelize ORM",
-        "RESTful APIs",
-        "NoSQL Databases",
-        "Apollo Server & Client",
-        "HTML5/CSS3",
-      ],
-      icon: <Code className="h-5 w-5" />,
-    },
-    {
-      type: "education",
-      title: "Bachelor of Agricultural Technology",
-      company: "Universitas Hasanuddin",
-      location: "Makassar, Sulawesi Selatan",
-      duration: "2020 - 2024",
-      description:
-        "Experienced in applying problem-solving, teamwork, and analytical skills to real-world projects such as monitoring systems, automation, and decision-support systems.",
-      impact: [
-        "Maintaining excellent academic performance with GPA: 3.72/4.0",
-        "Participated in programming competitions, enhancing problem-solving and critical thinking",
-        "Collaborated in research and projects involving IoT, AI, and automation systems, improving teamwork and adaptability",
-        "Applied analytical and communication skills in preparing technical reports and presentations",
-      ],
-      technologies: [
-        "C++",
-        "Artificial Intelligence",
-        "Instrumentation",
-        "Internet of Things (IoT)",
-        "Monitoring System",
-        "Automatic Control System",
-        "Fuzzy Logic Systems",
-        "Expert Systems",
-      ],
-      icon: <GraduationCap className="h-5 w-5" />,
-    },
-    {
-      type: "internship",
-      title: "Assistant Supervisor",
-      company: "Agricultural Extension Center",
-      location: "Sidenreng Rappang, Sulawesi Selatan, Indonesia",
-      duration: "Jan 2023 - Feb 2023",
-      description:
-        "Supported the development and execution of agricultural programs by collaborating with supervisors and local farmers. Focused on knowledge transfer, problem-solving, and data-driven approaches to improve crop yields and promote sustainable practices.",
-      impact: [
-        "Increased crop yields by an average of 30% through structured training and data-driven recommendations",
-        "Designed and distributed educational materials to promote sustainable farming practices",
-        "Facilitated interactive workshops for over 100 local farmers, enhancing communication and leadership skills",
-      ],
-      technologies: ["Agricultural Practices", "Community Outreach"],
-      icon: <Briefcase className="h-5 w-5" />,
-    },
-  ];
-
-  // const certifications = [
-  //   {
-  //     name: "AWS Cloud Practitioner",
-  //     issuer: "HackerRank", 
-  //     date: "Aug 2025",
-  //     credentialId: "AWS-CCP-2024-001",
-  //   },
-  //   {
-  //     name: "React Developer Certification",
-  //     issuer: "HackerRank",
-  //     date: "Aug 2025",
-  //     credentialId: "META-REACT-2024",
-  //   },
-  //   {
-  //     name: "JavaScript Algorithms & Data Structures",
-  //     issuer: "Udemy",
-  //     date: "Aug 2025",
-  //     credentialId: "FCC-JS-2024-789",
-  //   },
-  // ];
-
-  const getTypeColor = () => {
-    // Simplified color scheme - all using primary color for consistency
-    return "bg-primary/10 text-primary border-primary/20";
-  };
-
   return (
-    <section className="py-20 px-4">
-      <div className="container mx-auto max-w-4xl">
+    <div className="py-24 px-4">
+      <div className="container mx-auto max-w-5xl">
+        {/* Header */}
         <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
+          className="max-w-3xl mb-16"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
         >
-          <h2 className="text-4xl font-bold text-foreground mb-4 text-balance">
-            Professional Journey
+          <p className="text-xs font-mono uppercase tracking-[0.2em] text-primary mb-3">
+            Career & Academic Track
+          </p>
+          <h2
+            id="experience-heading"
+            className="text-3xl md:text-4xl font-semibold text-foreground tracking-tight mb-4"
+          >
+            Engineering Experience & Education
           </h2>
-          <p className="text-lg text-muted-foreground text-pretty max-w-2xl mx-auto">
-            My journey in software development through internships, education,
-            and hands-on projects
+          <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+            A progression from hardware instrumentation and control systems to full-stack web engineering, microservices, and AI workflow automation.
           </p>
         </motion.div>
 
-        <div className="relative">
-          {/* Timeline line */}
-          <motion.div
-            className="absolute left-8 top-0 bottom-0 w-0.5 bg-border/50 hidden md:block"
-            initial={{ scaleY: 0, opacity: 0 }}
-            whileInView={{ scaleY: 1, opacity: 1 }}
-            transition={{ duration: 1.2, ease: "easeInOut", delay: 0.3 }}
-            viewport={{ once: true }}
-            style={{ transformOrigin: "top" }}
-          ></motion.div>
+        {/* Timeline List */}
+        <div className="relative border-l border-border/70 ml-3 md:ml-6 pl-6 md:pl-10 space-y-12">
+          {EXPERIENCE_DATA.map((exp, index) => (
+            <motion.div
+              key={exp.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: index * 0.08 }}
+              viewport={{ once: true }}
+              className="relative group"
+            >
+              {/* Timeline Indicator Dot */}
+              <div className="absolute -left-[31px] md:-left-[47px] top-1.5 h-3.5 w-3.5 rounded-full border-2 border-primary bg-background group-hover:bg-primary transition-colors" />
 
-          <div className="space-y-8">
-            {experiences.map((exp, index) => (
-              <motion.div
-                key={index}
-                className="relative group"
-                initial={{ opacity: 0, x: -60, scale: 0.95 }}
-                whileInView={{ opacity: 1, x: 0, scale: 1 }}
-                transition={{
-                  duration: 0.7,
-                  ease: "easeOut",
-                  delay: index * 0.15 + 0.5,
-                }}
-                viewport={{ once: true, margin: "-50px" }}
-              >
-                {/* Timeline dot */}
-                <motion.div
-                  className="absolute left-6 top-8 w-4 h-4 bg-primary rounded-full border-4 border-background z-10 hidden md:block group-hover:scale-110 transition-transform duration-300"
-                  initial={{ scale: 0, rotate: -180 }}
-                  whileInView={{ scale: 1, rotate: 0 }}
-                  transition={{
-                    duration: 0.6,
-                    ease: "easeOut",
-                    delay: index * 0.15 + 0.8,
-                  }}
-                  viewport={{ once: true }}
-                ></motion.div>{" "}
-                <Card className="border-border/50 bg-card/50 backdrop-blur-sm hover:shadow-xl hover:shadow-primary/10 hover:border-primary/30 transition-all duration-300 md:ml-16">
-                  <CardHeader>
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="flex items-center gap-3">
-                        <div className="p-2 rounded-lg bg-primary/10 text-primary group-hover:bg-primary/20 transition-all duration-300">
-                          {exp.icon}
-                        </div>
-                        <div>
-                          <CardTitle className="text-card-foreground">
-                            {exp.title}
-                          </CardTitle>
-                          <CardDescription className="text-base font-medium text-muted-foreground">
-                            {exp.company}
-                          </CardDescription>
-                        </div>
-                      </div>
-                      <Badge className={`${getTypeColor()} capitalize`}>
+              <div className="rounded-2xl border border-border/80 bg-card/40 backdrop-blur-sm p-6 sm:p-7 hover:border-primary/40 transition-colors">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-4 border-b border-border/50">
+                  <div>
+                    <div className="flex flex-wrap items-center gap-2.5 mb-1">
+                      <h3 className="text-lg sm:text-xl font-semibold text-foreground">
+                        {exp.title}
+                      </h3>
+                      <span className="px-2.5 py-0.5 text-xs font-mono rounded-md bg-primary/10 text-primary border border-primary/20">
                         {exp.type}
-                      </Badge>
+                      </span>
                     </div>
-
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground mt-2">
-                      <div className="flex items-center gap-1">
-                        <Calendar className="h-4 w-4" />
-                        {exp.duration}
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <MapPin className="h-4 w-4" />
-                        {exp.location}
-                      </div>
-                    </div>
-                  </CardHeader>
-
-                  <CardContent className="space-y-4">
-                    <p className="text-muted-foreground leading-relaxed text-pretty">
-                      {exp.description}
+                    <p className="text-sm font-medium text-foreground/80">
+                      {exp.company}
                     </p>
+                  </div>
 
-                    <div className="space-y-2">
-                      <h4 className="text-sm font-semibold text-foreground flex items-center gap-2">
-                        <TrendingUp className="h-4 w-4" />
-                        Key Impact
-                      </h4>
-                      <ul className="space-y-1">
-                        {exp.impact.map((item, idx) => (
-                          <li
-                            key={idx}
-                            className="text-sm text-muted-foreground flex items-start gap-2"
-                          >
-                            <Zap className="h-3 w-3 mt-1 text-primary flex-shrink-0" />
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                  <div className="flex flex-col sm:items-end text-xs font-mono text-muted-foreground gap-1 shrink-0">
+                    <span className="flex items-center gap-1.5">
+                      <Calendar className="h-3.5 w-3.5 text-primary" />
+                      {exp.duration}
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <MapPin className="h-3.5 w-3.5" />
+                      {exp.location}
+                    </span>
+                  </div>
+                </div>
 
-                    <div className="flex flex-wrap gap-2">
-                      {exp.technologies.map((tech) => (
-                        <Badge
-                          key={tech}
-                          variant="secondary"
-                          className="text-xs bg-primary/5 hover:bg-primary/10 border border-primary/20 transition-all duration-200"
-                        >
-                          {tech}
-                        </Badge>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-5">
+                  {exp.description}
+                </p>
+
+                {/* Impact Bullets */}
+                <ul className="space-y-2 mb-6">
+                  {exp.impact.map((point, idx) => (
+                    <li
+                      key={idx}
+                      className="text-xs sm:text-sm text-foreground/90 flex items-start gap-2.5 leading-relaxed"
+                    >
+                      <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Clean Monospace Tech Tags */}
+                <div className="flex flex-wrap gap-1.5 pt-2">
+                  {exp.technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-2.5 py-1 rounded-md text-xs font-mono bg-background/80 border border-border/70 text-muted-foreground"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
-
-        <motion.div
-          className="mt-16"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          {/* <h3 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
-            <Award className="h-6 w-6 text-primary" />
-            Certifications
-          </h3> */}
-          {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {certifications.map((cert, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30, scale: 0.9 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{
-                  duration: 0.6,
-                  ease: "easeOut",
-                  delay: index * 0.1 + 0.4,
-                }}
-                viewport={{ once: true, margin: "-50px" }}
-                whileHover={{
-                  y: -5,
-                  transition: { duration: 0.2, ease: "easeOut" },
-                }}
-              >
-                <Card className="border-border/50 bg-card/50 backdrop-blur-sm hover:shadow-lg hover:border-primary/20 transition-all duration-300 group h-full">
-                  <CardContent className="p-6">
-                    <div className="space-y-3">
-                      <div className="flex items-start justify-between">
-                        <h4 className="font-semibold text-sm text-foreground leading-tight line-clamp-2">
-                          {cert.name}
-                        </h4>
-                        <Badge
-                          variant="outline"
-                          className="text-xs border-primary/20 text-primary bg-primary/5"
-                        >
-                          Verified
-                        </Badge>
-                      </div>
-                      <p className="text-xs text-muted-foreground font-medium">
-                        {cert.issuer}
-                      </p>
-                      <div className="flex items-center text-xs text-muted-foreground">
-                        <Calendar className="h-3 w-3 mr-1" />
-                        {cert.date}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div> */}
-        </motion.div>
       </div>
-    </section>
+    </div>
   );
 }

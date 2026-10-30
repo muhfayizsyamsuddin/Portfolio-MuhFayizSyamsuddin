@@ -128,11 +128,7 @@ export function Contact() {
   ];
 
   return (
-    <section
-      id="contact"
-      className="py-16 px-4 scroll-mt-16"
-      aria-labelledby="contact-heading"
-    >
+    <div className="py-24 px-4">
       <div className="container mx-auto max-w-6xl">
         <motion.div
           className="text-center mb-12"
@@ -195,11 +191,10 @@ export function Contact() {
                         name="name"
                         required
                         placeholder="Your name"
-                        className={`transition-all duration-200 focus:ring-2 focus:ring-primary/20 rounded-lg border-border/50 ${
-                          errors.name
-                            ? "border-red-500 focus:ring-red-500/20"
-                            : "focus:border-primary/50"
-                        }`}
+                        className={`transition-all duration-200 focus:ring-2 focus:ring-primary/20 rounded-lg border-border/50 ${errors.name
+                          ? "border-red-500 focus:ring-red-500/20"
+                          : "focus:border-primary/50"
+                          }`}
                         suppressHydrationWarning={true}
                       />
                       {errors.name && (
@@ -220,11 +215,10 @@ export function Contact() {
                         type="email"
                         required
                         placeholder="your.email@example.com"
-                        className={`transition-all duration-200 focus:ring-2 focus:ring-primary/20 rounded-lg border-border/50 ${
-                          errors.email
-                            ? "border-red-500 focus:ring-red-500/20"
-                            : "focus:border-primary/50"
-                        }`}
+                        className={`transition-all duration-200 focus:ring-2 focus:ring-primary/20 rounded-lg border-border/50 ${errors.email
+                          ? "border-red-500 focus:ring-red-500/20"
+                          : "focus:border-primary/50"
+                          }`}
                         suppressHydrationWarning={true}
                       />
                       {errors.email && (
@@ -245,11 +239,10 @@ export function Contact() {
                         required
                         placeholder="Tell me about your project..."
                         rows={4}
-                        className={`transition-all duration-200 focus:ring-2 focus:ring-primary/20 resize-none rounded-lg border-border/50 ${
-                          errors.message
-                            ? "border-red-500 focus:ring-red-500/20"
-                            : "focus:border-primary/50"
-                        }`}
+                        className={`transition-all duration-200 focus:ring-2 focus:ring-primary/20 resize-none rounded-lg border-border/50 ${errors.message
+                          ? "border-red-500 focus:ring-red-500/20"
+                          : "focus:border-primary/50"
+                          }`}
                       />
                       {errors.message && (
                         <p className="text-sm text-red-500 flex items-center gap-1 mt-2">
@@ -364,6 +357,6 @@ export function Contact() {
           </motion.div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
