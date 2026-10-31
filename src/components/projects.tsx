@@ -95,28 +95,68 @@ export function Projects() {
                     </span>
                   </div>
 
-                  {/* Center Row: System Architecture Flow + Optional Mini Logo */}
+                  {/* Center Row: System Architecture Flow + Adaptive Mini Logo */}
                   <div className="relative z-10 my-auto py-2 flex items-center justify-between gap-4">
                     <div className="space-y-1">
+                      <p className="text-[11px] font-mono uppercase tracking-wider text-primary/80">
+                        Architecture & Execution Flow
+                      </p>
                       <p className="text-base sm:text-lg font-mono font-semibold text-foreground tracking-tight leading-snug group-hover:text-primary transition-colors">
                         {project.systemFlow || project.name}
                       </p>
-                      <p className="text-xs font-mono text-muted-foreground line-clamp-1">
-                        {project.tagline}
-                      </p>
                     </div>
 
-                    {/* Jika ada logo, tampilkan sebagai mini badge elegan di kanan, bukan kotak putih raksasa */}
-                    {project.image && (
-                      <div className="relative h-12 w-12 rounded-xl overflow-hidden bg-white p-1.5 shrink-0 shadow-md border border-white/20 hidden sm:block">
-                        <Image
-                          src={project.image}
-                          alt={`${project.name} logo`}
-                          fill
-                          className="object-contain p-1"
-                          sizes="48px"
-                        />
+                    {/* Mini Badge: Vector SVG tajam untuk Pinventa & High-DPI Image untuk proyek lain */}
+                    {project.id === "pinventa" ? (
+                      <div
+                        className="relative h-12 w-12 rounded-xl bg-[#071526] border border-emerald-400/30 shrink-0 shadow-md hidden sm:flex items-center justify-center"
+                        title="Pinventa AI"
+                      >
+                        {/* Custom Crisp Vector Logo Pinventa (Map Pin + Neural Nodes) */}
+                        <svg
+                          viewBox="0 0 36 36"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="w-7 h-7"
+                        >
+                          <defs>
+                            <linearGradient id="pinGrad" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+                              <stop stopColor="#4ade80" />
+                              <stop offset="1" stopColor="#06b6d4" />
+                            </linearGradient>
+                          </defs>
+                          <path
+                            d="M16 4C10.477 4 6 8.477 6 14C6 21.5 16 32 16 32C16 32 26 21.5 26 14C26 8.477 21.523 4 16 4Z"
+                            stroke="url(#pinGrad)"
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                          <circle cx="16" cy="14" r="3.5" fill="url(#pinGrad)" />
+                          <path
+                            d="M19.5 14H29M18.5 11.5L26 7.5M18.5 16.5L26 20.5"
+                            stroke="#2dd4bf"
+                            strokeWidth="1.8"
+                            strokeLinecap="round"
+                          />
+                          <circle cx="30" cy="14" r="2" fill="#f8fafc" />
+                          <circle cx="27" cy="7" r="1.8" fill="#4ade80" />
+                          <circle cx="27" cy="21" r="1.8" fill="#06b6d4" />
+                        </svg>
                       </div>
+                    ) : (
+                      project.image && (
+                        <div className="relative h-12 w-12 rounded-xl overflow-hidden bg-white p-1.5 border border-white/20 shrink-0 shadow-md hidden sm:block">
+                          <Image
+                            src={project.image}
+                            alt={`${project.name} logo`}
+                            fill
+                            quality={100}
+                            className="object-contain p-1"
+                            sizes="128px"
+                          />
+                        </div>
+                      )
                     )}
                   </div>
 

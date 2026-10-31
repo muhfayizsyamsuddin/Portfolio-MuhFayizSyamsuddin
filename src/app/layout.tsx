@@ -21,36 +21,40 @@ const inter = Inter({
   display: "swap",
 });
 
+// Di dalam src/app/layout.tsx, ganti blok export const metadata dengan ini:
+
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:3000"
+    process.env.NEXT_PUBLIC_BASE_URL || "https://faizms.my.id"
   ),
   title: {
-    default: "Muh. Fayiz Syamsuddin - Full Stack Developer",
+    default: "Muh. Fayiz Syamsuddin — Full-Stack Developer, Backend & AI Engineer",
     template: "%s | Muh. Fayiz Syamsuddin",
   },
   description:
-    "Experienced Software Developer specializing in React, Next.js, TypeScript, and Node.js. Creating innovative web applications and digital solutions. Available for freelance projects and full-time opportunities.",
+    "Full-Stack Developer & Backend/AI Engineer specializing in TypeScript (Next.js, Node.js), PHP (Laravel), Python, n8n AI workflows, and self-hosted Docker & Traefik infrastructure.",
   keywords: [
     "Muh. Fayiz Syamsuddin",
-    "Software Developer",
-    "Full Stack Developer",
-    "Frontend Developer",
-    "Backend Developer",
-    "Web Developer",
-    "Software Engineer",
-    "React Developer",
+    "Faizms",
+    "Full-Stack Developer",
+    "Backend Engineer",
+    "AI Engineer",
     "Next.js Developer",
     "TypeScript",
     "Node.js",
-    "Portfolio",
-    "Freelance Developer",
-    "Indonesia",
+    "Laravel Developer",
+    "Python",
+    "n8n Automation",
+    "Docker",
+    "Traefik",
+    "Microservices",
+    "Software Engineer Indonesia",
+    "Makassar",
   ],
   authors: [
     {
       name: "Muh. Fayiz Syamsuddin",
-      url: process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:3000",
+      url: "https://faizms.my.id",
     },
   ],
   creator: "Muh. Fayiz Syamsuddin",
@@ -58,26 +62,26 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:3000",
-    title: "Muh. Fayiz Syamsuddin - Software Developer",
+    url: "https://faizms.my.id",
+    title: "Muh. Fayiz Syamsuddin — Full-Stack, Backend & AI Engineer",
     description:
-      "Experienced Software Developer creating innovative web applications and digital solutions.",
-    siteName: "Fayiz Syamsuddin Portfolio",
+      "Architecting production-ready web platforms, scalable backend services, and intelligent AI workflows with Next.js, Laravel, Python, and Docker.",
+    siteName: "Muh. Fayiz Syamsuddin Portfolio",
     images: [
       {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Muh. Fayiz Syamsuddin - Software Developer",
+        url: "/faiz.jpg",
+        width: 800,
+        height: 800,
+        alt: "Muh. Fayiz Syamsuddin — Full-Stack Developer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Muh. Fayiz Syamsuddin - Software Developer",
+    title: "Muh. Fayiz Syamsuddin — Full-Stack, Backend & AI Engineer",
     description:
-      "Experienced Software Developer creating innovative web applications and digital solutions.",
-    images: ["/og-image.jpg"],
+      "Architecting production-ready web platforms, scalable backend services, and intelligent AI workflows.",
+    images: ["/faiz.jpg"],
   },
   robots: {
     index: true,
