@@ -59,68 +59,75 @@ export function Projects() {
               viewport={{ once: true }}
               className="group rounded-2xl border border-border/80 bg-card/40 backdrop-blur-sm hover:border-primary/40 transition-all duration-300 flex flex-col overflow-hidden"
             >
-              {/* Uniform Browser Mockup Header (Menghindari logo terpotong atau belang) */}
+              {/* Uniform Browser Mockup Header */}
               <div className="border-b border-border/60 bg-zinc-950/70">
-                {/* Browser Top Bar */}
-                <div className="px-4 py-2.5 border-b border-border/40 flex items-center justify-between gap-2 bg-zinc-900/60">
-                  <div className="flex items-center gap-1.5">
+                {/* Browser Top Bar (Responsif di layar HP) */}
+                <div className="px-3.5 sm:px-4 py-2.5 border-b border-border/40 flex items-center justify-between gap-2 bg-zinc-900/60">
+                  <div className="flex items-center gap-1.5 shrink-0">
                     <span className="h-2.5 w-2.5 rounded-full bg-zinc-700 group-hover:bg-red-500/80 transition-colors" />
                     <span className="h-2.5 w-2.5 rounded-full bg-zinc-700 group-hover:bg-amber-500/80 transition-colors" />
                     <span className="h-2.5 w-2.5 rounded-full bg-zinc-700 group-hover:bg-emerald-500/80 transition-colors" />
                   </div>
-                  <div className="flex items-center gap-1.5 px-3 py-0.5 rounded-md bg-background/60 border border-border/50 text-[11px] font-mono text-muted-foreground">
-                    <Globe className="h-3 w-3 text-primary" />
-                    <span>{project.previewHost}</span>
+                  <div className="flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 rounded-md bg-background/60 border border-border/50 text-[11px] font-mono text-muted-foreground truncate">
+                    <Globe className="h-3 w-3 text-primary shrink-0" />
+                    <span className="truncate">{project.previewHost}</span>
                   </div>
-                  <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-primary/10 text-primary border border-primary/20">
+                  <span className="hidden sm:inline-block px-2 py-0.5 rounded text-[10px] font-mono bg-primary/10 text-primary border border-primary/20 shrink-0">
                     {project.category}
                   </span>
                 </div>
 
-                {/* Visual Canvas Area: Seragam & Elegan Tanpa Kotak Putih Mencolok */}
-                <div className="aspect-[16/8] relative overflow-hidden p-5 bg-zinc-950 flex flex-col justify-between">
+                {/* Visual Canvas Area (min-h-[185px] di HP agar tidak sempit) */}
+                <div className="min-h-[185px] sm:aspect-[16/8] relative overflow-hidden p-4 sm:p-5 bg-zinc-950 flex flex-col justify-between gap-3">
                   {/* Subtle Technical Grid Background */}
                   <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(14,165,233,0.07)_1px,transparent_1px),linear-gradient(to_bottom,rgba(14,165,233,0.07)_1px,transparent_1px)] bg-[size:24px_24px]" />
                   <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(14,165,233,0.10),transparent_75%)]" />
 
                   {/* Top Row: System Badge & Key Metric */}
                   <div className="relative z-10 flex items-center justify-between gap-2">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono bg-primary/15 text-primary border border-primary/30">
-                      <Sparkles className="h-3.5 w-3.5 shrink-0" />
-                      <span className="truncate">{project.systemBadge || project.category}</span>
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] sm:text-xs font-mono bg-primary/15 text-primary border border-primary/30 max-w-[70%]">
+                      <Sparkles className="h-3 w-3 sm:h-3.5 sm:w-3.5 shrink-0" />
+                      <span className="truncate">
+                        {project.systemBadge || project.category}
+                      </span>
                     </span>
 
-                    <span className="text-xs font-mono text-emerald-400 shrink-0">
+                    <span className="text-[11px] sm:text-xs font-mono text-emerald-400 shrink-0">
                       {project.systemMetric || "Production Live"}
                     </span>
                   </div>
 
-                  {/* Center Row: System Architecture Flow + Adaptive Mini Logo */}
-                  <div className="relative z-10 my-auto py-2 flex items-center justify-between gap-4">
+                  {/* Center Row: System Architecture Flow + Mini Logo (Tampil di HP & Desktop) */}
+                  <div className="relative z-10 my-auto py-1 flex items-center justify-between gap-3 sm:gap-4">
                     <div className="space-y-1">
-                      <p className="text-[11px] font-mono uppercase tracking-wider text-primary/80">
+                      <p className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-primary/80">
                         Architecture & Execution Flow
                       </p>
-                      <p className="text-base sm:text-lg font-mono font-semibold text-foreground tracking-tight leading-snug group-hover:text-primary transition-colors">
+                      <p className="text-sm sm:text-lg font-mono font-semibold text-foreground tracking-tight leading-snug group-hover:text-primary transition-colors">
                         {project.systemFlow || project.name}
                       </p>
                     </div>
 
-                    {/* Mini Badge: Vector SVG tajam untuk Pinventa & High-DPI Image untuk proyek lain */}
                     {project.id === "pinventa" ? (
                       <div
-                        className="relative h-12 w-12 rounded-xl bg-[#071526] border border-emerald-400/30 shrink-0 shadow-md hidden sm:flex items-center justify-center"
+                        className="relative h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-[#071526] border border-emerald-400/30 shrink-0 shadow-md flex items-center justify-center"
                         title="Pinventa AI"
                       >
-                        {/* Custom Crisp Vector Logo Pinventa (Map Pin + Neural Nodes) */}
                         <svg
                           viewBox="0 0 36 36"
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
-                          className="w-7 h-7"
+                          className="w-6 h-6 sm:w-7 sm:h-7"
                         >
                           <defs>
-                            <linearGradient id="pinGrad" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+                            <linearGradient
+                              id="pinGrad"
+                              x1="0"
+                              y1="0"
+                              x2="36"
+                              y2="36"
+                              gradientUnits="userSpaceOnUse"
+                            >
                               <stop stopColor="#4ade80" />
                               <stop offset="1" stopColor="#06b6d4" />
                             </linearGradient>
@@ -146,7 +153,7 @@ export function Projects() {
                       </div>
                     ) : (
                       project.image && (
-                        <div className="relative h-12 w-12 rounded-xl overflow-hidden bg-white p-1.5 border border-white/20 shrink-0 shadow-md hidden sm:block">
+                        <div className="relative h-10 w-10 sm:h-12 sm:w-12 rounded-xl overflow-hidden bg-white p-1.5 border border-white/20 shrink-0 shadow-md block">
                           <Image
                             src={project.image}
                             alt={`${project.name} logo`}
@@ -290,9 +297,15 @@ export function Projects() {
                 >
                   <div>
                     <div className="flex items-start justify-between gap-2 mb-2">
-                      <h4 className="text-base font-semibold text-foreground">
-                        {project.name}
-                      </h4>
+                      <div>
+                        <h4 className="text-base font-semibold text-foreground">
+                          {project.name}
+                        </h4>
+                        <p className="text-[11px] font-mono text-primary/80 flex items-center gap-1 mt-0.5">
+                          <Globe className="h-3 w-3" />
+                          {project.previewHost}
+                        </p>
+                      </div>
                       <div className="flex items-center gap-1.5 shrink-0">
                         {project.githubUrl && (
                           <a
@@ -395,7 +408,7 @@ export function Projects() {
                 </div>
 
                 <div className="lg:col-span-2 flex lg:justify-end gap-2">
-                  {lab.liveUrl && (
+                  {lab.liveUrl ? (
                     <a
                       href={lab.liveUrl}
                       target="_blank"
@@ -405,6 +418,11 @@ export function Projects() {
                       Live Demo
                       <ArrowUpRight className="ml-1.5 h-3.5 w-3.5" />
                     </a>
+                  ) : (
+                    <span className="inline-flex items-center justify-center px-3 py-1.5 rounded-lg text-xs font-mono border border-border/60 bg-muted/30 text-muted-foreground">
+                      <Terminal className="mr-1.5 h-3.5 w-3.5 text-primary" />
+                      Local Script
+                    </span>
                   )}
                 </div>
               </div>

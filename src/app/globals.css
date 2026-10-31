@@ -153,6 +153,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -160,10 +161,12 @@
 
 /* Custom animations */
 @keyframes pulse-soft {
+
   0%,
   100% {
     opacity: 0.8;
   }
+
   50% {
     opacity: 1;
   }
@@ -171,4 +174,18 @@
 
 .pulse-soft {
   animation: pulse-soft 3s ease-in-out infinite;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Sembunyikan scrollbar pada horizontal tab di mobile namun tetap bisa di-swipe */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

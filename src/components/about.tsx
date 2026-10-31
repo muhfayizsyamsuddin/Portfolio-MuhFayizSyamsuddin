@@ -5,52 +5,53 @@ import { motion } from "motion/react";
 import { ABOUT_DATA } from "@/data/portfolio";
 import { Terminal, Server, Cpu } from "lucide-react";
 
+const EASE_OUT_EXPO = [0.16, 1, 0.3, 1] as const;
+
 export function About() {
   const icons = [Server, Terminal, Cpu];
 
   return (
-    <div className="min-h-screen flex items-center py-28 px-4">
+    <div className="min-h-screen flex items-center py-20 sm:py-28 px-4">
       <div className="container mx-auto max-w-6xl">
         {/* Section Header */}
         <motion.div
-          className="max-w-3xl mb-14"
-          initial={{ opacity: 0, y: 20 }}
+          className="max-w-3xl mb-10 sm:mb-14"
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: EASE_OUT_EXPO }}
+          viewport={{ once: true, margin: "-80px" }}
         >
-          <p className="text-xs font-mono uppercase tracking-[0.2em] text-primary mb-3">
+          <p className="text-xs font-mono uppercase tracking-[0.2em] text-primary mb-2.5">
             {ABOUT_DATA.eyebrow}
           </p>
           <h2
             id="about-heading"
-            className="text-3xl md:text-4xl font-semibold text-foreground tracking-tight mb-4"
+            className="text-2xl sm:text-4xl font-semibold text-foreground tracking-tight mb-3 sm:mb-4"
           >
             {ABOUT_DATA.title}
           </h2>
-          <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+          <p className="text-sm sm:text-lg text-muted-foreground leading-relaxed">
             {ABOUT_DATA.subtitle}
           </p>
         </motion.div>
 
-        {/* items-start memastikan kartu foto di kiri TIDAK melar mengikuti kolom kanan */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-          {/* Left Column: Portrait Card yang padat dan proporsional */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+          {/* Left Column: Portrait Card (Dibatasi max-w-sm di HP agar tidak raksasa) */}
           <motion.div
-            className="lg:col-span-4"
-            initial={{ opacity: 0, y: 20 }}
+            className="lg:col-span-4 max-w-sm mx-auto lg:max-w-none w-full"
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.08, ease: EASE_OUT_EXPO }}
+            viewport={{ once: true, margin: "-80px" }}
           >
-            <div className="group rounded-2xl overflow-hidden border border-border/80 bg-card/40 p-3.5 shadow-sm hover:border-primary/40 transition-colors">
+            <div className="group rounded-2xl overflow-hidden border border-border/80 bg-card/40 p-3.5 shadow-sm hover:border-primary/40 transition-all duration-300">
               <div className="aspect-square rounded-xl overflow-hidden relative bg-zinc-900">
                 <Image
                   src="/faiz.jpg"
                   alt="Muh. Fayiz Syamsuddin"
                   fill
                   className="object-cover grayscale contrast-110 group-hover:grayscale-0 transition-all duration-500"
-                  sizes="(max-width: 768px) 100vw, 340px"
+                  sizes="(max-width: 768px) 320px, 360px"
                 />
               </div>
 
@@ -71,32 +72,32 @@ export function About() {
             </div>
           </motion.div>
 
-          {/* Right Column: Narrative (Justified) & 3 Symmetrical Highlight Cards */}
+          {/* Right Column: Narrative & 3 Symmetrical Highlight Cards */}
           <motion.div
-            className="lg:col-span-8 space-y-6"
-            initial={{ opacity: 0, y: 20 }}
+            className="lg:col-span-8 space-y-5 sm:space-y-6"
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.15, ease: EASE_OUT_EXPO }}
+            viewport={{ once: true, margin: "-80px" }}
           >
-            <div className="rounded-2xl border border-border/80 bg-card/40 backdrop-blur-sm p-6 sm:p-8 space-y-5">
+            <div className="rounded-2xl border border-border/80 bg-card/40 backdrop-blur-sm p-5 sm:p-8 space-y-4 sm:space-y-5">
               {ABOUT_DATA.paragraphs.map((paragraph, index) => (
                 <p
                   key={index}
-                  className="text-base text-muted-foreground leading-relaxed text-justify hyphens-auto"
+                  className="text-sm sm:text-base text-muted-foreground leading-relaxed text-left sm:text-justify hyphens-auto"
                 >
                   {paragraph}
                 </p>
               ))}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {ABOUT_DATA.highlights.map((item, index) => {
                 const Icon = icons[index % icons.length];
                 return (
                   <div
                     key={item.metric}
-                    className="rounded-xl border border-border/80 bg-card/40 p-5 hover:border-primary/40 transition-colors flex flex-col"
+                    className="rounded-xl border border-border/80 bg-card/40 p-5 hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-200 flex flex-col"
                   >
                     <div className="flex items-center justify-between gap-2 mb-3">
                       <span className="text-base font-mono font-semibold text-foreground whitespace-nowrap">

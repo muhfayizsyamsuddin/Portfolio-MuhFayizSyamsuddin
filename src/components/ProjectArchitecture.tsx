@@ -195,7 +195,7 @@ export function ProjectArchitecture() {
   return (
     <div className="mt-24 pt-16 border-t border-border/60">
       <div className="max-w-5xl mx-auto">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-10 gap-6">
+        <div className="mb-8 space-y-6">
           <div>
             <p className="text-xs font-mono uppercase tracking-[0.2em] text-primary mb-2">
               System Design & Under the Hood
@@ -205,8 +205,9 @@ export function ProjectArchitecture() {
             </h3>
           </div>
 
+          {/* Swipeable Horizontal Pills di Mobile, 5-Column Grid di Desktop */}
           <div
-            className="inline-flex flex-wrap gap-1.5 p-1.5 rounded-xl border border-border/80 bg-card/60"
+            className="flex lg:grid lg:grid-cols-5 gap-2 overflow-x-auto no-scrollbar p-1.5 rounded-xl border border-border/80 bg-card/60"
             role="group"
             aria-label="Select architecture project"
           >
@@ -216,7 +217,7 @@ export function ProjectArchitecture() {
                 type="button"
                 onClick={() => setActiveProject(key)}
                 aria-pressed={activeProject === key}
-                className={`rounded-lg px-3.5 py-2 text-xs font-mono transition-all cursor-pointer ${activeProject === key
+                className={`shrink-0 rounded-lg px-3.5 py-2.5 text-xs font-mono text-center truncate transition-all cursor-pointer ${activeProject === key
                   ? "bg-primary text-primary-foreground font-medium shadow-sm"
                   : "text-muted-foreground hover:text-primary hover:bg-primary/10"
                   }`}
@@ -290,6 +291,6 @@ export function ProjectArchitecture() {
           </div>
         </motion.div>
       </div>
-    </div>
+    </div >
   );
 }

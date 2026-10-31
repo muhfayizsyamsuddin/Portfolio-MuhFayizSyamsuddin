@@ -469,12 +469,12 @@ export const EXPERIENCE_DATA: ExperienceItem[] = [
         title: "Backend & AI Workflow Engineering",
         company: "Maxy Academy",
         location: "Remote / Indonesia",
-        duration: "2026",
+        duration: "Sep 2026 - Nov 2026",
         description:
             "Intensive backend, enterprise rapid application development, and AI workflow automation program culminating in the Pinventa Hackathon project.",
         impact: [
             "Engineered enterprise sales & purchasing ERP modules using PHP/Laravel, MySQL, role-based permissions, and server-side DataTables",
-            "Integrated Xendit payment gateway webhooks and built RESTful microservices using Laravel & Lumen",
+            "Integrated Xendit payment gateway webhooks and built RESTful backend services using Laravel MVC",
             "Developed omnichannel AI chatbots (Web, WhatsApp, Telegram) orchestrated via n8n, OpenRouter, Groq LLMs, and Hugging Face classifiers",
             "Built headless browser automation & auth-bypass scripts (Puppeteer/Selenium) alongside Python CLI data-mining tools for e-commerce datasets",
         ],

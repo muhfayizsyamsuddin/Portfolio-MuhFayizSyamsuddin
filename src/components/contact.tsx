@@ -3,6 +3,8 @@
 import type React from "react";
 import { useState, useRef } from "react";
 import {
+  Check,
+  Copy,
   Mail,
   Github,
   Linkedin,
@@ -24,8 +26,20 @@ import emailjs from "@emailjs/browser";
 export function Contact() {
   const form = useRef<HTMLFormElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const { toast } = useToast();
+
+  const handleCopyEmail = (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigator.clipboard.writeText("muhfayiz14@gmail.com");
+    setCopiedEmail(true);
+    toast({
+      title: "Email copied to clipboard",
+      description: "muhfayiz14@gmail.com is ready to paste.",
+    });
+    setTimeout(() => setCopiedEmail(false), 2000);
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -165,15 +179,16 @@ export function Contact() {
               </p>
             </div>
 
-            {/* Social Channels */}
+            {/* Social Channels dengan Fitur Quick Copy untuk Email */}
             <div className="rounded-2xl border border-border/80 bg-card/40 divide-y divide-border/50 overflow-hidden">
               {socialLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
+                  onClick={link.name === "Email" ? handleCopyEmail : undefined}
                   target={link.href.startsWith("mailto:") ? undefined : "_blank"}
                   rel={link.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-                  className="flex items-center justify-between p-4 hover:bg-primary/5 transition-colors group"
+                  className="flex items-center justify-between p-4 hover:bg-primary/5 transition-colors group cursor-pointer"
                 >
                   <div className="flex items-center gap-3.5">
                     <div className="p-2.5 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
@@ -188,7 +203,23 @@ export function Contact() {
                       </p>
                     </div>
                   </div>
-                  <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  {link.name === "Email" ? (
+                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] font-mono border border-border bg-background/60 text-muted-foreground group-hover:border-primary/40 group-hover:text-primary transition-colors">
+                      {copiedEmail ? (
+                        <>
+                          <Check className="h-3 w-3 text-emerald-400" />
+                          Copied
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="h-3 w-3" />
+                          Copy
+                        </>
+                      )}
+                    </span>
+                  ) : (
+                    <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  )}
                 </a>
               ))}
             </div>
