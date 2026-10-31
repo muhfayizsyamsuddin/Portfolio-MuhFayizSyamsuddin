@@ -1,16 +1,7 @@
 "use client";
 
 import type React from "react";
-
 import { useState, useRef } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import {
   Mail,
   Github,
@@ -19,6 +10,7 @@ import {
   AlertCircle,
   Instagram,
   MapPin,
+  ArrowUpRight,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Input } from "./ui/input";
@@ -51,10 +43,8 @@ export function Contact() {
     };
 
     try {
-      // Validate form data
-      const validatedData = contactFormSchema.parse(data);
+      contactFormSchema.parse(data);
 
-      // Send email using EmailJS
       await emailjs.sendForm(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_CONTACT!,
@@ -62,7 +52,6 @@ export function Contact() {
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       );
 
-      // Send auto reply to user
       await emailjs.sendForm(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_REPLY!,
@@ -71,15 +60,13 @@ export function Contact() {
       );
 
       toast({
-        title: "✅ Message sent successfully!",
-        description: "Thank you for your message. I'll get back to you soon.",
+        title: "Message sent successfully",
+        description: "Thank you for reaching out. I will get back to you shortly.",
       });
 
-      // Reset form
       form.current.reset();
     } catch (error) {
       if (error instanceof ZodError) {
-        // Handle validation errors
         const fieldErrors: Record<string, string> = {};
         error.issues.forEach((err) => {
           if (err.path) {
@@ -89,7 +76,7 @@ export function Contact() {
         setErrors(fieldErrors);
       } else {
         toast({
-          title: "❌ Failed to send message",
+          title: "Failed to send message",
           description:
             error instanceof Error ? error.message : "Please try again later.",
           variant: "destructive",
@@ -123,236 +110,200 @@ export function Contact() {
       name: "Instagram",
       icon: Instagram,
       href: "https://instagram.com/faizms14_",
-      label: "instagram.com/faizms14_",
+      label: "@faizms14_",
     },
   ];
 
   return (
     <div className="py-24 px-4">
       <div className="container mx-auto max-w-6xl">
+        {/* Header selaras dengan section lain */}
         <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 30 }}
+          className="max-w-3xl mb-16"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
+          <p className="text-xs font-mono uppercase tracking-[0.2em] text-primary mb-3">
+            Collaboration & Inquiries
+          </p>
           <h2
             id="contact-heading"
-            className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance"
+            className="text-3xl md:text-4xl font-semibold text-foreground tracking-tight mb-4"
           >
             Get In Touch
           </h2>
-          <p className="text-lg text-muted-foreground text-pretty max-w-2xl mx-auto">
-            Have a project in mind or want to collaborate? I&apos;d love to hear
-            from you and discuss how we can work together.
+          <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+            Available for full-time software engineering roles, backend/AI automation projects, and technical collaborations.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-          <div className="space-y-6 flex flex-col h-full">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="flex-1"
-            >
-              <Card className="border-border/50 bg-card/50 backdrop-blur-sm hover:shadow-lg transition-all duration-300 h-full flex flex-col">
-                <CardHeader className="pb-6">
-                  <CardTitle className="text-foreground text-xl">
-                    Send a Message
-                  </CardTitle>
-                  <CardDescription className="text-muted-foreground">
-                    Fill out the form below and I&apos;ll get back to you as
-                    soon as possible.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="flex-1">
-                  <form
-                    ref={form}
-                    onSubmit={handleSubmit}
-                    className="space-y-6"
-                  >
-                    <input
-                      type="text"
-                      name="honeypot"
-                      style={{ display: "none" }}
-                      tabIndex={-1}
-                      autoComplete="off"
-                    />
-
-                    <div className="space-y-2">
-                      <Label htmlFor="name" className="text-sm font-medium">
-                        Name
-                      </Label>
-                      <Input
-                        id="name"
-                        name="name"
-                        required
-                        placeholder="Your name"
-                        className={`transition-all duration-200 focus:ring-2 focus:ring-primary/20 rounded-lg border-border/50 ${errors.name
-                          ? "border-red-500 focus:ring-red-500/20"
-                          : "focus:border-primary/50"
-                          }`}
-                        suppressHydrationWarning={true}
-                      />
-                      {errors.name && (
-                        <p className="text-sm text-red-500 flex items-center gap-1 mt-2">
-                          <AlertCircle className="h-3 w-3" />
-                          {errors.name}
-                        </p>
-                      )}
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="email" className="text-sm font-medium">
-                        Email
-                      </Label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        required
-                        placeholder="your.email@example.com"
-                        className={`transition-all duration-200 focus:ring-2 focus:ring-primary/20 rounded-lg border-border/50 ${errors.email
-                          ? "border-red-500 focus:ring-red-500/20"
-                          : "focus:border-primary/50"
-                          }`}
-                        suppressHydrationWarning={true}
-                      />
-                      {errors.email && (
-                        <p className="text-sm text-red-500 flex items-center gap-1 mt-2">
-                          <AlertCircle className="h-3 w-3" />
-                          {errors.email}
-                        </p>
-                      )}
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="message" className="text-sm font-medium">
-                        Message
-                      </Label>
-                      <Textarea
-                        id="message"
-                        name="message"
-                        required
-                        placeholder="Tell me about your project..."
-                        rows={4}
-                        className={`transition-all duration-200 focus:ring-2 focus:ring-primary/20 resize-none rounded-lg border-border/50 ${errors.message
-                          ? "border-red-500 focus:ring-red-500/20"
-                          : "focus:border-primary/50"
-                          }`}
-                      />
-                      {errors.message && (
-                        <p className="text-sm text-red-500 flex items-center gap-1 mt-2">
-                          <AlertCircle className="h-3 w-3" />
-                          {errors.message}
-                        </p>
-                      )}
-                    </div>
-
-                    <Button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full group transition-all duration-300 hover:scale-105 rounded-lg py-3 bg-primary hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25"
-                      suppressHydrationWarning={true}
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                          Sending...
-                        </>
-                      ) : (
-                        <>
-                          Send Message
-                          <Send className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                        </>
-                      )}
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: true }}
-            >
-              <Card className="border-border/50 bg-card/50 backdrop-blur-sm hover:shadow-lg transition-all duration-300">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold text-foreground mb-3 text-lg">
-                    Available for Work
-                  </h3>
-                  <p className="text-sm text-muted-foreground text-pretty leading-relaxed">
-                    I&apos;m currently available for freelance projects and
-                    full-time opportunities. Let&apos;s discuss how we can work
-                    together to bring your ideas to life.
-                  </p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </div>
-
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* Left Column: Direct Channels & Availability Info */}
           <motion.div
-            className="h-full"
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            className="lg:col-span-5 space-y-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <div className="h-full flex flex-col space-y-6">
-              <Card className="border-border/50 bg-card/50 backdrop-blur-sm hover:shadow-lg transition-all duration-300 flex-1">
-                <CardHeader className="pb-0">
-                  <CardTitle className="text-foreground text-xl">
-                    Let&apos;s Connect
-                  </CardTitle>
-                  <CardDescription className="text-muted-foreground">
-                    Feel free to reach out through any of these channels.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4 flex-1 flex flex-col justify-center">
-                  {socialLinks.map((link) => (
-                    <a
-                      key={link.name}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-4 p-3 rounded-lg hover:bg-primary/10 transition-all duration-300 group hover:shadow-sm"
-                    >
-                      <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-all duration-300">
-                        <link.icon className="h-5 w-5 text-primary transition-colors duration-300" />
-                      </div>
-                      <div>
-                        <p className="font-medium text-foreground">
-                          {link.name}
-                        </p>
-                        <p className="text-sm text-muted-foreground">
-                          {link.label}
-                        </p>
-                      </div>
-                    </a>
-                  ))}
-                </CardContent>
-              </Card>
+            {/* Status Card */}
+            <div className="rounded-2xl border border-border/80 bg-card/40 p-6 space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                  <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                  Available for Work
+                </span>
+                <span className="flex items-center gap-1.5 text-xs font-mono text-muted-foreground">
+                  <MapPin className="h-3.5 w-3.5 text-primary" />
+                  Makassar, ID
+                </span>
+              </div>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Open to remote or on-site opportunities as a Full-Stack Developer, Backend Engineer, or AI Workflow Engineer.
+              </p>
+            </div>
 
-              <Card className="border-border/50 bg-card/50 backdrop-blur-sm hover:shadow-lg transition-all duration-300">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="p-2 bg-primary/10 rounded-lg">
-                      <MapPin className="h-5 w-5 text-primary" />
+            {/* Social Channels */}
+            <div className="rounded-2xl border border-border/80 bg-card/40 divide-y divide-border/50 overflow-hidden">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  target={link.href.startsWith("mailto:") ? undefined : "_blank"}
+                  rel={link.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+                  className="flex items-center justify-between p-4 hover:bg-primary/5 transition-colors group"
+                >
+                  <div className="flex items-center gap-3.5">
+                    <div className="p-2.5 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                      <link.icon className="h-4 w-4" />
                     </div>
-                    <h3 className="font-semibold text-foreground text-lg">
-                      Location
-                    </h3>
+                    <div>
+                      <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
+                        {link.name}
+                      </p>
+                      <p className="text-xs font-mono text-muted-foreground">
+                        {link.label}
+                      </p>
+                    </div>
                   </div>
-                  <p className="text-sm text-muted-foreground text-pretty leading-relaxed">
-                    Makassar, Sulawesi Selatan, Indonesia
-                  </p>
-                </CardContent>
-              </Card>
+                  <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </a>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Right Column: Contact Form */}
+          <motion.div
+            className="lg:col-span-7"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <div className="rounded-2xl border border-border/80 bg-card/40 backdrop-blur-sm p-6 sm:p-8">
+              <h3 className="text-lg font-semibold text-foreground mb-1">
+                Send a Direct Message
+              </h3>
+              <p className="text-xs font-mono text-muted-foreground mb-6">
+                Fill out the form below and I&apos;ll respond via email.
+              </p>
+
+              <form ref={form} onSubmit={handleSubmit} className="space-y-5">
+                <input
+                  type="text"
+                  name="honeypot"
+                  style={{ display: "none" }}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div className="space-y-2">
+                    <Label htmlFor="name" className="text-xs font-mono uppercase text-muted-foreground">
+                      Name
+                    </Label>
+                    <Input
+                      id="name"
+                      name="name"
+                      required
+                      placeholder="Your name"
+                      className={`rounded-xl bg-background/60 border-border/80 focus:border-primary ${errors.name ? "border-red-500" : ""
+                        }`}
+                      suppressHydrationWarning
+                    />
+                    {errors.name && (
+                      <p className="text-xs text-red-500 flex items-center gap-1 mt-1">
+                        <AlertCircle className="h-3 w-3" />
+                        {errors.name}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="email" className="text-xs font-mono uppercase text-muted-foreground">
+                      Email
+                    </Label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      placeholder="you@company.com"
+                      className={`rounded-xl bg-background/60 border-border/80 focus:border-primary ${errors.email ? "border-red-500" : ""
+                        }`}
+                      suppressHydrationWarning
+                    />
+                    {errors.email && (
+                      <p className="text-xs text-red-500 flex items-center gap-1 mt-1">
+                        <AlertCircle className="h-3 w-3" />
+                        {errors.email}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="message" className="text-xs font-mono uppercase text-muted-foreground">
+                    Message
+                  </Label>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    required
+                    placeholder="Tell me about your role, project timeline, or technical needs..."
+                    rows={5}
+                    className={`rounded-xl bg-background/60 border-border/80 focus:border-primary resize-none ${errors.message ? "border-red-500" : ""
+                      }`}
+                  />
+                  {errors.message && (
+                    <p className="text-xs text-red-500 flex items-center gap-1 mt-1">
+                      <AlertCircle className="h-3 w-3" />
+                      {errors.message}
+                    </p>
+                  )}
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full inline-flex items-center justify-center px-6 py-3 rounded-xl text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-200 disabled:opacity-50 cursor-pointer"
+                  suppressHydrationWarning
+                >
+                  {isSubmitting ? (
+                    <>
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary-foreground mr-2" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      Send Message
+                      <Send className="ml-2 h-4 w-4" />
+                    </>
+                  )}
+                </button>
+              </form>
             </div>
           </motion.div>
         </div>

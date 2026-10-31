@@ -33,51 +33,54 @@ export function About() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          {/* Left Column: Clean Editorial Portrait */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          {/* Left Column: Portrait Card */}
           <motion.div
-            className="lg:col-span-4 space-y-5"
+            className="lg:col-span-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <div className="relative rounded-2xl overflow-hidden border border-border/80 bg-card p-2 shadow-sm">
-              <div className="aspect-square rounded-xl overflow-hidden relative bg-muted">
+            <div className="group relative rounded-2xl overflow-hidden border border-border/80 bg-card/40 p-3 shadow-sm hover:border-primary/40 transition-colors">
+              <div className="aspect-square rounded-xl overflow-hidden relative bg-zinc-900">
+                {/* Filter grayscale/contrast halus agar latar merah menyatu elegan dengan dark mode, dan berwarna penuh saat di-hover */}
                 <Image
                   src="/faiz.jpg"
                   alt="Muh. Fayiz Syamsuddin"
                   fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 320px"
+                  className="object-cover grayscale contrast-110 group-hover:grayscale-0 transition-all duration-500"
+                  sizes="(max-width: 768px) 100vw, 340px"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60" />
               </div>
-              <div className="pt-4 pb-2 px-2 flex items-center justify-between">
+
+              <div className="pt-4 pb-1 px-1 flex items-center justify-between gap-2">
                 <div>
                   <h3 className="text-base font-semibold text-foreground">
                     Muh. Fayiz Syamsuddin
                   </h3>
                   <p className="text-xs font-mono text-muted-foreground">
-                    Makassar, ID • Full-Stack & Infra
+                    Full-Stack Developer • Makassar, ID
                   </p>
                 </div>
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                  Open
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shrink-0">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  Available
                 </span>
               </div>
             </div>
           </motion.div>
 
-          {/* Right Column: Narrative & Concrete Engineering Metrics */}
+          {/* Right Column: Narrative & 3 Aligned Highlight Cards */}
           <motion.div
-            className="lg:col-span-8 space-y-8"
+            className="lg:col-span-8 space-y-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <div className="rounded-2xl border border-border/70 bg-card/40 backdrop-blur-sm p-6 sm:p-8 space-y-5">
+            <div className="rounded-2xl border border-border/80 bg-card/40 backdrop-blur-sm p-6 sm:p-8 space-y-5">
               {ABOUT_DATA.paragraphs.map((paragraph, index) => (
                 <p
                   key={index}
@@ -88,24 +91,28 @@ export function About() {
               ))}
             </div>
 
-            {/* Concrete Metrics replacing generic AI cards */}
+            {/* 3 Highlight Cards dengan items-start sehingga ikon selalu sejajar di atas */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {ABOUT_DATA.highlights.map((item, index) => {
                 const Icon = icons[index % icons.length];
                 return (
                   <div
                     key={item.metric}
-                    className="rounded-xl border border-border/70 bg-card/30 p-5 hover:border-primary/40 transition-colors"
+                    className="rounded-xl border border-border/80 bg-card/40 p-5 hover:border-primary/40 transition-colors flex flex-col justify-between"
                   >
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-lg font-mono font-semibold text-foreground">
-                        {item.metric}
-                      </span>
-                      <Icon className="h-4 w-4 text-primary" />
+                    <div>
+                      <div className="flex items-start justify-between gap-2 mb-3">
+                        <span className="text-base font-mono font-semibold text-foreground leading-snug">
+                          {item.metric}
+                        </span>
+                        <div className="p-2 rounded-lg bg-primary/10 text-primary shrink-0">
+                          <Icon className="h-4 w-4" />
+                        </div>
+                      </div>
+                      <h4 className="text-sm font-medium text-primary mb-1.5">
+                        {item.label}
+                      </h4>
                     </div>
-                    <h4 className="text-sm font-medium text-foreground mb-1">
-                      {item.label}
-                    </h4>
                     <p className="text-xs text-muted-foreground leading-relaxed">
                       {item.detail}
                     </p>

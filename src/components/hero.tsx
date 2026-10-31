@@ -6,10 +6,9 @@ import {
   Github,
   Linkedin,
   Instagram,
-  FileText,
   Terminal,
+  Layers,
 } from "lucide-react";
-import { Button } from "./ui/button";
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { HERO_DATA } from "@/data/portfolio";
@@ -52,15 +51,11 @@ export function Hero() {
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const handleViewCV = () => {
-    window.open("/cv", "_blank");
-  };
-
   return (
-    <div className="min-h-screen flex items-center justify-center relative overflow-hidden px-4 sm:px-6 lg:px-8 pt-20 pb-16">
-      {/* Subtle radial spotlight & architectural grid */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-background" />
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+    <div className="min-h-screen flex items-center justify-center relative overflow-hidden px-4 sm:px-6 lg:px-8 pt-24 pb-16">
+      {/* Radial Glow & Architectural Grid */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_25%,rgba(14,165,233,0.15),transparent_60%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(148,163,184,0.09)_1px,transparent_1px),linear-gradient(to_bottom,rgba(148,163,184,0.09)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_75%_65%_at_50%_35%,#000_60%,transparent_100%)]" />
 
       <div className="max-w-4xl mx-auto text-center space-y-8 relative z-10">
         {/* Monospace Technical Eyebrow */}
@@ -68,7 +63,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-border/80 bg-card/60 backdrop-blur-md text-xs font-mono text-muted-foreground"
+          className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/5 backdrop-blur-md text-xs font-mono text-foreground/90 shadow-sm"
         >
           <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
           <Terminal className="h-3.5 w-3.5 text-primary" />
@@ -90,25 +85,25 @@ export function Hero() {
           </h1>
 
           <div className="flex items-center justify-center gap-3 pt-2">
-            <div className="h-px w-8 bg-border" />
+            <div className="h-px w-10 bg-primary/40" />
             <div className="min-h-[1.75rem] flex items-center">
-              <h2 className="text-sm sm:text-base font-mono text-primary tracking-wider uppercase">
+              <h2 className="text-sm sm:text-base font-mono font-medium text-primary tracking-wider uppercase">
                 {typedText}
                 <span className="inline-block w-1.5 h-4 bg-primary ml-1 animate-pulse align-middle" />
               </h2>
             </div>
-            <div className="h-px w-8 bg-border" />
+            <div className="h-px w-10 bg-primary/40" />
           </div>
         </motion.div>
 
-        {/* High-Signal Value Proposition */}
+        {/* Value Proposition */}
         <motion.div
           className="space-y-3 max-w-2xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.25 }}
         >
-          <p className="text-lg sm:text-xl text-foreground/90 font-medium leading-relaxed">
+          <p className="text-lg sm:text-xl text-foreground font-medium leading-relaxed">
             {HERO_DATA.headline}
           </p>
           <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
@@ -116,87 +111,81 @@ export function Hero() {
           </p>
         </motion.div>
 
-        {/* Primary Actions */}
+        {/* 2 Tombol Utama dengan Lebar Sama Persis (min-w-[180px]) & Visual Depth */}
         <motion.div
-          className="flex flex-col sm:flex-row gap-3.5 justify-center items-center pt-2"
+          className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-2"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.35 }}
         >
-          <Button
+          <button
             onClick={scrollToProjects}
-            size="lg"
-            className="group px-7 font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-xl shadow-sm"
+            className="group inline-flex items-center justify-center min-w-[185px] px-6 py-3 rounded-xl text-sm font-medium bg-gradient-to-b from-sky-400 to-primary text-primary-foreground shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3)] hover:brightness-110 hover:shadow-lg hover:shadow-primary/25 transition-all duration-200 cursor-pointer"
           >
-            Explore Systems
+            <Layers className="mr-2 h-4 w-4 transition-transform group-hover:scale-110" />
+            <span>Explore Projects</span>
             <ArrowDown className="ml-2 h-4 w-4 transition-transform group-hover:translate-y-0.5" />
-          </Button>
+          </button>
 
-          <Button
-            onClick={handleViewCV}
-            variant="outline"
-            size="lg"
-            className="group px-7 font-medium rounded-xl border-border/80 bg-card/40 hover:bg-card hover:border-primary/40"
-          >
-            <FileText className="mr-2 h-4 w-4 text-primary" />
-            Resume / CV
-          </Button>
-
-          <Button
+          <button
             onClick={scrollToContact}
-            variant="ghost"
-            size="lg"
-            className="px-6 font-medium text-muted-foreground hover:text-foreground rounded-xl"
+            className="group inline-flex items-center justify-center min-w-[185px] px-6 py-3 rounded-xl text-sm font-medium border border-border/90 bg-card/60 backdrop-blur-sm text-foreground shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] hover:border-primary hover:bg-primary/10 hover:text-primary transition-all duration-200 cursor-pointer"
           >
-            <Mail className="mr-2 h-4 w-4" />
-            Contact
-          </Button>
+            <Mail className="mr-2 h-4 w-4 text-primary transition-transform group-hover:scale-110" />
+            <span>Get In Touch</span>
+          </button>
         </motion.div>
 
-        {/* Clean Social Bar */}
+        {/* 4 Social Icons (GitHub, LinkedIn, Instagram, Email) Diapit Garis Samping Seperti Gambar 2 */}
         <motion.div
-          className="flex justify-center items-center gap-4 pt-4"
+          className="flex justify-center items-center gap-6 pt-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          {[
-            {
-              href: "https://github.com/muhfayizsyamsuddin",
-              icon: Github,
-              label: "GitHub",
-            },
-            {
-              href: "https://linkedin.com/in/muh-fayiz-syamsuddin",
-              icon: Linkedin,
-              label: "LinkedIn",
-            },
-            {
-              href: "https://instagram.com/faizms14_",
-              icon: Instagram,
-              label: "Instagram",
-            },
-            {
-              href: "mailto:muhfayiz14@gmail.com",
-              icon: Mail,
-              label: "Email",
-            },
-          ].map((social) => (
-            <a
-              key={social.label}
-              href={social.href}
-              target={social.href.startsWith("mailto:") ? undefined : "_blank"}
-              rel={
-                social.href.startsWith("mailto:")
-                  ? undefined
-                  : "noopener noreferrer"
-              }
-              className="p-2.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/60 border border-transparent hover:border-border/60 transition-colors"
-              aria-label={`${social.label} Profile`}
-            >
-              <social.icon className="h-4 w-4" />
-            </a>
-          ))}
+          <div className="h-px bg-border/80 flex-1 max-w-16" />
+
+          <div className="flex items-center gap-3">
+            {[
+              {
+                href: "https://github.com/muhfayizsyamsuddin",
+                icon: Github,
+                label: "GitHub",
+              },
+              {
+                href: "https://linkedin.com/in/muh-fayiz-syamsuddin",
+                icon: Linkedin,
+                label: "LinkedIn",
+              },
+              {
+                href: "https://instagram.com/faizms14_",
+                icon: Instagram,
+                label: "Instagram",
+              },
+              {
+                href: "mailto:muhfayiz14@gmail.com",
+                icon: Mail,
+                label: "Email",
+              },
+            ].map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target={social.href.startsWith("mailto:") ? undefined : "_blank"}
+                rel={
+                  social.href.startsWith("mailto:")
+                    ? undefined
+                    : "noopener noreferrer"
+                }
+                className="p-2.5 rounded-xl text-muted-foreground hover:text-primary hover:bg-primary/10 border border-transparent hover:border-primary/30 transition-all duration-200"
+                aria-label={`${social.label} Profile`}
+              >
+                <social.icon className="h-5 w-5" />
+              </a>
+            ))}
+          </div>
+
+          <div className="h-px bg-border/80 flex-1 max-w-16" />
         </motion.div>
       </div>
     </div>

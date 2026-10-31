@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X, FileText, ArrowUpRight } from "lucide-react";
 
 const navItems = [
   { name: "About", href: "#about" },
@@ -14,14 +14,26 @@ const navItems = [
 
 export function Navbar() {
   const [activeSection, setActiveSection] = useState("hero");
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["hero", ...navItems.map((item) => item.href.substring(1))];
-      const scrollPosition = window.scrollY + 140;
+      const currentScrollY = window.scrollY;
+      setIsScrolled(currentScrollY > 20);
 
-      if (window.scrollY < 100) {
+      // Hitung persentase scroll halaman untuk progress bar tipis
+      const totalHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight > 0) {
+        setScrollProgress((currentScrollY / totalHeight) * 100);
+      }
+
+      const sections = ["hero", ...navItems.map((item) => item.href.substring(1))];
+      const scrollPosition = currentScrollY + 160;
+
+      if (currentScrollY < 100) {
         setActiveSection("hero");
         return;
       }
@@ -57,20 +69,33 @@ export function Navbar() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-md">
+    <header
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        isScrolled
+          ? "border-b border-border/60 bg-background/80 backdrop-blur-xl shadow-sm"
+          : "border-b border-transparent bg-transparent"
+      )}
+    >
+      {/* Top Scroll Progress Indicator */}
+      <div
+        className="absolute top-0 left-0 h-[2px] bg-primary transition-all duration-150"
+        style={{ width: `${scrollProgress}%` }}
+      />
+
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           {/* Brand Logo */}
           <button
             onClick={scrollToHero}
-            className="text-lg font-mono font-semibold tracking-tight text-foreground hover:text-primary transition-colors cursor-pointer"
+            className="text-2xl font-bold tracking-tight text-foreground hover:opacity-90 transition-opacity cursor-pointer"
             aria-label="Scroll to top"
           >
-            faizms<span className="text-primary">.my.id</span>
+            Faiz<span className="text-primary font-light">ms</span>
           </button>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1">
+          {/* Desktop Navigation: Ukuran 15px yang lebih proporsional */}
+          <nav className="hidden md:flex items-center gap-8">
             {navItems.map((item) => {
               const isActive = activeSection === item.href.substring(1);
               return (
@@ -78,33 +103,40 @@ export function Navbar() {
                   key={item.name}
                   onClick={() => scrollToSection(item.href)}
                   className={cn(
-                    "px-3.5 py-1.5 rounded-lg text-sm font-medium transition-colors cursor-pointer",
+                    "relative py-2 text-[15px] font-medium transition-colors duration-200 cursor-pointer group",
                     isActive
-                      ? "text-foreground bg-muted/80"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
+                      ? "text-primary"
+                      : "text-foreground/80 hover:text-primary"
                   )}
                 >
                   {item.name}
+                  <span
+                    className={cn(
+                      "absolute bottom-0 left-0 h-0.5 bg-primary rounded-full transition-all duration-300",
+                      isActive ? "w-full" : "w-0 group-hover:w-full"
+                    )}
+                  />
                 </button>
               );
             })}
           </nav>
 
-          {/* Right CTA & Mobile Trigger */}
+          {/* Right Resume Button (Lebih berdimensi & elegan) */}
           <div className="flex items-center gap-3">
             <a
               href="/cv"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-1 px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium border border-border/80 bg-card/60 hover:border-primary/50 hover:text-primary transition-colors"
+              className="group hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono font-medium border border-primary/30 bg-card/80 hover:bg-primary text-foreground hover:text-primary-foreground shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] hover:shadow-md hover:shadow-primary/20 transition-all duration-200"
             >
-              Resume
-              <ArrowUpRight className="h-3.5 w-3.5" />
+              <FileText className="h-3.5 w-3.5 text-primary group-hover:text-primary-foreground transition-colors" />
+              <span>Resume</span>
+              <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary-foreground group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
 
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+              className="md:hidden p-2 rounded-lg text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
               aria-label="Toggle mobile menu"
             >
               {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -114,7 +146,7 @@ export function Navbar() {
 
         {/* Mobile Dropdown */}
         {isMenuOpen && (
-          <div className="md:hidden py-3 border-t border-border/50 space-y-1">
+          <div className="md:hidden py-3 border-t border-border/50 bg-background/95 backdrop-blur-xl space-y-1 px-2 rounded-b-2xl shadow-xl">
             {navItems.map((item) => {
               const isActive = activeSection === item.href.substring(1);
               return (
@@ -122,16 +154,27 @@ export function Navbar() {
                   key={item.name}
                   onClick={() => scrollToSection(item.href)}
                   className={cn(
-                    "block w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+                    "block w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors",
                     isActive
-                      ? "text-primary bg-primary/10"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
+                      ? "text-primary bg-primary/10 border-l-2 border-primary"
+                      : "text-muted-foreground hover:text-primary hover:bg-primary/5"
                   )}
                 >
                   {item.name}
                 </button>
               );
             })}
+            <div className="pt-2 px-1 pb-1">
+              <a
+                href="/cv"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-xs font-mono font-medium bg-primary text-primary-foreground"
+              >
+                <FileText className="h-3.5 w-3.5" />
+                View Resume / CV
+              </a>
+            </div>
           </div>
         )}
       </div>

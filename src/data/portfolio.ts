@@ -1,3 +1,5 @@
+// src/data/portfolio.ts (Bagian Atas)
+
 export interface EngineeringHighlight {
     metric: string;
     label: string;
@@ -15,17 +17,17 @@ export interface SkillPillar {
 }
 
 export const HERO_DATA = {
-    eyebrow: "Full-Stack Engineer • Polyglot Backend & AI Automation",
+    eyebrow: "Full-Stack Developer • Backend & AI Engineer",
     name: "Muh. Fayiz Syamsuddin.",
     roles: [
-        "Full-Stack Engineer",
-        "Backend & System Architect",
-        "AI & Workflow Automation Builder",
+        "Full-Stack Developer",
+        "Backend Engineer",
+        "AI & Automation Engineer",
     ],
     headline:
-        "Architecting production-ready web platforms, scalable backend services, and automated deployment pipelines.",
+        "Architecting production-ready web platforms, scalable backend services, and intelligent AI workflows.",
     subheadline:
-        "Specializing in the TypeScript (Next.js, Node.js) and PHP (Laravel) ecosystems, combined with AI workflow orchestration (n8n, LLMs) and self-managed Docker & Traefik infrastructure.",
+        "Building end-to-end applications with TypeScript (Next.js, Node.js), PHP (Laravel), and Python—backed by self-managed Docker, Traefik, and CI/CD infrastructure.",
 };
 
 export const ABOUT_DATA = {
@@ -35,97 +37,114 @@ export const ABOUT_DATA = {
         "Transitioning from physical instrumentation and automation to building resilient software architectures.",
     paragraphs: [
         "My engineering foundation began in Agricultural Technology at Universitas Hasanuddin, where I focused on instrumentation, IoT monitoring, and automatic control systems. That background wired me to view software not just as screens and buttons, but as interconnected systems requiring strict data integrity, clear state transitions, and fault tolerance.",
-        "After completing the Full-Stack JavaScript Immersive at Hacktiv8 Indonesia and advancing through the Backend & AI Automation track at Maxy Academy, I expanded into a polyglot engineering workflow. Today, I build end-to-end applications across Next.js, Express, and Laravel—integrating payment gateways (Midtrans, Xendit), AI agents (n8n, OpenRouter, Groq), and deploying them on self-managed cloud servers via Docker, Traefik reverse proxy, and GitHub Actions CI/CD.",
+        "After completing the Full-Stack JavaScript Immersive at Hacktiv8 Indonesia and advancing through the Backend & AI track at Maxy Academy, I expanded into a multi-language engineering workflow. Today, I build production applications across Next.js, Express, Laravel, and Python—integrating payment gateways (Midtrans, Xendit), AI models (OpenAI, Groq, Hugging Face, n8n), and deploying them via Docker, Traefik reverse proxy, and GitHub Actions CI/CD.",
     ],
     highlights: [
         {
-            metric: "10+ Live Deployments",
-            label: "Self-Hosted Production Systems",
+            metric: "10+ Live Systems",
+            label: "Self-Hosted Production Apps",
             detail: "Running on custom subdomains with Docker, Traefik SSL routing & CI/CD.",
         },
         {
-            metric: "Polyglot Stack",
-            label: "TS / JS • PHP • Python",
-            detail: "Next.js & Express for modern web/microservices; Laravel for rapid ERP & APIs.",
+            metric: "Full-Stack Core", // 1 baris sejajar dengan kiri & kanan!
+            label: "TypeScript • PHP • Python",
+            detail: "Next.js & Express for modern web/microservices; Laravel for enterprise ERP.",
         },
         {
             metric: "AI & Automation",
-            label: "n8n • LLM APIs • Scraping",
-            detail: "Automated webhooks, omnichannel chatbots, and headless browser pipelines.",
+            label: "LLMs • n8n • Data Scraping",
+            detail: "OpenAI/Groq chatbots, Streamlit apps, and Puppeteer/Python pipelines.",
         },
     ] as EngineeringHighlight[],
 };
 
 export const SKILL_PILLARS: SkillPillar[] = [
     {
-        id: "frontend",
-        category: "Frontend & Client Architecture",
-        subtitle: "Type-safe interfaces, custom CMS dashboards, and cross-platform apps",
+        id: "frontend-lang",
+        category: "Languages & Frontend Architecture",
+        subtitle: "Core programming languages, type-safe web interfaces, and mobile apps",
         skills: [
-            { name: "TypeScript", context: "Strict typing & Zod schemas" },
+            { name: "TypeScript & JavaScript (ES6+)", context: "Strict typing & Zod" },
+            { name: "PHP & Python", context: "Backend web & data scripting" },
             { name: "Next.js (App Router)", context: "SSR, Server Actions, SEO" },
-            { name: "React.js & Vite", context: "SPA & Real-time dashboards" },
+            { name: "React.js & Vite", context: "Dynamic SPA & dashboards" },
             { name: "React Native & Expo", context: "Cross-platform mobile" },
-            { name: "Tailwind CSS", context: "Design systems & responsive UI" },
+            { name: "Tailwind CSS", context: "Modern UI systems" },
             { name: "Apollo Client", context: "GraphQL state management" },
         ],
     },
     {
-        id: "backend",
-        category: "Polyglot Backend & Data Layer",
-        subtitle: "Scalable REST/GraphQL APIs, relational modeling, and message brokers",
+        id: "backend-data",
+        category: "Backend & Database Systems",
+        subtitle: "REST/GraphQL APIs, relational/NoSQL modeling, and payment webhooks",
         skills: [
-            { name: "Node.js & Express.js", context: "Monolith & Microservices" },
-            { name: "PHP & Laravel", context: "MVC, Lumen API & Server DataTables" },
-            { name: "PostgreSQL & MySQL", context: "Relational schema & indexing" },
-            { name: "MongoDB & Redis", context: "NoSQL & caching layer" },
-            { name: "Prisma & Sequelize ORM", context: "Type-safe migrations & queries" },
-            { name: "RabbitMQ & Socket.IO", context: "Async messaging & real-time events" },
-            { name: "Midtrans & Xendit", context: "Webhook payment integration" },
+            { name: "Node.js & Express.js", context: "REST API & Microservices" },
+            { name: "Laravel (MVC)", context: "Enterprise ERP & Server DataTables" },
+            { name: "GraphQL & Apollo Server", context: "Typed schema & resolvers" },
+            { name: "PostgreSQL & MySQL", context: "ACID relational databases" },
+            { name: "MongoDB, Redis & Supabase", context: "NoSQL, caching & BaaS" },
+            { name: "Prisma & Sequelize ORM", context: "Migrations & query builder" },
+            { name: "RabbitMQ & Socket.IO", context: "Message broker & real-time" },
+            { name: "Midtrans & Xendit", context: "Payment gateway webhooks" },
         ],
     },
     {
-        id: "ai-devops",
-        category: "AI Automation, Scraping & DevOps",
-        subtitle: "Workflow orchestration, data mining, and containerized cloud delivery",
+        id: "ai-automation",
+        category: "AI Engineering & Automation",
+        subtitle: "LLM orchestration, sentiment classifiers, data mining, and scraping",
         skills: [
-            { name: "Docker & Compose", context: "Multi-container orchestration" },
+            { name: "OpenAI & Gemini AI", context: "Generative AI & vision APIs" },
+            { name: "OpenRouter & Groq", context: "High-speed LLM inference" },
+            { name: "Hugging Face & Streamlit", context: "NLP classifiers & data apps" },
+            { name: "n8n Workflow Automation", context: "Telegram/WA AI agents & webhooks" },
+            { name: "Puppeteer & Selenium", context: "Headless browser & auth automation" },
+            { name: "Python Data Mining", context: "Web scraping & CSV analytics" },
+        ],
+    },
+    {
+        id: "devops-testing",
+        category: "DevOps, Cloud & Quality Assurance",
+        subtitle: "Container orchestration, reverse proxy, cloud storage, and testing",
+        skills: [
+            { name: "Docker & Docker Compose", context: "Containerized environments" },
             { name: "Traefik & Nginx", context: "Reverse proxy & SSL routing" },
-            { name: "GitHub Actions", context: "Automated CI/CD pipelines" },
-            { name: "n8n Automation", context: "AI agents, Telegram/WA & webhooks" },
-            { name: "OpenRouter, Groq & Gemini", context: "LLM integration & classifiers" },
-            { name: "Python & Puppeteer", context: "Data mining, CLI & web scraping" },
-            { name: "AWS EC2 & Vercel", context: "Cloud compute & edge hosting" },
+            { name: "GitHub Actions (CI/CD)", context: "Automated build & deployment" },
+            { name: "AWS EC2, Vercel & Firebase", context: "Cloud compute & hosting" },
+            { name: "Cloudinary", context: "Cloud media pipeline" },
+            { name: "Jest", context: "Automated unit & API testing" },
+            { name: "Git, GitHub & Postman", context: "Version control & API testing" },
         ],
     },
 ];
 
+// Ganti mulai dari interface ProjectItem hingga ENGINEERING_LABS di src/data/portfolio.ts
+
 export interface ProjectItem {
     id: string;
     name: string;
-    category: "Enterprise & ERP" | "AI & Automation" | "Full-Stack Web" | "Microservices";
+    category: "Enterprise & ERP" | "Agentic AI & Automation" | "Full-Stack Web" | "Microservices";
     tagline: string;
     description: string;
     architectureNote: string;
-    coreStack: string[]; // Maksimal 5-6 item untuk tampilan kartu yang bersih
+    coreStack: string[];
     extraStack?: string[];
     githubUrl?: string;
     demoUrl?: string;
-    image: string;
-    isLogoImage?: boolean; // Penanda sementara jika gambar masih berupa logo
+    image?: string;
+    previewHost: string;
     featured: boolean;
 }
 
 export interface EngineeringLabItem {
     id: string;
     title: string;
-    track: string;
-    domain: "Laravel & Enterprise ERP" | "AI Agents & n8n" | "Automation & Data Mining";
+    subtitle: string;
+    domain: "AI & LLM Systems" | "Enterprise ERP & API" | "Automation & Data Mining";
     summary: string;
     stack: string[];
     liveUrl?: string;
     repoUrl?: string;
-    deliverableType: "Live Web App" | "Telegram/WA Bot" | "CLI & Script";
+    deliverableType: "Web Application" | "REST API & Webhook" | "CLI & Automation";
 }
 
 export const PROJECTS_DATA: ProjectItem[] = [
@@ -133,9 +152,9 @@ export const PROJECTS_DATA: ProjectItem[] = [
         id: "opsora",
         name: "Opsora Enterprise ERP",
         category: "Enterprise & ERP",
-        tagline: "Multi-module operations, HR, payroll & inventory system",
+        tagline: "Multi-module business operations, HR, payroll & inventory system",
         description:
-            "End-to-end enterprise management platform covering purchasing, sales workflows, employee attendance, automated payroll, performance reviews, and role-based access control.",
+            "End-to-end enterprise management platform covering purchasing cycles, sales workflows, employee attendance, automated payroll, performance reviews, and role-based access control (RBAC).",
         architectureNote:
             "Self-hosted on custom cloud infrastructure via Docker Compose, Traefik reverse proxy, and automated GitHub Actions CI/CD.",
         coreStack: ["Next.js", "TypeScript", "Express.js", "PostgreSQL", "Prisma", "Traefik"],
@@ -143,39 +162,41 @@ export const PROJECTS_DATA: ProjectItem[] = [
         githubUrl: "https://github.com/muhfayizsyamsuddin/opsora",
         demoUrl: "https://opsora.faizms.com",
         image: "/opsora-logo.png",
-        isLogoImage: true,
+        previewHost: "opsora.faizms.com",
         featured: true,
     },
     {
         id: "pinventa",
-        name: "Pinventa — AI Workflow Platform",
-        category: "AI & Automation",
-        tagline: "Maxy Academy Hackathon • Next.js + n8n AI orchestration",
+        name: "Pinventa — Geo-Targeted B2B Prospecting AI Agent",
+        category: "Agentic AI & Automation",
+        tagline: "Autonomous B2B lead discovery, multi-source enrichment & AI scoring platform",
         description:
-            "Intelligent web application built during the Maxy Academy Hackathon that bridges a modern Next.js frontend with automated multi-step n8n backend workflows and AI agents.",
+            "Agentic AI sales intelligence platform that transforms a map pin and radius into verified B2B prospects. Automates business discovery, website/contact enrichment, AI opportunity analysis, weighted 0–100 lead scoring, and personalized outreach email drafting.",
         architectureNote:
-            "Event-driven webhook architecture connecting client actions to asynchronous n8n automation pipelines.",
-        coreStack: ["Next.js", "TypeScript", "n8n", "Tailwind CSS", "AI Webhooks"],
+            "Orchestrates Next.js interactive map/dashboard with n8n agentic workflows, location APIs, and LLM reasoning pipelines with anti-hallucination evidence verification.",
+        coreStack: ["Next.js", "TypeScript", "n8n Agents", "LLM API", "Google Maps/Places", "Tailwind CSS"],
+        extraStack: ["Webhook Orchestration", "CSV/Sheets Export", "Lead Scoring Engine"],
         demoUrl: "https://pinventa.vercel.app",
         githubUrl: "https://github.com/muhfayizsyamsuddin",
-        image: "/logonext.png",
-        isLogoImage: true,
+        // Tidak memakai gambar NextBalance lagi; menggunakan komponen Browser Preview bawaan
+        previewHost: "pinventa.vercel.app",
         featured: true,
     },
     {
         id: "sio-microservices",
         name: "SIO App — Microservices Architecture",
         category: "Microservices",
-        tagline: "Distributed restaurant ordering system with message broker",
+        tagline: "Distributed restaurant ordering system with asynchronous message broker",
         description:
             "Re-engineered a monolithic EJS application into decoupled backend microservices with a React SPA frontend, asynchronous inter-service messaging, and automated PDF invoice generation.",
         architectureNote:
-            "Uses RabbitMQ for event-driven communication across services, routed behind a Traefik API gateway.",
+            "Uses RabbitMQ for event-driven communication across isolated services, routed behind a Traefik API gateway.",
         coreStack: ["Node.js", "React.js", "RabbitMQ", "PostgreSQL", "Traefik", "Docker"],
         extraStack: ["Express.js", "Sequelize", "PDFKit", "GitHub Actions"],
         githubUrl: "https://github.com/muhfayizsyamsuddin/SIO-deployment",
         demoUrl: "https://sioms.faizms.com",
         image: "/sio.png",
+        previewHost: "sioms.faizms.com",
         featured: true,
     },
     {
@@ -184,7 +205,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
         category: "Full-Stack Web",
         tagline: "Corporate construction platform with bespoke admin CMS & SEO engine",
         description:
-            "Production corporate platform featuring a custom-built Content Management System to manage project portfolios, client inquiries, dynamic SEO metadata, and media galleries.",
+            "Production corporate platform featuring a custom-built Content Management System to manage project portfolios, services, client inquiries, dynamic SEO metadata, and media galleries.",
         architectureNote:
             "End-to-end type safety with TypeScript, Zod schema validation, and Prisma ORM deployed via Docker & Traefik.",
         coreStack: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Zod", "Docker"],
@@ -192,6 +213,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
         githubUrl: "https://github.com/muhfayizsyamsuddin/denver-build",
         demoUrl: "https://denverbuild.faizms.com",
         image: "/denverbuild.png",
+        previewHost: "denverbuild.faizms.com",
         featured: true,
     },
     {
@@ -200,7 +222,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
         category: "Full-Stack Web",
         tagline: "Studio reservation workflow & package management platform",
         description:
-            "Online booking system allowing clients to explore photography packages, submit reservation requests, and track booking statuses through a dedicated admin workflow.",
+            "Online booking system allowing clients to explore photography packages, submit reservation requests, and track booking statuses through a dedicated admin management workflow.",
         architectureNote:
             "Containerized Next.js & PostgreSQL stack with automated CI/CD delivery and Cloudinary asset pipeline.",
         coreStack: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Zod", "Traefik"],
@@ -208,15 +230,16 @@ export const PROJECTS_DATA: ProjectItem[] = [
         githubUrl: "https://github.com/muhfayizsyamsuddin/photography-booking-system",
         demoUrl: "https://photobooth.faizms.com",
         image: "/photography-booking-system.png",
+        previewHost: "photobooth.faizms.com",
         featured: true,
     },
     {
         id: "click-booth",
         name: "Click Booth AI App",
-        category: "AI & Automation",
+        category: "Agentic AI & Automation",
         tagline: "Web photobooth with OpenAI integration, Midtrans payment & WhatsApp delivery",
         description:
-            "Interactive digital photobooth integrating OpenAI for smart features, Midtrans payment gateway for automated checkout, and Fonnte API for instant WhatsApp media delivery.",
+            "Interactive digital photobooth integrating OpenAI for smart image/caption features, Midtrans payment gateway for automated checkout, and Fonnte API for instant WhatsApp media delivery.",
         architectureNote:
             "Integrates third-party payment webhooks (Midtrans) and messaging APIs (Fonnte) inside a Dockerized Next.js environment.",
         coreStack: ["Next.js", "TypeScript", "MongoDB", "OpenAI", "Midtrans", "Docker"],
@@ -224,10 +247,10 @@ export const PROJECTS_DATA: ProjectItem[] = [
         githubUrl: "https://github.com/muhfayizsyamsuddin/Click-Booth",
         demoUrl: "https://clickbooth.faizms.com",
         image: "/logo.png",
-        isLogoImage: true,
+        previewHost: "clickbooth.faizms.com",
         featured: true,
     },
-    // --- ARCHIVE / ADDITIONAL DEPLOYED PROJECTS ---
+    // --- ADDITIONAL DEPLOYED PROJECTS ---
     {
         id: "sportify-court",
         name: "Sportify Court Booking",
@@ -240,6 +263,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
         githubUrl: "https://github.com/muhfayizsyamsuddin/Sportify-Court",
         demoUrl: "https://sportifycourt.faizms.com",
         image: "/Sportify-Court.png",
+        previewHost: "sportifycourt.faizms.com",
         featured: false,
     },
     {
@@ -254,6 +278,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
         githubUrl: "https://github.com/muhfayizsyamsuddin/Next-Balance",
         demoUrl: "https://nextbalance.faizms.com",
         image: "/nb.png",
+        previewHost: "nextbalance.faizms.com",
         featured: false,
     },
     {
@@ -268,6 +293,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
         githubUrl: "https://github.com/muhfayizsyamsuddin/Smart-Chat-Client",
         demoUrl: "https://smartchat.faizms.com",
         image: "/smart-chat.png",
+        previewHost: "smartchat.faizms.com",
         featured: false,
     },
     {
@@ -281,6 +307,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
         coreStack: ["React Native", "Expo", "GraphQL", "Apollo", "MongoDB"],
         githubUrl: "https://github.com/muhfayizsyamsuddin/My-Social-Media-App",
         image: "/mysocialmediaapp.png",
+        previewHost: "github.com/muhfayizsyamsuddin",
         featured: false,
     },
     {
@@ -295,57 +322,58 @@ export const PROJECTS_DATA: ProjectItem[] = [
         githubUrl: "https://github.com/muhfayizsyamsuddin/Furniqo-App-Client",
         demoUrl: "https://furniqo.faizms.com",
         image: "/furniqo.png",
+        previewHost: "furniqo.faizms.com",
         featured: false,
     },
 ];
 
-// RANGKUMAN KURASI DARI MAXY ACADEMY BOOTCAMP (Day 9 - Day 19)
+// TANPA EMBEL-EMBEL "MAXY DAY X" — MURNI SEBAGAI EKSPLORASI TEKNIS & R&D
 export const ENGINEERING_LABS: EngineeringLabItem[] = [
     {
         id: "lab-ai-chatbots",
         title: "Omnichannel AI Chatbots & Sentiment Classifier",
-        track: "Maxy Academy • AI & LLM Engineering (Day 18–19)",
-        domain: "AI Agents & n8n",
+        subtitle: "Conversational LLM Agents • Web, Telegram & WhatsApp",
+        domain: "AI & LLM Systems",
         summary:
-            "Built web-based AI conversational agents (PeduliKampanye) using Laravel/Next.js with OpenRouter & Groq LLMs, alongside automated Telegram/WhatsApp bots in n8n and Hugging Face review classifiers.",
+            "Engineered web-based conversational AI agents (PeduliKampanye) powered by OpenRouter & Groq LLMs, alongside automated Telegram/WhatsApp bots in n8n and customer review sentiment classifiers using Hugging Face.",
         stack: ["n8n", "OpenRouter", "Groq LLM", "Hugging Face", "Laravel", "Telegram Bot API"],
         liveUrl: "https://pedulikampanye.vercel.app",
         repoUrl: "https://github.com/muhfayizsyamsuddin",
-        deliverableType: "Live Web App",
+        deliverableType: "Web Application",
     },
     {
         id: "lab-laravel-erp",
         title: "Sales & Purchasing ERP Cycle + RBAC Permissions",
-        track: "Maxy Academy • Rapid Enterprise Dev (Day 9 & 12)",
-        domain: "Laravel & Enterprise ERP",
+        subtitle: "Transactional Enterprise Workflows & Server-Side DataTables",
+        domain: "Enterprise ERP & API",
         summary:
-            "Engineered master data modules, end-to-end sales and purchasing transactions, role-based access permissions, and server-side DataTables with custom export and column visibility.",
-        stack: ["PHP", "Laravel MVC", "MySQL", "Server-Side DataTables", "Gentelella"],
+            "Built master data modules, end-to-end sales and purchasing transaction cycles, role-based access permissions, and high-volume server-side DataTables with custom export and column visibility controls.",
+        stack: ["PHP", "Laravel MVC", "MySQL", "Server-Side DataTables"],
         liveUrl: "https://maxy-sales-purchasing.free.je",
         repoUrl: "https://github.com/muhfayizsyamsuddin",
-        deliverableType: "Live Web App",
+        deliverableType: "Web Application",
     },
     {
         id: "lab-xendit-payment",
-        title: "Pedulink — Payment Gateway & Microframework API",
-        track: "Maxy Academy • API & Payment Integration (Day 11)",
-        domain: "Laravel & Enterprise ERP",
+        title: "Pedulink — Payment Gateway & Webhook Service",
+        subtitle: "Digital Checkout & Automated Transaction Verification",
+        domain: "Enterprise ERP & API",
         summary:
-            "Implemented RESTful web services using Lumen/Laravel and integrated Xendit Payment Gateway with automated callback/webhook transaction verification.",
-        stack: ["Laravel", "Lumen", "Xendit API", "RESTful Webhook", "Postman"],
+            "Developed RESTful backend services and integrated Xendit Payment Gateway with automated webhook callbacks for real-time payment status synchronization.",
+        stack: ["PHP", "Laravel", "Xendit API", "RESTful Webhooks", "Postman"],
         liveUrl: "https://pedulink.free.je",
         repoUrl: "https://github.com/muhfayizsyamsuddin",
-        deliverableType: "Live Web App",
+        deliverableType: "REST API & Webhook",
     },
     {
         id: "lab-scraping-datamining",
-        title: "Headless Browser Auth Bypass & E-Commerce Data Mining",
-        track: "Maxy Academy • Automation & Python Analytics (Day 14–17)",
+        title: "Headless Browser Automation & E-Commerce Data Mining",
+        subtitle: "Automated Session Flows & Marketplace Dataset Analytics",
         domain: "Automation & Data Mining",
         summary:
-            "Developed Puppeteer & Selenium scripts for automated session/authentication bypass (FarmRPG), direct API web scraping, and a Python CLI data-mining tool analyzing Tokopedia CSV datasets.",
-        stack: ["Python", "Puppeteer", "Selenium", "Direct API Scraping", "CSV Data Mining"],
-        deliverableType: "CLI & Script",
+            "Created Puppeteer and Selenium automation scripts for complex session/authentication flows (FarmRPG), direct API web scraping, and a Python CLI analytics program for mining Tokopedia product CSV datasets.",
+        stack: ["Python", "Puppeteer", "Selenium", "Direct API Scraping", "CSV Analytics"],
+        deliverableType: "CLI & Automation",
     },
 ];
 

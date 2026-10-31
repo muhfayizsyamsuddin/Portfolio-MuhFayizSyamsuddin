@@ -13,10 +13,11 @@ import {
   Network,
   Server,
   Webhook,
+  ShieldCheck,
   type LucideIcon,
 } from "lucide-react";
 
-type ProjectKey = "opsora" | "pinventa" | "sio";
+type ProjectKey = "opsora" | "pinventa" | "sio" | "cms_booking" | "clickbooth";
 
 type ArchitectureLayer = {
   label: string;
@@ -34,7 +35,7 @@ type Architecture = {
 
 const architectures: Record<ProjectKey, Architecture> = {
   opsora: {
-    name: "Opsora Enterprise ERP",
+    name: "Opsora ERP",
     badge: "Monolith + Containerized Proxy",
     summary:
       "Multi-module enterprise operations platform engineered with strict relational integrity, reverse-proxy SSL termination, and automated CI/CD container delivery.",
@@ -67,34 +68,40 @@ const architectures: Record<ProjectKey, Architecture> = {
   },
 
   pinventa: {
-    name: "Pinventa (Maxy Hackathon)",
-    badge: "Next.js + n8n AI Workflow",
+    name: "Pinventa B2B AI Agent",
+    badge: "Agentic AI + n8n Orchestration",
     summary:
-      "Event-driven AI application decoupling user-facing Next.js interactions from complex multi-step LLM and automation pipelines powered by n8n.",
+      "Autonomous geo-targeted B2B sales prospecting architecture: discovers businesses by radius, enriches verified public data, computes weighted 0–100 lead scores, and drafts tailored outreach.",
     layers: [
       {
-        label: "Client Presentation",
-        description: "Interactive UI & real-time state updates",
-        items: ["Next.js (App Router)", "TypeScript", "Tailwind CSS"],
+        label: "Geo-Discovery & Map UI",
+        description: "Pin/radius input, industry filter & lead dashboard",
+        items: ["Next.js (App Router)", "TypeScript", "Google Maps / Places API"],
         icon: Globe,
       },
       {
-        label: "Webhook & Event Bridge",
-        description: "Asynchronous payload dispatch & validation",
-        items: ["Next.js Server Actions / API", "REST Webhooks", "JSON Schema"],
+        label: "Agent Orchestration & Enrichment",
+        description: "Multi-step discovery, website & contact verification",
+        items: ["n8n Agent Workflow", "Authorized Web Enrichment", "Duplicate Detection"],
         icon: Webhook,
       },
       {
-        label: "Workflow & AI Orchestration",
-        description: "Automated decision nodes & LLM execution",
-        items: ["n8n Workflow Engine", "AI Agents / LLM Nodes", "Conditional Routing"],
+        label: "AI Qualification & Outreach Engine",
+        description: "0–100 weighted lead scoring & anti-hallucination guardrails",
+        items: ["LLM Reasoning API", "Evidence-Based Lead Scoring", "Personalized Email Drafter"],
         icon: Bot,
+      },
+      {
+        label: "Sales-Ready Lead Storage",
+        description: "Structured prospect tracking & export pipeline",
+        items: ["Structured Lead Database", "Verification Status Tracking", "CSV / Sheets Export"],
+        icon: Database,
       },
     ],
   },
 
   sio: {
-    name: "SIO App — Microservices",
+    name: "SIO Microservices",
     badge: "Event-Driven Microservices",
     summary:
       "Decoupled restaurant ordering architecture utilizing an API gateway, independent domain services, and asynchronous message brokering.",
@@ -108,7 +115,7 @@ const architectures: Record<ProjectKey, Architecture> = {
       {
         label: "Domain Microservices",
         description: "Isolated business services & document worker",
-        items: ["Order Service (Express)", "Menu/User Service", "PDFKit Worker"],
+        items: ["Order Service (Express)", "Menu/User Service", "PDFKit Invoice Worker"],
         icon: Server,
       },
       {
@@ -125,6 +132,60 @@ const architectures: Record<ProjectKey, Architecture> = {
       },
     ],
   },
+
+  cms_booking: {
+    name: "Denver CMS & Studio Booking",
+    badge: "Type-Safe Full-Stack Next.js",
+    summary:
+      "Unified full-stack architecture powering both Denver Build CMS and Photography Booking System with strict schema validation and self-hosted container routing.",
+    layers: [
+      {
+        label: "Edge Routing & SSR UI",
+        description: "SEO-optimized pages & admin dashboard",
+        items: ["Traefik Proxy", "Next.js App Router", "Tailwind CSS"],
+        icon: Globe,
+      },
+      {
+        label: "Validation & Server Logic",
+        description: "Runtime payload validation & type-safe mutations",
+        items: ["TypeScript", "Zod Schema Validation", "Next.js API / Actions"],
+        icon: ShieldCheck,
+      },
+      {
+        label: "Data & Media Pipeline",
+        description: "Relational persistence & optimized gallery delivery",
+        items: ["Prisma ORM", "PostgreSQL", "Cloudinary", "Docker CI/CD"],
+        icon: Database,
+      },
+    ],
+  },
+
+  clickbooth: {
+    name: "Click Booth AI",
+    badge: "AI + Payment & WA Webhooks",
+    summary:
+      "Interactive digital photobooth integrating generative AI processing, automated payment gateway webhooks, and instant WhatsApp media delivery.",
+    layers: [
+      {
+        label: "Interactive Camera & UI",
+        description: "Browser media capture & custom frame compositor",
+        items: ["Next.js", "TypeScript", "Tailwind CSS"],
+        icon: Globe,
+      },
+      {
+        label: "AI & Third-Party Webhooks",
+        description: "AI enhancement, checkout callback & instant messaging",
+        items: ["OpenAI API", "Midtrans Payment Webhook", "Fonnte WhatsApp API"],
+        icon: Webhook,
+      },
+      {
+        label: "NoSQL & Cloud Storage",
+        description: "Session state, transaction logs & photo storage",
+        items: ["MongoDB", "Cloudinary CDN", "Docker + GitHub Actions"],
+        icon: Database,
+      },
+    ],
+  },
 };
 
 export function ProjectArchitecture() {
@@ -134,7 +195,7 @@ export function ProjectArchitecture() {
   return (
     <div className="mt-24 pt-16 border-t border-border/60">
       <div className="max-w-5xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-10 gap-6">
           <div>
             <p className="text-xs font-mono uppercase tracking-[0.2em] text-primary mb-2">
               System Design & Under the Hood
@@ -145,7 +206,7 @@ export function ProjectArchitecture() {
           </div>
 
           <div
-            className="inline-flex flex-wrap gap-2 p-1.5 rounded-xl border border-border/80 bg-card/60"
+            className="inline-flex flex-wrap gap-1.5 p-1.5 rounded-xl border border-border/80 bg-card/60"
             role="group"
             aria-label="Select architecture project"
           >
@@ -155,9 +216,9 @@ export function ProjectArchitecture() {
                 type="button"
                 onClick={() => setActiveProject(key)}
                 aria-pressed={activeProject === key}
-                className={`rounded-lg px-4 py-2 text-xs font-mono transition-all cursor-pointer ${activeProject === key
+                className={`rounded-lg px-3.5 py-2 text-xs font-mono transition-all cursor-pointer ${activeProject === key
                   ? "bg-primary text-primary-foreground font-medium shadow-sm"
-                  : "text-muted-foreground hover:text-foreground"
+                  : "text-muted-foreground hover:text-primary hover:bg-primary/10"
                   }`}
               >
                 {architectures[key].name}
@@ -175,7 +236,7 @@ export function ProjectArchitecture() {
         >
           <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-6 border-b border-border/50">
             <div>
-              <div className="flex items-center gap-3 mb-2">
+              <div className="flex flex-wrap items-center gap-3 mb-2">
                 <h4 className="text-xl font-semibold text-foreground">
                   {architecture.name}
                 </h4>
@@ -196,10 +257,10 @@ export function ProjectArchitecture() {
                 <div key={layer.label}>
                   {index > 0 && (
                     <div className="flex justify-center py-1" aria-hidden="true">
-                      <ArrowDown className="h-4 w-4 text-muted-foreground/50" />
+                      <ArrowDown className="h-4 w-4 text-primary/60" />
                     </div>
                   )}
-                  <div className="grid gap-4 rounded-xl border border-border/60 bg-background/60 p-4 md:grid-cols-[240px_1fr] md:items-center">
+                  <div className="grid gap-4 rounded-xl border border-border/60 bg-background/60 p-4 md:grid-cols-[250px_1fr] md:items-center">
                     <div>
                       <div className="flex items-center gap-2 mb-1">
                         <Icon className="h-4 w-4 text-primary shrink-0" />

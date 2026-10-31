@@ -38,14 +38,14 @@ export function Footer() {
           <span>Built with Next.js, TypeScript & Tailwind CSS</span>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2.5">
           {socialLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
               target={link.href.startsWith("mailto:") ? undefined : "_blank"}
               rel={link.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-              className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors"
+              className="p-2.5 rounded-xl text-muted-foreground hover:text-primary hover:bg-primary/10 border border-transparent hover:border-primary/30 transition-all duration-200"
               aria-label={`Visit ${link.name} profile`}
             >
               <link.icon className="h-4 w-4" />
