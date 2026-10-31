@@ -325,6 +325,51 @@ export const PROJECTS_DATA: ProjectItem[] = [
         previewHost: "furniqo.faizms.com",
         featured: false,
     },
+    {
+        id: "sio-monolith",
+        name: "SIO App (Monolith Edition)",
+        category: "Full-Stack Web",
+        tagline: "Server-rendered restaurant ordering system",
+        description:
+            "Web-based food and beverage ordering platform built with Express.js, Sequelize ORM, PostgreSQL, and EJS templating.",
+        architectureNote: "Containerized monolithic MVC architecture with automated CI/CD.",
+        coreStack: ["Node.js", "Express.js", "PostgreSQL", "Sequelize", "EJS", "Docker"],
+        githubUrl: "https://github.com/muhfayizsyamsuddin/SIO-APP",
+        demoUrl: "https://sioapp.faizms.com",
+        image: "/sio.png",
+        previewHost: "sioapp.faizms.com",
+        featured: false,
+    },
+    {
+        id: "toride-store",
+        name: "Toride Store Web",
+        category: "Full-Stack Web",
+        tagline: "Japanese sports equipment e-commerce storefront",
+        description:
+            "Responsive e-commerce storefront for Japanese sports products deployed via Docker containers and GitHub Actions CI/CD.",
+        architectureNote: "Static/client web application served via Dockerized container pipeline.",
+        coreStack: ["JavaScript", "Bootstrap", "HTML5/CSS3", "Docker", "GitHub Actions"],
+        githubUrl: "https://github.com/muhfayizsyamsuddin/Toride-Store-Web",
+        demoUrl: "https://toridestore.faizms.com",
+        image: "/toride.png",
+        previewHost: "toridestore.faizms.com",
+        featured: false,
+    },
+    {
+        id: "prelo-app",
+        name: "Prelo Secondhand Marketplace",
+        category: "Full-Stack Web",
+        tagline: "Pre-loved goods e-commerce with cart workflow",
+        description:
+            "Web-based marketplace for used goods featuring interactive shopping cart management and automated container deployment.",
+        architectureNote: "Automated CI/CD deployment to self-managed subdomain.",
+        coreStack: ["JavaScript", "Bootstrap", "HTML5/CSS3", "Docker", "GitHub Actions"],
+        githubUrl: "https://github.com/muhfayizsyamsuddin/prelo-app",
+        demoUrl: "https://preloapp.faizms.com",
+        image: "/preloapp.png",
+        previewHost: "preloapp.faizms.com",
+        featured: false,
+    },
 ];
 
 // TANPA EMBEL-EMBEL "MAXY DAY X" — MURNI SEBAGAI EKSPLORASI TEKNIS & R&D

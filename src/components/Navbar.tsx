@@ -84,18 +84,18 @@ export function Navbar() {
       />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between h-20">
-          {/* Brand Logo */}
+        <div className="flex items-center justify-between h-16">
+          {/* Brand Logo: Proporsional di h-16 */}
           <button
             onClick={scrollToHero}
-            className="text-2xl font-bold tracking-tight text-foreground hover:opacity-90 transition-opacity cursor-pointer"
+            className="text-xl font-bold tracking-tight text-foreground hover:opacity-90 transition-opacity cursor-pointer"
             aria-label="Scroll to top"
           >
             Faiz<span className="text-primary font-light">ms</span>
           </button>
 
-          {/* Desktop Navigation: Ukuran 15px yang lebih proporsional */}
-          <nav className="hidden md:flex items-center gap-8">
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-7">
             {navItems.map((item) => {
               const isActive = activeSection === item.href.substring(1);
               return (
@@ -103,7 +103,7 @@ export function Navbar() {
                   key={item.name}
                   onClick={() => scrollToSection(item.href)}
                   className={cn(
-                    "relative py-2 text-[15px] font-medium transition-colors duration-200 cursor-pointer group",
+                    "relative py-1.5 text-base font-medium transition-colors duration-200 cursor-pointer group",
                     isActive
                       ? "text-primary"
                       : "text-foreground/80 hover:text-primary"
@@ -121,17 +121,17 @@ export function Navbar() {
             })}
           </nav>
 
-          {/* Right Resume Button (Lebih berdimensi & elegan) */}
+          {/* Right Resume Button: Lebih ramping & tajam */}
           <div className="flex items-center gap-3">
             <a
               href="/cv"
               target="_blank"
               rel="noopener noreferrer"
-              className="group hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono font-medium border border-primary/30 bg-card/80 hover:bg-primary text-foreground hover:text-primary-foreground shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] hover:shadow-md hover:shadow-primary/20 transition-all duration-200"
+              className="group hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium border border-primary/30 bg-card/80 hover:bg-primary text-foreground hover:text-primary-foreground shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] hover:shadow-md hover:shadow-primary/20 transition-all duration-200"
             >
               <FileText className="h-3.5 w-3.5 text-primary group-hover:text-primary-foreground transition-colors" />
               <span>Resume</span>
-              <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary-foreground group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              <ArrowUpRight className="h-3 w-3 text-muted-foreground group-hover:text-primary-foreground group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
 
             <button
@@ -143,40 +143,6 @@ export function Navbar() {
             </button>
           </div>
         </div>
-
-        {/* Mobile Dropdown */}
-        {isMenuOpen && (
-          <div className="md:hidden py-3 border-t border-border/50 bg-background/95 backdrop-blur-xl space-y-1 px-2 rounded-b-2xl shadow-xl">
-            {navItems.map((item) => {
-              const isActive = activeSection === item.href.substring(1);
-              return (
-                <button
-                  key={item.name}
-                  onClick={() => scrollToSection(item.href)}
-                  className={cn(
-                    "block w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors",
-                    isActive
-                      ? "text-primary bg-primary/10 border-l-2 border-primary"
-                      : "text-muted-foreground hover:text-primary hover:bg-primary/5"
-                  )}
-                >
-                  {item.name}
-                </button>
-              );
-            })}
-            <div className="pt-2 px-1 pb-1">
-              <a
-                href="/cv"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-xs font-mono font-medium bg-primary text-primary-foreground"
-              >
-                <FileText className="h-3.5 w-3.5" />
-                View Resume / CV
-              </a>
-            </div>
-          </div>
-        )}
       </div>
     </header>
   );
