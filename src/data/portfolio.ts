@@ -133,6 +133,10 @@ export interface ProjectItem {
     image?: string;
     previewHost: string;
     featured: boolean;
+    systemBadge?: string;
+    systemMetric?: string;
+    systemFlow?: string;
+    systemModules?: string[];
 }
 
 export interface EngineeringLabItem {
@@ -164,6 +168,10 @@ export const PROJECTS_DATA: ProjectItem[] = [
         image: "/opsora-logo.png",
         previewHost: "opsora.faizms.com",
         featured: true,
+        systemBadge: "Multi-Module ERP Core",
+        systemMetric: "9+ Core Modules",
+        systemFlow: "Inventory & Sales → HR Attendance → Payroll → RBAC",
+        systemModules: ["Purchasing Cycle", "Payroll Engine", "KPI Reviews", "Role Permissions"],
     },
     {
         id: "pinventa",
@@ -178,9 +186,12 @@ export const PROJECTS_DATA: ProjectItem[] = [
         extraStack: ["Webhook Orchestration", "CSV/Sheets Export", "Lead Scoring Engine"],
         demoUrl: "https://pinventa.vercel.app",
         githubUrl: "https://github.com/muhfayizsyamsuddin",
-        // Tidak memakai gambar NextBalance lagi; menggunakan komponen Browser Preview bawaan
         previewHost: "pinventa.vercel.app",
         featured: true,
+        systemBadge: "Agentic AI Prospecting Engine",
+        systemMetric: "Score: 0–100",
+        systemFlow: "Map Pin → Enrich → Qualify → Outreach",
+        systemModules: ["Geo-Discovery", "Web Enrichment", "AI Lead Score", "Email Drafts"],
     },
     {
         id: "sio-microservices",
@@ -198,6 +209,10 @@ export const PROJECTS_DATA: ProjectItem[] = [
         image: "/sio.png",
         previewHost: "sioms.faizms.com",
         featured: true,
+        systemBadge: "Event-Driven Microservices",
+        systemMetric: "RabbitMQ Broker",
+        systemFlow: "Traefik Gateway → Order Service → RabbitMQ → PDF Worker",
+        systemModules: ["API Gateway", "Isolated Services", "Async Queue", "Invoice PDFKit"],
     },
     {
         id: "denver-build",
@@ -215,6 +230,10 @@ export const PROJECTS_DATA: ProjectItem[] = [
         image: "/denverbuild.png",
         previewHost: "denverbuild.faizms.com",
         featured: true,
+        systemBadge: "Bespoke Headless/Admin CMS",
+        systemMetric: "Zod + Prisma",
+        systemFlow: "Admin CMS → Zod Validation → PostgreSQL → Dynamic SEO",
+        systemModules: ["Portfolio Manager", "Inquiry Pipeline", "SEO Metadata", "Cloudinary CDN"],
     },
     {
         id: "photography-booking",
@@ -232,6 +251,10 @@ export const PROJECTS_DATA: ProjectItem[] = [
         image: "/photography-booking-system.png",
         previewHost: "photobooth.faizms.com",
         featured: true,
+        systemBadge: "Reservation & Scheduling Engine",
+        systemMetric: "End-to-End Flow",
+        systemFlow: "Package Catalog → Slot Request → Admin Approval → Status Track",
+        systemModules: ["Package Tiering", "Booking Workflow", "Gallery Showcase", "Admin Panel"],
     },
     {
         id: "click-booth",
@@ -249,6 +272,10 @@ export const PROJECTS_DATA: ProjectItem[] = [
         image: "/logo.png",
         previewHost: "clickbooth.faizms.com",
         featured: true,
+        systemBadge: "AI Media & Payment Pipeline",
+        systemMetric: "Midtrans + OpenAI",
+        systemFlow: "Camera Capture → Midtrans Webhook → OpenAI → WhatsApp Send",
+        systemModules: ["WebRTC Camera", "Payment Callback", "OpenAI Vision", "Fonnte WA API"],
     },
     // --- ADDITIONAL DEPLOYED PROJECTS ---
     {

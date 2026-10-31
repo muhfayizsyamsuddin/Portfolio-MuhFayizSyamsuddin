@@ -77,54 +77,62 @@ export function Projects() {
                   </span>
                 </div>
 
-                {/* Visual Canvas Area */}
-                <div className="aspect-[16/8] relative overflow-hidden flex items-center justify-center p-6 bg-[radial-gradient(circle_at_50%_50%,rgba(14,165,233,0.12),transparent_70%)]">
-                  {project.image ? (
-                    <div className="relative w-full h-full rounded-xl overflow-hidden bg-white/95 shadow-md flex items-center justify-center p-4">
-                      <Image
-                        src={project.image}
-                        alt={`${project.name} preview`}
-                        fill
-                        className="object-contain p-4 transition-transform duration-500 group-hover:scale-105"
-                        sizes="(max-width: 1024px) 100vw, 50vw"
-                        priority={index < 2}
-                      />
+                {/* Visual Canvas Area: Seragam & Elegan Tanpa Kotak Putih Mencolok */}
+                <div className="aspect-[16/8] relative overflow-hidden p-5 bg-zinc-950 flex flex-col justify-between">
+                  {/* Subtle Technical Grid Background */}
+                  <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(14,165,233,0.07)_1px,transparent_1px),linear-gradient(to_bottom,rgba(14,165,233,0.07)_1px,transparent_1px)] bg-[size:24px_24px]" />
+                  <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(14,165,233,0.10),transparent_75%)]" />
+
+                  {/* Top Row: System Badge & Key Metric */}
+                  <div className="relative z-10 flex items-center justify-between gap-2">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono bg-primary/15 text-primary border border-primary/30">
+                      <Sparkles className="h-3.5 w-3.5 shrink-0" />
+                      <span className="truncate">{project.systemBadge || project.category}</span>
+                    </span>
+
+                    <span className="text-xs font-mono text-emerald-400 shrink-0">
+                      {project.systemMetric || "Production Live"}
+                    </span>
+                  </div>
+
+                  {/* Center Row: System Architecture Flow + Optional Mini Logo */}
+                  <div className="relative z-10 my-auto py-2 flex items-center justify-between gap-4">
+                    <div className="space-y-1">
+                      <p className="text-base sm:text-lg font-mono font-semibold text-foreground tracking-tight leading-snug group-hover:text-primary transition-colors">
+                        {project.systemFlow || project.name}
+                      </p>
+                      <p className="text-xs font-mono text-muted-foreground line-clamp-1">
+                        {project.tagline}
+                      </p>
                     </div>
-                  ) : (
-                    /* Custom Architectural Visual Card khusus Pinventa AI Agent */
-                    <div className="w-full h-full rounded-xl border border-primary/30 bg-zinc-900/90 p-5 flex flex-col justify-between relative overflow-hidden">
-                      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(14,165,233,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(14,165,233,0.08)_1px,transparent_1px)] bg-[size:24px_24px]" />
-                      <div className="relative z-10 flex items-center justify-between">
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono bg-primary/15 text-primary border border-primary/30">
-                          <Sparkles className="h-3.5 w-3.5" />
-                          Agentic AI Prospecting Engine
+
+                    {/* Jika ada logo, tampilkan sebagai mini badge elegan di kanan, bukan kotak putih raksasa */}
+                    {project.image && (
+                      <div className="relative h-12 w-12 rounded-xl overflow-hidden bg-white p-1.5 shrink-0 shadow-md border border-white/20 hidden sm:block">
+                        <Image
+                          src={project.image}
+                          alt={`${project.name} logo`}
+                          fill
+                          className="object-contain p-1"
+                          sizes="48px"
+                        />
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Bottom Row: Module Pills */}
+                  <div className="relative z-10 flex flex-wrap gap-1.5">
+                    {(project.systemModules || project.coreStack.slice(0, 4)).map(
+                      (moduleName) => (
+                        <span
+                          key={moduleName}
+                          className="px-2 py-0.5 rounded text-[10px] font-mono bg-zinc-900/90 border border-border/80 text-muted-foreground"
+                        >
+                          {moduleName}
                         </span>
-                        <span className="text-xs font-mono text-emerald-400">
-                          Score: 0–100
-                        </span>
-                      </div>
-                      <div className="relative z-10 my-auto">
-                        <p className="text-lg sm:text-xl font-mono font-semibold text-foreground tracking-tight">
-                          Map Pin → Enrich → Qualify → Outreach
-                        </p>
-                        <p className="text-xs font-mono text-muted-foreground mt-1">
-                          Autonomous B2B Lead Discovery & Sales Intelligence
-                        </p>
-                      </div>
-                      <div className="relative z-10 flex flex-wrap gap-1.5">
-                        {["Geo-Discovery", "Web Enrichment", "AI Lead Score", "Email Drafts"].map(
-                          (step) => (
-                            <span
-                              key={step}
-                              className="px-2 py-0.5 rounded text-[10px] font-mono bg-background/80 border border-border text-muted-foreground"
-                            >
-                              {step}
-                            </span>
-                          )
-                        )}
-                      </div>
-                    </div>
-                  )}
+                      )
+                    )}
+                  </div>
                 </div>
               </div>
 
