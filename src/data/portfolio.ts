@@ -117,7 +117,12 @@ export const SKILL_PILLARS: SkillPillar[] = [
     },
 ];
 
-// Ganti mulai dari interface ProjectItem hingga ENGINEERING_LABS di src/data/portfolio.ts
+export interface DemoCredential {
+    role: string;
+    email: string;
+    password: string;
+    loginNote?: string;
+}
 
 export interface ProjectItem {
     id: string;
@@ -137,6 +142,7 @@ export interface ProjectItem {
     systemMetric?: string;
     systemFlow?: string;
     systemModules?: string[];
+    demoCredentials?: DemoCredential;
 }
 
 export interface EngineeringLabItem {
@@ -165,6 +171,11 @@ export const PROJECTS_DATA: ProjectItem[] = [
         extraStack: ["Node.js", "Docker", "Cloudinary", "GitHub Actions"],
         githubUrl: "https://github.com/muhfayizsyamsuddin/opsora",
         demoUrl: "https://opsora.faizms.com",
+        demoCredentials: {
+            role: "DEMO",
+            email: "demo@opsora.faizms.com",
+            password: "demoapp123",
+        },
         image: "/opsora-logo.png",
         previewHost: "opsora.faizms.com",
         featured: true,

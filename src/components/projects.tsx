@@ -8,6 +8,9 @@ import {
   FlaskConical,
   ChevronDown,
   ChevronUp,
+  Copy,
+  Check,
+  KeyRound,
   Terminal,
   Globe,
   Sparkles,
@@ -19,9 +22,17 @@ import { ProjectArchitecture } from "./ProjectArchitecture";
 
 export function Projects() {
   const [showArchive, setShowArchive] = useState(false);
+  const [openCredsId, setOpenCredsId] = useState<string | null>(null);
+  const [copiedField, setCopiedField] = useState<string | null>(null);
 
   const featuredProjects = PROJECTS_DATA.filter((p) => p.featured);
   const archiveProjects = PROJECTS_DATA.filter((p) => !p.featured);
+
+  const handleCopyText = (text: string, fieldId: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedField(fieldId);
+    setTimeout(() => setCopiedField(null), 1800);
+  };
 
   return (
     <div className="py-24 px-4">
@@ -231,29 +242,130 @@ export function Projects() {
                   </div>
 
                   {/* Dual Action Bar dengan Hover Biru Konsisten */}
-                  <div className="flex items-center gap-3 pt-3 border-t border-border/50">
-                    {project.demoUrl && project.demoUrl !== "#" && (
-                      <a
-                        href={project.demoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center px-4 py-2 rounded-lg text-xs font-medium bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-md hover:shadow-primary/20 transition-all duration-200"
-                      >
-                        Live System
-                        <ArrowUpRight className="ml-1.5 h-3.5 w-3.5" />
-                      </a>
-                    )}
+                  {/* Action Bar + Optional Demo Credentials Drawer */}
+                  <div className="space-y-3 pt-3 border-t border-border/50">
+                    <div className="flex flex-wrap items-center gap-2.5">
+                      {project.demoUrl && project.demoUrl !== "#" && (
+                        <a
+                          href={project.demoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center px-4 py-2 rounded-lg text-xs font-medium bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-md hover:shadow-primary/20 transition-all duration-200"
+                        >
+                          Live System
+                          <ArrowUpRight className="ml-1.5 h-3.5 w-3.5" />
+                        </a>
+                      )}
 
-                    {project.githubUrl && (
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center px-4 py-2 rounded-lg text-xs font-medium border border-border bg-card/50 text-foreground hover:border-primary hover:bg-primary/10 hover:text-primary transition-all duration-200"
-                      >
-                        <Github className="mr-1.5 h-3.5 w-3.5" />
-                        Source
-                      </a>
+                      {project.githubUrl && (
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center px-3.5 py-2 rounded-lg text-xs font-medium border border-border bg-card/50 text-foreground hover:border-primary hover:bg-primary/10 hover:text-primary transition-all duration-200"
+                        >
+                          <Github className="mr-1.5 h-3.5 w-3.5" />
+                          Source
+                        </a>
+                      )}
+
+                      {/* Tombol Demo Access (Hanya muncul jika proyek punya demoCredentials) */}
+                      {project.demoCredentials && (
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setOpenCredsId(
+                              openCredsId === project.id ? null : project.id
+                            )
+                          }
+                          className={`inline-flex items-center justify-center px-3 py-2 rounded-lg text-xs font-mono border transition-all duration-200 cursor-pointer ml-auto ${openCredsId === project.id
+                            ? "border-primary bg-primary/15 text-primary"
+                            : "border-border/80 bg-background/60 text-muted-foreground hover:border-primary/40 hover:text-primary"
+                            }`}
+                        >
+                          <KeyRound className="mr-1.5 h-3.5 w-3.5 text-primary" />
+                          Demo Login
+                        </button>
+                      )}
+                    </div>
+
+                    {/* Panel Kredensial yang Muncul Saat "Demo Login" Diklik */}
+                    {project.demoCredentials && openCredsId === project.id && (
+                      <div className="rounded-xl border border-primary/30 bg-zinc-950/90 p-3.5 space-y-2.5 text-xs font-mono animate-in fade-in slide-in-from-top-1 duration-200">
+                        <div className="flex items-center justify-between text-[11px] text-muted-foreground border-b border-border/50 pb-1.5">
+                          <span>
+                            Role:{" "}
+                            <strong className="text-foreground">
+                              {project.demoCredentials.role || "Demo User"}
+                            </strong>
+                          </span>
+                          <span className="text-emerald-400">Read/Test Access</span>
+                        </div>
+
+                        {/* Baris Email / Username */}
+                        <div className="flex items-center justify-between gap-2 bg-card/60 px-2.5 py-1.5 rounded-lg border border-border/60">
+                          <div className="truncate">
+                            <span className="text-muted-foreground mr-2">User:</span>
+                            <span className="text-foreground">
+                              {project.demoCredentials.email}
+                            </span>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              handleCopyText(
+                                project.demoCredentials!.email,
+                                `${project.id}-email`
+                              )
+                            }
+                            className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-background border border-border text-[10px] text-muted-foreground hover:text-primary hover:border-primary/40 shrink-0 cursor-pointer"
+                          >
+                            {copiedField === `${project.id}-email` ? (
+                              <>
+                                <Check className="h-3 w-3 text-emerald-400" />
+                                Copied
+                              </>
+                            ) : (
+                              <>
+                                <Copy className="h-3 w-3" />
+                                Copy
+                              </>
+                            )}
+                          </button>
+                        </div>
+
+                        {/* Baris Password */}
+                        <div className="flex items-center justify-between gap-2 bg-card/60 px-2.5 py-1.5 rounded-lg border border-border/60">
+                          <div className="truncate">
+                            <span className="text-muted-foreground mr-2">Pass:</span>
+                            <span className="text-foreground">
+                              {project.demoCredentials.password}
+                            </span>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              handleCopyText(
+                                project.demoCredentials!.password,
+                                `${project.id}-pass`
+                              )
+                            }
+                            className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-background border border-border text-[10px] text-muted-foreground hover:text-primary hover:border-primary/40 shrink-0 cursor-pointer"
+                          >
+                            {copiedField === `${project.id}-pass` ? (
+                              <>
+                                <Check className="h-3 w-3 text-emerald-400" />
+                                Copied
+                              </>
+                            ) : (
+                              <>
+                                <Copy className="h-3 w-3" />
+                                Copy
+                              </>
+                            )}
+                          </button>
+                        </div>
+                      </div>
                     )}
                   </div>
                 </div>
